@@ -145,6 +145,12 @@ def main(raw_dir: str = "data/raw", output_dir: str = "data/output"):
     print("Adding labels...")
     df = add_labels(df)
 
+    # Filter out institutions with 0% admission rate or 0% graduation rate
+    # (these are data artifacts, not truly zero)
+    before = len(df)
+    df = df[~((df["admission_rate"] == 0) | (df["grad_rate_6yr"] == 0))].copy()
+    print(f"  Filtered out {before - len(df)} institutions with 0% admit or grad rate")
+
     institutions_cols = [
         "UNITID", "INSTNM", "CITY", "STABBR", "SECTOR", "sector_label",
         "LOCALE", "locale_group", "C18BASIC", "INSTSIZE", "CONTROL", "HBCU",

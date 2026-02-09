@@ -53,7 +53,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 106148,Yavapai College,Prescott,AZ,1,Public,13,City,6,3,1,2,-112.453395,34.547495,4025,,,7200.0,7200.0,57.0,64.0,1.0,21.0,1.0,2.0,0.0,4.0,6.0,0.0,19.0
 106245,University of Arkansas at Little Rock,Little Rock,AR,1,Public,12,City,16,3,1,2,-92.339778,34.723254,5119,58.0,37.0,8158.0,5789.0,61.0,53.0,21.0,3.0,2.0,1.0,0.0,10.0,2.0,8.0,41.0
 106263,University of Arkansas for Medical Sciences,Little Rock,AR,1,Public,12,City,25,2,1,2,-92.322348,34.750152,5119,,,3275.0,1380.0,73.0,63.0,10.0,7.0,9.0,0.0,0.0,4.0,3.0,3.0,27.0
-106306,Arkansas Baptist College,Little Rock,AR,2,Private nonprofit,12,City,23,1,2,1,-92.290555,34.734751,5119,,0.0,373.0,373.0,26.0,1.0,91.0,5.0,0.0,0.0,0.0,2.0,1.0,1.0,46.0
 106342,Lyon College,Batesville,AR,2,Private nonprofit,33,Town,21,1,2,2,-91.625354,35.777619,5063,66.0,46.0,584.0,584.0,43.0,47.0,8.0,8.0,2.0,0.0,0.0,2.0,28.0,5.0,36.0
 106397,University of Arkansas,Fayetteville,AR,1,Public,13,City,15,5,1,2,-94.176981,36.070009,5143,72.0,70.0,32140.0,27472.0,56.0,72.0,4.0,10.0,3.0,1.0,0.0,4.0,2.0,4.0,17.0
 106412,University of Arkansas at Pine Bluff,Pine Bluff,AR,1,Public,32,Town,22,2,1,1,-92.018683,34.244031,5069,58.0,41.0,2100.0,1905.0,55.0,3.0,88.0,2.0,0.0,0.0,0.0,2.0,0.0,3.0,67.0
@@ -91,7 +90,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 110404,California Institute of Technology,Pasadena,CA,2,Private nonprofit,12,City,15,2,2,2,-118.125878,34.137349,6037,3.0,93.0,2463.0,1023.0,39.0,24.0,2.0,12.0,22.0,0.0,0.0,6.0,0.0,32.0,15.0
 110413,California Lutheran University,Thousand Oaks,CA,2,Private nonprofit,12,City,18,2,2,2,-118.878924,34.224566,6111,89.0,74.0,3413.0,2380.0,58.0,35.0,3.0,41.0,5.0,0.0,0.0,5.0,2.0,8.0,30.0
 110422,California Polytechnic State University-San Luis Obispo,San Luis Obispo,CA,1,Public,23,Suburb,18,5,1,2,-120.657311,35.299513,6079,30.0,85.0,22485.0,21559.0,50.0,50.0,1.0,23.0,14.0,0.0,0.0,8.0,3.0,1.0,18.0
-110468,Alliant International University-San Diego,San Diego,CA,3,Private for-profit,11,City,17,2,3,2,-117.094398,32.897056,6073,0.0,9.0,4147.0,355.0,75.0,36.0,8.0,31.0,8.0,1.0,0.0,2.0,6.0,8.0,2.0
 110486,California State University-Bakersfield,Bakersfield,CA,1,Public,11,City,18,3,1,2,-119.104711,35.350005,6029,88.0,48.0,9787.0,8336.0,66.0,14.0,4.0,67.0,7.0,0.0,0.0,2.0,4.0,1.0,61.0
 110495,California State University-Stanislaus,Turlock,CA,1,Public,23,Suburb,18,3,1,2,-120.852511,37.52577,6099,97.0,58.0,9841.0,8669.0,67.0,18.0,3.0,62.0,9.0,0.0,1.0,3.0,5.0,1.0,55.0
 110510,California State University-San Bernardino,San Bernardino,CA,1,Public,12,City,18,4,1,2,-117.323801,34.182622,6071,98.0,57.0,18925.0,16067.0,61.0,11.0,5.0,69.0,6.0,0.0,0.0,3.0,4.0,3.0,57.0
@@ -186,7 +184,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 120698,Palo Alto University,Palo Alto,CA,2,Private nonprofit,41,Rural,26,2,2,2,-122.187437,37.382216,6085,,,1223.0,19.0,84.0,46.0,4.0,19.0,12.0,0.0,0.0,6.0,4.0,9.0,19.0
 120768,Pacific Oaks College,Pasadena,CA,2,Private nonprofit,12,City,32,2,2,2,-118.151323,34.153382,6037,10.0,,1051.0,346.0,87.0,22.0,13.0,48.0,4.0,0.0,0.0,4.0,7.0,0.0,55.0
 120795,Pacific School of Religion,Berkeley,CA,2,Private nonprofit,12,City,24,1,2,2,-122.263155,37.87669,6001,,,128.0,0.0,62.0,49.0,22.0,2.0,5.0,0.0,9.0,6.0,2.0,4.0,
-120838,Pacific States University,Los Angeles,CA,2,Private nonprofit,11,City,29,1,2,2,-118.298408,34.061315,6037,100.0,0.0,40.0,17.0,48.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0
 120865,Pacific Union College,Angwin,CA,2,Private nonprofit,41,Rural,22,1,2,2,-122.440308,38.570585,6055,42.0,40.0,938.0,910.0,63.0,18.0,6.0,29.0,21.0,0.0,1.0,13.0,9.0,3.0,33.0
 120883,University of the Pacific,Stockton,CA,2,Private nonprofit,11,City,17,3,2,2,-121.312301,37.981424,6077,95.0,66.0,6755.0,3297.0,58.0,20.0,3.0,22.0,32.0,0.0,0.0,5.0,5.0,13.0,34.0
 121150,Pepperdine University,Malibu,CA,2,Private nonprofit,21,Suburb,17,3,2,2,-118.707077,34.037786,6037,50.0,83.0,9545.0,3629.0,67.0,42.0,8.0,21.0,12.0,0.0,0.0,5.0,3.0,8.0,20.0
@@ -214,7 +211,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 122977,Santa Monica College,Santa Monica,CA,1,Public,13,City,14,5,1,2,-118.469765,34.017022,6037,,,23164.0,23164.0,55.0,26.0,9.0,41.0,9.0,0.0,0.0,5.0,2.0,7.0,26.0
 123095,Saybrook University,Pasadena,CA,2,Private nonprofit,12,City,32,2,2,2,-118.152155,34.153103,6037,,,1055.0,0.0,83.0,53.0,16.0,12.0,3.0,1.0,1.0,7.0,6.0,1.0,
 123165,Scripps College,Claremont,CA,2,Private nonprofit,21,Suburb,21,2,2,2,-117.711294,34.104147,6037,34.0,82.0,1103.0,1082.0,99.0,53.0,4.0,12.0,14.0,0.0,0.0,11.0,2.0,4.0,11.0
-123280,Shasta Bible College and Graduate School,Redding,CA,2,Private nonprofit,13,City,24,1,2,2,-122.314419,40.566034,6089,100.0,0.0,20.0,13.0,35.0,70.0,5.0,15.0,0.0,0.0,0.0,10.0,0.0,0.0,54.0
 123299,Shasta College,Redding,CA,1,Public,22,Suburb,14,3,1,2,-122.317982,40.625731,6089,,,8081.0,8081.0,59.0,61.0,2.0,20.0,4.0,2.0,0.0,8.0,2.0,0.0,37.0
 123448,Trinity Law School,Santa Ana,CA,2,Private nonprofit,11,City,31,1,2,2,-117.852059,33.766071,6059,,,364.0,0.0,69.0,27.0,27.0,25.0,8.0,1.0,1.0,9.0,2.0,0.0,
 123457,Simpson University,Redding,CA,2,Private nonprofit,13,City,20,1,2,2,-122.332981,40.61334,6089,99.0,51.0,907.0,755.0,56.0,48.0,3.0,25.0,6.0,1.0,1.0,8.0,2.0,7.0,42.0
@@ -266,7 +262,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 127565,Metropolitan State University of Denver,Denver,CO,1,Public,11,City,18,4,1,2,-105.00504,39.744202,8031,99.0,30.0,17593.0,16430.0,57.0,44.0,7.0,36.0,4.0,1.0,0.0,5.0,1.0,1.0,35.0
 127617,Morgan Community College,Fort  Morgan,CO,1,Public,41,Rural,6,2,1,2,-103.771822,40.258792,8087,,,1506.0,1506.0,66.0,54.0,5.0,36.0,1.0,0.0,0.0,2.0,2.0,0.0,21.0
 127653,Naropa University,Boulder,CO,2,Private nonprofit,12,City,19,2,2,2,-105.266987,40.014235,8013,94.0,34.0,1117.0,368.0,73.0,70.0,2.0,9.0,3.0,0.0,0.0,6.0,8.0,3.0,57.0
-127714,Nazarene Bible College,Colorado Springs,CO,2,Private nonprofit,11,City,24,1,2,2,-104.803251,38.944824,8041,,0.0,584.0,584.0,50.0,76.0,8.0,8.0,2.0,1.0,0.0,4.0,0.0,0.0,14.0
 127741,University of Northern Colorado,Greeley,CO,1,Public,12,City,17,3,1,2,-104.692777,40.410855,8123,86.0,52.0,9067.0,6616.0,69.0,62.0,4.0,24.0,3.0,0.0,0.0,4.0,1.0,2.0,26.0
 127820,Pikes Peak State College,Colorado Springs,CO,1,Public,21,Suburb,2,4,1,2,-104.787261,38.764287,8041,,,12388.0,12388.0,58.0,53.0,7.0,24.0,4.0,1.0,0.0,7.0,2.0,1.0,31.0
 127884,Pueblo Community College,Pueblo,CO,1,Public,12,City,14,3,1,2,-104.636258,38.262124,8101,,,6767.0,6767.0,61.0,48.0,3.0,37.0,1.0,2.0,0.0,4.0,5.0,1.0,28.0
@@ -279,7 +274,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 128328,United States Air Force Academy,USAF Academy,CO,1,Public,41,Rural,21,2,1,2,-104.891358,39.010957,8041,14.0,86.0,4124.0,4124.0,29.0,63.0,6.0,12.0,7.0,0.0,1.0,8.0,1.0,1.0,
 128391,Western Colorado University,Gunnison,CO,1,Public,33,Town,20,2,1,2,-106.919132,38.549936,8051,97.0,48.0,4053.0,3569.0,52.0,60.0,4.0,21.0,2.0,1.0,1.0,3.0,7.0,1.0,13.0
 128498,Albertus Magnus College,New Haven,CT,2,Private nonprofit,12,City,19,2,2,2,-72.923848,41.332519,9170,64.0,56.0,1161.0,892.0,63.0,37.0,28.0,24.0,1.0,0.0,0.0,3.0,2.0,4.0,47.0
-128586,Bais Binyomin Academy,Monsey,NY,2,Private nonprofit,21,Suburb,24,1,2,2,-74.078802,41.123013,36087,79.0,0.0,50.0,50.0,0.0,94.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.0,67.0
 128744,University of Bridgeport,Bridgeport,CT,2,Private nonprofit,12,City,17,2,2,2,-73.190166,41.164741,9120,64.0,43.0,4103.0,1479.0,58.0,25.0,18.0,15.0,4.0,0.0,0.0,0.0,2.0,36.0,52.0
 128771,Central Connecticut State University,New Britain,CT,1,Public,21,Suburb,18,3,1,2,-72.765991,41.692502,9110,76.0,55.0,9712.0,7917.0,49.0,56.0,13.0,19.0,5.0,0.0,0.0,3.0,2.0,2.0,35.0
 128780,Charter Oak State College,New Britain,CT,1,Public,21,Suburb,21,2,1,2,-72.781239,41.666848,9110,,,1766.0,1683.0,77.0,50.0,20.0,21.0,3.0,0.0,0.0,2.0,2.0,0.0,38.0
@@ -318,7 +312,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 131469,George Washington University,Washington,DC,2,Private nonprofit,11,City,15,5,2,2,-77.048363,38.89923,11001,44.0,84.0,25568.0,11387.0,62.0,44.0,10.0,10.0,13.0,0.0,0.0,4.0,4.0,14.0,15.0
 131496,Georgetown University,Washington,DC,2,Private nonprofit,11,City,15,5,2,2,-77.073463,38.908809,11001,13.0,95.0,20392.0,7968.0,55.0,42.0,6.0,8.0,12.0,0.0,0.0,4.0,11.0,17.0,10.0
 131520,Howard University,Washington,DC,2,Private nonprofit,11,City,16,4,2,1,-77.018966,38.922392,11001,35.0,64.0,13416.0,10190.0,70.0,1.0,69.0,6.0,3.0,0.0,0.0,5.0,11.0,5.0,41.0
-131803,Strayer University-District of Columbia,Washington,DC,3,Private for-profit,11,City,19,1,3,2,-77.034133,38.904881,11001,,0.0,353.0,310.0,78.0,7.0,80.0,7.0,1.0,0.0,0.0,4.0,1.0,0.0,71.0
 131876,Trinity Washington University,Washington,DC,2,Private nonprofit,11,City,19,2,2,2,-77.004261,38.927398,11001,99.0,41.0,1865.0,1604.0,95.0,3.0,55.0,29.0,1.0,0.0,0.0,2.0,10.0,1.0,51.0
 131973,Wesley Theological Seminary,Washington,DC,2,Private nonprofit,11,City,24,1,2,2,-77.08996,38.939606,11001,,,450.0,0.0,45.0,34.0,31.0,4.0,12.0,2.0,0.0,4.0,6.0,7.0,
 132408,Baptist University of Florida,Graceville,FL,2,Private nonprofit,42,Rural,24,1,2,2,-85.503931,30.962708,12063,64.0,29.0,352.0,331.0,50.0,57.0,4.0,1.0,2.0,0.0,0.0,6.0,29.0,0.0,34.0
@@ -327,7 +320,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 132657,Lynn University,Boca Raton,FL,2,Private nonprofit,13,City,18,2,2,2,-80.122806,26.385985,12099,74.0,50.0,3501.0,2823.0,53.0,47.0,10.0,18.0,2.0,0.0,0.0,3.0,4.0,15.0,23.0
 132693,Eastern Florida State College,Melbourne,FL,1,Public,13,City,14,4,1,2,-80.670781,28.170002,12009,,,13601.0,13601.0,59.0,59.0,11.0,18.0,3.0,0.0,0.0,6.0,2.0,1.0,28.0
 132709,Broward College,Fort Lauderdale,FL,1,Public,12,City,14,5,1,2,-80.14183,26.119422,12011,,,29140.0,29140.0,60.0,12.0,30.0,35.0,4.0,0.0,0.0,4.0,3.0,12.0,40.0
-132842,Albizu University-Miami,Miami,FL,2,Private nonprofit,13,City,26,1,2,2,-80.354942,25.795181,12086,100.0,0.0,787.0,226.0,86.0,6.0,5.0,80.0,1.0,0.0,0.0,0.0,6.0,2.0,52.0
 132851,College of Central Florida,Ocala,FL,1,Public,13,City,23,3,1,2,-82.175692,29.166079,12083,,,5747.0,5747.0,63.0,58.0,10.0,20.0,3.0,0.0,0.0,4.0,2.0,2.0,40.0
 132879,Johnson University Florida,Kissimmee,FL,2,Private nonprofit,21,Suburb,24,1,2,2,-81.363053,28.302547,12097,23.0,25.0,136.0,136.0,26.0,22.0,20.0,21.0,0.0,0.0,0.0,3.0,4.0,30.0,46.0
 132903,University of Central Florida,Orlando,FL,1,Public,21,Suburb,15,5,1,2,-81.200889,28.602159,12095,40.0,75.0,69233.0,59470.0,55.0,43.0,9.0,29.0,8.0,0.0,0.0,5.0,1.0,5.0,33.0
@@ -397,7 +389,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 138187,Valencia College,Orlando,FL,1,Public,11,City,14,5,1,2,-81.464275,28.520783,12095,,,42524.0,42524.0,59.0,24.0,16.0,43.0,5.0,0.0,0.0,3.0,2.0,6.0,39.0
 138275,Warner University,Lake Wales,FL,2,Private nonprofit,41,Rural,22,1,2,2,-81.599972,27.825751,12105,48.0,31.0,891.0,798.0,49.0,42.0,26.0,21.0,1.0,1.0,0.0,4.0,0.0,4.0,53.0
 138293,Webber International University,Babson Park,FL,2,Private nonprofit,41,Rural,22,1,2,2,-81.532315,27.838778,12105,78.0,20.0,930.0,879.0,33.0,42.0,31.0,11.0,1.0,1.0,0.0,1.0,3.0,10.0,54.0
-138309,Rasmussen University-Florida,Ocala,FL,3,Private for-profit,13,City,22,2,3,2,-82.197343,29.140099,12083,,0.0,3034.0,3034.0,87.0,32.0,25.0,22.0,3.0,0.0,0.0,2.0,14.0,0.0,55.0
 138354,University of West Florida,Pensacola,FL,1,Public,41,Rural,18,4,1,2,-87.218511,30.549076,12033,57.0,52.0,14371.0,9661.0,61.0,58.0,11.0,13.0,3.0,0.0,0.0,5.0,5.0,4.0,33.0
 138558,Abraham Baldwin Agricultural College,Tifton,GA,1,Public,32,Town,23,2,1,2,-83.528281,31.481889,13277,77.0,34.0,3768.0,3768.0,60.0,78.0,8.0,10.0,1.0,0.0,0.0,1.0,0.0,1.0,34.0
 138600,Agnes Scott College,Decatur,GA,2,Private nonprofit,21,Suburb,21,2,2,2,-84.295459,33.769268,13089,67.0,75.0,1077.0,911.0,99.0,38.0,34.0,13.0,5.0,0.0,0.0,6.0,1.0,3.0,36.0
@@ -515,7 +506,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 146667,Lincoln Christian University,Lincoln,IL,2,Private nonprofit,32,Town,24,1,2,2,-89.346721,40.148924,17107,,42.0,185.0,45.0,43.0,80.0,10.0,3.0,2.0,0.0,0.0,1.0,2.0,3.0,39.0
 146719,Loyola University Chicago,Chicago,IL,2,Private nonprofit,11,City,16,4,2,2,-87.656872,42.000765,17031,81.0,72.0,17397.0,12487.0,69.0,49.0,7.0,19.0,12.0,0.0,0.0,4.0,5.0,3.0,23.0
 146728,Lutheran School of Theology at Chicago,Chicago,IL,2,Private nonprofit,11,City,24,1,2,2,-87.585989,41.797895,17031,,,114.0,0.0,55.0,41.0,4.0,8.0,0.0,0.0,0.0,1.0,18.0,28.0,
-146755,Trinity College of Nursing & Health Sciences,Rock Island,IL,2,Private nonprofit,13,City,26,1,2,2,-90.568862,41.484924,17161,,0.0,76.0,59.0,88.0,57.0,7.0,16.0,8.0,0.0,0.0,8.0,5.0,0.0,54.0
 146977,McCormick Theological Seminary,Chicago,IL,2,Private nonprofit,11,City,24,1,2,2,-87.585989,41.797895,17031,,,133.0,0.0,36.0,10.0,33.0,18.0,26.0,0.0,0.0,1.0,0.0,12.0,
 147013,McKendree University,Lebanon,IL,2,Private nonprofit,21,Suburb,18,2,2,2,-89.816822,38.608154,17163,64.0,56.0,2075.0,1605.0,55.0,62.0,12.0,6.0,1.0,0.0,0.0,6.0,5.0,8.0,29.0
 147031,Meadville Theological School of Lombard College,Chicago,IL,2,Private nonprofit,11,City,24,1,2,2,-87.62671,41.885452,17031,,,69.0,0.0,67.0,78.0,7.0,3.0,0.0,1.0,0.0,1.0,6.0,3.0,
@@ -796,7 +786,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 164988,Boston University,Boston,MA,2,Private nonprofit,11,City,15,5,2,2,-71.107942,42.351118,25025,11.0,89.0,36624.0,18656.0,57.0,33.0,5.0,9.0,15.0,0.0,0.0,3.0,5.0,29.0,18.0
 165015,Brandeis University,Waltham,MA,2,Private nonprofit,13,City,15,3,2,2,-71.260155,42.365727,25017,35.0,88.0,5302.0,3675.0,57.0,40.0,6.0,8.0,14.0,0.0,0.0,3.0,3.0,26.0,14.0
 165024,Bridgewater State University,Bridgewater,MA,1,Public,21,Suburb,18,3,1,2,-70.974553,41.98749,25023,89.0,62.0,9550.0,8172.0,60.0,70.0,10.0,9.0,2.0,0.0,0.0,6.0,1.0,1.0,30.0
-165167,Cambridge College,Boston,MA,2,Private nonprofit,11,City,18,2,2,2,-71.072646,42.381091,25025,,0.0,1952.0,717.0,77.0,31.0,19.0,36.0,3.0,1.0,0.0,1.0,4.0,5.0,33.0
 165264,Laboure College of Healthcare,Milton,MA,2,Private nonprofit,21,Suburb,26,1,2,2,-71.058279,42.260866,25021,41.0,,717.0,717.0,88.0,32.0,43.0,13.0,3.0,0.0,0.0,3.0,4.0,2.0,37.0
 165334,Clark University,Worcester,MA,2,Private nonprofit,12,City,16,2,2,2,-71.823356,42.249987,25027,42.0,79.0,4124.0,2369.0,53.0,43.0,4.0,8.0,5.0,0.0,0.0,3.0,2.0,35.0,21.0
 165495,Conway School of Landscape Design,Northampton,MA,2,Private nonprofit,13,City,30,1,2,2,-72.64875,42.313857,25015,,,18.0,0.0,67.0,94.0,0.0,0.0,0.0,0.0,0.0,6.0,0.0,0.0,
@@ -979,7 +968,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 176600,Aquinas Institute of Theology,Saint Louis,MO,2,Private nonprofit,11,City,24,1,2,2,-90.237795,38.634329,29510,,,83.0,0.0,39.0,66.0,6.0,16.0,4.0,0.0,0.0,2.0,0.0,6.0,
 176628,Avila University,Kansas City,MO,2,Private nonprofit,11,City,19,2,2,2,-94.591758,38.91339,29095,60.0,39.0,1733.0,1196.0,61.0,43.0,24.0,15.0,2.0,1.0,0.0,2.0,2.0,12.0,49.0
 176664,Mission University,Springfield,MO,2,Private nonprofit,12,City,24,1,2,2,-93.284286,37.239696,29077,,31.0,377.0,342.0,34.0,81.0,7.0,6.0,1.0,3.0,0.0,3.0,0.0,0.0,49.0
-176770,Cox College,Springfield,MO,2,Private nonprofit,12,City,26,1,2,2,-93.290233,37.225116,29077,71.0,0.0,795.0,637.0,87.0,82.0,2.0,5.0,1.0,1.0,0.0,4.0,4.0,0.0,35.0
 176789,Calvary University,Kansas City,MO,2,Private nonprofit,11,City,24,1,2,2,-94.547927,38.839578,29037,71.0,37.0,262.0,198.0,46.0,75.0,6.0,8.0,6.0,0.0,0.0,3.0,2.0,1.0,36.0
 176910,Central Christian College of the Bible,Moberly,MO,2,Private nonprofit,32,Town,24,1,2,2,-92.427259,39.395963,29175,,52.0,183.0,155.0,33.0,70.0,11.0,5.0,2.0,0.0,0.0,2.0,9.0,0.0,53.0
 176947,Central Methodist University-College of Liberal Arts and Sciences,Fayette,MO,2,Private nonprofit,42,Rural,22,2,2,2,-92.685253,39.150497,29089,88.0,47.0,1017.0,1017.0,54.0,64.0,12.0,8.0,1.0,0.0,0.0,5.0,2.0,8.0,37.0
@@ -1156,7 +1144,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 189088,Bard College,Annandale-On-Hudson,NY,2,Private nonprofit,41,Rural,21,2,2,2,-73.909927,42.020386,36027,52.0,71.0,2922.0,2453.0,58.0,43.0,11.0,12.0,3.0,0.0,0.0,6.0,8.0,17.0,23.0
 189097,Barnard College,New York,NY,2,Private nonprofit,11,City,21,2,2,2,-73.963346,40.810098,36061,8.0,93.0,3353.0,3353.0,99.0,33.0,7.0,17.0,20.0,0.0,0.0,7.0,2.0,14.0,15.0
 189228,Berkeley College-New York,New York,NY,3,Private for-profit,11,City,29,2,3,2,-73.979458,40.753986,36061,,31.0,1902.0,1756.0,64.0,2.0,12.0,22.0,1.0,0.0,0.0,1.0,47.0,14.0,54.0
-189273,Beth Hamedrash Shaarei Yosher Institute,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.981202,40.635444,36047,90.0,0.0,83.0,83.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,77.0
 189282,Mount Sinai Phillips School of Nursing,New York,NY,2,Private nonprofit,11,City,26,1,2,2,-73.936639,40.804778,36061,,,273.0,273.0,88.0,41.0,21.0,12.0,22.0,0.0,1.0,4.0,0.0,0.0,2.0
 189413,Boricua College,New York,NY,2,Private nonprofit,11,City,22,1,2,2,-73.9458,40.833434,36061,,58.0,479.0,401.0,81.0,2.0,21.0,76.0,0.0,0.0,0.0,0.0,0.0,0.0,85.0
 189501,Brooklyn Law School,Brooklyn,NY,2,Private nonprofit,11,City,31,2,2,2,-73.989623,40.691836,36047,,,1174.0,0.0,62.0,62.0,4.0,12.0,11.0,0.0,0.0,3.0,3.0,5.0,
@@ -1223,7 +1210,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 192925,Medaille University,Buffalo,NY,2,Private nonprofit,11,City,18,-2,2,2,-78.855941,42.92856,36029,,,,,,,,,,,,,,,
 193016,Mercy University,Dobbs Ferry,NY,2,Private nonprofit,21,Suburb,18,3,2,2,-73.874447,41.021626,36119,85.0,49.0,8774.0,6482.0,70.0,21.0,23.0,43.0,6.0,0.0,0.0,2.0,2.0,3.0,47.0
 193052,Mesivta Torah Vodaath Rabbinical Seminary,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.969395,40.6382,36047,90.0,33.0,538.0,337.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,54.0
-193061,Mesivta of Eastern Parkway-Yeshiva Zichron Meilech,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.979327,40.635236,36047,63.0,0.0,42.0,41.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,66.0
 193070,Mesivtha Tifereth Jerusalem of America,New York,NY,2,Private nonprofit,11,City,24,1,2,2,-73.991271,40.713812,36061,61.0,11.0,66.0,45.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.0
 193247,Mirrer Yeshiva Cent Institute,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.966049,40.605043,36047,78.0,13.0,121.0,102.0,0.0,93.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.0,37.0
 193292,Molloy College,Rockville Centre,NY,2,Private nonprofit,21,Suburb,18,2,2,2,-73.626183,40.685941,36059,76.0,70.0,4970.0,3259.0,75.0,50.0,13.0,23.0,9.0,0.0,0.0,2.0,1.0,1.0,30.0
@@ -1252,7 +1238,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 194657,Rabbinical Academy Mesivta Rabbi Chaim Berlin,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.963615,40.618347,36047,100.0,10.0,276.0,160.0,0.0,98.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,22.0
 194666,Rabbinical College Bobover Yeshiva Bnei Zion,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.985026,40.631954,36047,,85.0,511.0,436.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,88.0
 194693,Rabbinical College Beth Shraga,Monsey,NY,2,Private nonprofit,21,Suburb,24,1,2,2,-74.07258,41.114116,36087,93.0,14.0,48.0,48.0,0.0,94.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.0,21.0
-194718,Rabbinical Seminary Mkor Chaim,Lakewood,NJ,2,Private nonprofit,21,Suburb,-2,1,2,2,-74.214817,40.046838,34029,100.0,0.0,81.0,81.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,63.0
 194736,Rabbinical College of Long Island,Long Beach,NY,2,Private nonprofit,21,Suburb,24,1,2,2,-73.670238,40.586427,36059,100.0,39.0,161.0,161.0,0.0,99.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,30.0
 194763,Rabbinical Seminary of America,Flushing,NY,2,Private nonprofit,11,City,24,1,2,2,-73.817161,40.72308,36081,98.0,25.0,601.0,379.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.0
 194824,Rensselaer Polytechnic Institute,Troy,NY,2,Private nonprofit,13,City,15,3,2,2,-73.676646,42.729978,36083,58.0,84.0,7024.0,5954.0,31.0,42.0,5.0,11.0,19.0,0.0,0.0,5.0,4.0,14.0,19.0
@@ -1268,7 +1253,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 195234,The College of Saint Rose,Albany,NY,2,Private nonprofit,12,City,18,2,2,2,-73.786661,42.664297,36001,73.0,59.0,2538.0,1250.0,72.0,51.0,15.0,4.0,4.0,0.0,0.0,15.0,7.0,5.0,39.0
 195243,St. Thomas Aquinas College,Sparkill,NY,2,Private nonprofit,21,Suburb,20,2,2,2,-73.936799,41.041576,36087,82.0,55.0,1950.0,1795.0,52.0,59.0,13.0,14.0,5.0,0.0,0.0,2.0,3.0,4.0,18.0
 195304,Sarah Lawrence College,Bronxville,NY,2,Private nonprofit,21,Suburb,21,2,2,2,-73.843727,40.9355,36119,59.0,76.0,1743.0,1521.0,81.0,59.0,4.0,10.0,5.0,0.0,0.0,6.0,11.0,6.0,13.0
-195438,Sh'or Yoshuv Rabbinical College,Lawrence,NY,2,Private nonprofit,21,Suburb,24,1,2,2,-73.740085,40.605227,36059,,0.0,151.0,147.0,0.0,98.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,4.0
 195474,Siena College,Loudonville,NY,2,Private nonprofit,21,Suburb,20,2,2,2,-73.7526,42.717602,36001,71.0,77.0,3623.0,3497.0,54.0,74.0,4.0,9.0,4.0,0.0,0.0,4.0,1.0,3.0,23.0
 195526,Skidmore College,Saratoga Springs,NY,2,Private nonprofit,23,Suburb,21,2,2,2,-73.785335,43.097035,36091,23.0,84.0,2776.0,2776.0,59.0,64.0,4.0,10.0,6.0,0.0,0.0,6.0,2.0,9.0,14.0
 195544,St. Joseph's University-New York,Brooklyn,NY,2,Private nonprofit,11,City,19,2,2,2,-73.967664,40.690418,36047,71.0,71.0,4050.0,3369.0,69.0,54.0,9.0,21.0,4.0,0.0,0.0,2.0,6.0,3.0,34.0
@@ -1331,7 +1315,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 197692,Yeshivath Shaar Hatorah,Kew Gardens,NY,2,Private nonprofit,11,City,24,1,2,2,-73.835009,40.704048,36081,92.0,52.0,96.0,84.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.0
 197708,Yeshiva University,New York,NY,2,Private nonprofit,11,City,16,3,2,2,-73.929873,40.850605,36061,64.0,80.0,6826.0,3091.0,56.0,51.0,3.0,5.0,2.0,0.0,0.0,1.0,26.0,12.0,14.0
 197735,Yeshivath Viznitz,Monsey,NY,2,Private nonprofit,21,Suburb,24,2,2,2,-74.070243,41.114682,36087,94.0,71.0,1148.0,921.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,81.0
-197744,Yeshivath Zichron Moshe,South Fallsburg,NY,2,Private nonprofit,32,Town,24,1,2,2,-74.621823,41.73048,36105,52.0,0.0,222.0,176.0,0.0,95.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5.0,50.0
 197869,Appalachian State University,Boone,NC,1,Public,32,Town,18,5,1,2,-81.680583,36.215536,37189,89.0,73.0,21253.0,19405.0,57.0,81.0,3.0,8.0,2.0,0.0,0.0,4.0,1.0,1.0,26.0
 197911,Barton College,Wilson,NC,2,Private nonprofit,31,Town,22,2,2,2,-77.913867,35.734376,37195,96.0,52.0,1259.0,1163.0,53.0,53.0,30.0,10.0,1.0,0.0,0.0,1.0,0.0,4.0,37.0
 197984,Belmont Abbey College,Belmont,NC,2,Private nonprofit,22,Suburb,22,2,2,2,-81.041315,35.260651,37071,90.0,46.0,1650.0,1549.0,48.0,62.0,9.0,9.0,2.0,0.0,0.0,3.0,12.0,4.0,25.0
@@ -1392,7 +1375,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 200013,Rasmussen University-North Dakota,Fargo,ND,3,Private for-profit,12,City,23,1,3,2,-96.848937,46.848362,38017,,,44.0,44.0,80.0,55.0,16.0,11.0,5.0,0.0,0.0,5.0,9.0,0.0,46.0
 200022,Bismarck State College,Bismarck,ND,1,Public,13,City,14,2,1,2,-100.816534,46.821459,38015,,,4065.0,4065.0,49.0,76.0,2.0,4.0,1.0,1.0,0.0,4.0,11.0,1.0,14.0
 200059,Dickinson State University,Dickinson,ND,1,Public,33,Town,22,2,1,2,-102.799679,46.882917,38089,60.0,36.0,1453.0,1392.0,58.0,74.0,2.0,7.0,1.0,1.0,1.0,4.0,7.0,3.0,22.0
-200086,Nueta Hidatsa Sahnish College,New Town,ND,1,Public,43,Rural,33,1,1,2,-102.472814,47.983311,38061,,0.0,158.0,158.0,65.0,9.0,1.0,5.0,4.0,75.0,1.0,6.0,0.0,0.0,31.0
 200156,University of Jamestown,Jamestown,ND,2,Private nonprofit,33,Town,22,2,2,2,-98.698416,46.914302,38093,94.0,55.0,1215.0,964.0,47.0,67.0,2.0,7.0,0.0,0.0,0.0,3.0,14.0,5.0,26.0
 200217,University of Mary,Bismarck,ND,2,Private nonprofit,41,Rural,17,2,2,2,-100.75274,46.723767,38015,78.0,64.0,3794.0,2650.0,61.0,78.0,2.0,0.0,2.0,3.0,0.0,3.0,9.0,3.0,18.0
 200226,Mayville State University,Mayville,ND,1,Public,43,Rural,22,2,1,2,-97.322554,47.505415,38097,,31.0,1025.0,963.0,61.0,78.0,4.0,6.0,1.0,1.0,0.0,7.0,1.0,2.0,24.0
@@ -1405,7 +1387,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 200554,United Tribes Technical College,Bismarck,ND,2,Private nonprofit,23,Suburb,33,1,2,2,-100.755131,46.767157,38015,,,542.0,542.0,66.0,2.0,1.0,0.0,0.0,96.0,0.0,1.0,0.0,0.0,75.0
 200572,Valley City State University,Valley City,ND,1,Public,33,Town,22,2,1,2,-98.00389,46.918517,38003,69.0,53.0,1754.0,1628.0,60.0,82.0,2.0,4.0,1.0,1.0,0.0,4.0,4.0,2.0,17.0
 200697,Air Force Institute of Technology-Graduate School of Engineering & Management,Wright-Patterson AFB,OH,1,Public,21,Suburb,16,2,1,2,-84.082618,39.782221,39057,,,1005.0,0.0,17.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,
-200785,Herzing University-Akron,Akron,OH,2,Private nonprofit,21,Suburb,23,1,2,2,-81.493109,41.02817,39153,94.0,0.0,381.0,381.0,91.0,52.0,38.0,4.0,1.0,0.0,0.0,4.0,2.0,0.0,78.0
 200800,University of Akron Main Campus,Akron,OH,1,Public,12,City,16,4,1,2,-81.511167,41.075923,39153,71.0,49.0,13518.0,11452.0,50.0,69.0,11.0,4.0,4.0,0.0,0.0,5.0,3.0,4.0,29.0
 200873,Allegheny Wesleyan College,Salem,OH,2,Private nonprofit,41,Rural,24,1,2,2,-80.861232,40.86722,39029,,42.0,70.0,70.0,59.0,93.0,0.0,0.0,0.0,7.0,0.0,0.0,0.0,0.0,45.0
 201061,Art Academy of Cincinnati,Cincinnati,OH,2,Private nonprofit,11,City,30,1,2,2,-84.513913,39.108805,39061,33.0,38.0,259.0,255.0,76.0,64.0,18.0,6.0,1.0,0.0,0.0,8.0,3.0,0.0,48.0
@@ -1416,7 +1397,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 201371,Bluffton University,Bluffton,OH,2,Private nonprofit,42,Rural,22,1,2,2,-83.899439,40.895606,39003,61.0,53.0,678.0,602.0,45.0,68.0,17.0,3.0,1.0,0.0,0.0,3.0,7.0,1.0,37.0
 201432,Bowling Green State University-Firelands,Huron,OH,1,Public,41,Rural,2,2,1,2,-82.594266,41.397566,39043,,,1928.0,1928.0,64.0,73.0,9.0,7.0,0.0,0.0,0.0,4.0,6.0,0.0,26.0
 201441,Bowling Green State University-Main Campus,Bowling Green,OH,1,Public,31,Town,16,4,1,2,-83.640896,41.375513,39173,81.0,61.0,17027.0,14014.0,57.0,76.0,6.0,5.0,1.0,0.0,0.0,4.0,3.0,5.0,23.0
-201469,Bryant & Stratton College-Parma,Parma,OH,2,Private nonprofit,21,Suburb,23,1,2,2,-81.781757,41.404607,39035,,0.0,522.0,522.0,74.0,45.0,36.0,8.0,2.0,0.0,0.0,6.0,2.0,0.0,68.0
 201548,Capital University,Columbus,OH,2,Private nonprofit,21,Suburb,19,2,2,2,-82.937867,39.954875,39049,73.0,62.0,2388.0,1747.0,57.0,70.0,12.0,6.0,3.0,0.0,0.0,6.0,2.0,1.0,31.0
 201645,Case Western Reserve University,Cleveland,OH,2,Private nonprofit,11,City,15,4,2,2,-81.609596,41.507419,39035,29.0,84.0,12266.0,6186.0,52.0,39.0,7.0,9.0,20.0,0.0,0.0,4.0,3.0,19.0,17.0
 201654,Cedarville University,Cedarville,OH,2,Private nonprofit,42,Rural,20,3,2,2,-83.814692,39.749237,39057,63.0,73.0,5374.0,4916.0,54.0,85.0,2.0,4.0,3.0,0.0,0.0,3.0,1.0,2.0,15.0
@@ -1447,7 +1427,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 203128,Hiram College,Hiram,OH,2,Private nonprofit,42,Rural,22,2,2,2,-81.143981,41.3107,39133,93.0,53.0,1011.0,983.0,52.0,53.0,5.0,6.0,1.0,0.0,0.0,2.0,32.0,1.0,32.0
 203368,John Carroll University,University Heights,OH,2,Private nonprofit,21,Suburb,19,2,2,2,-81.531224,41.490259,39035,81.0,76.0,2773.0,2287.0,50.0,80.0,6.0,5.0,3.0,0.0,0.0,3.0,0.0,3.0,20.0
 203447,Kent State University at Ashtabula,Ashtabula,OH,1,Public,32,Town,14,2,1,2,-80.830377,41.888296,39007,,1.0,1762.0,1762.0,63.0,79.0,7.0,5.0,1.0,0.0,0.0,4.0,3.0,1.0,34.0
-203456,Kent State University at East Liverpool,East Liverpool,OH,1,Public,31,Town,26,2,1,2,-80.576702,40.616966,39029,,0.0,1056.0,1056.0,65.0,81.0,5.0,4.0,1.0,0.0,0.0,5.0,3.0,1.0,24.0
 203465,Kent State University at Stark,North Canton,OH,1,Public,21,Suburb,14,2,1,2,-81.43731,40.868568,39151,,1.0,3433.0,3423.0,64.0,80.0,7.0,4.0,1.0,0.0,0.0,4.0,3.0,1.0,29.0
 203474,Kent State University at Trumbull,Warren,OH,1,Public,41,Rural,23,2,1,2,-80.836233,41.278748,39155,,1.0,2029.0,2029.0,63.0,81.0,8.0,4.0,1.0,0.0,0.0,4.0,2.0,0.0,37.0
 203483,Kent State University at Tuscarawas,New Philadelphia,OH,1,Public,32,Town,23,2,1,2,-81.407707,40.467736,39157,,5.0,1885.0,1885.0,60.0,84.0,5.0,4.0,1.0,0.0,0.0,3.0,2.0,0.0,31.0
@@ -1505,7 +1484,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 205957,Franciscan University of Steubenville,Steubenville,OH,2,Private nonprofit,13,City,19,2,2,2,-80.620524,40.376919,39081,72.0,72.0,3750.0,2978.0,56.0,71.0,1.0,18.0,3.0,0.0,0.0,2.0,2.0,3.0,21.0
 206048,Tiffin University,Tiffin,OH,2,Private nonprofit,32,Town,18,2,2,2,-83.184197,41.118316,39147,80.0,45.0,3598.0,2669.0,55.0,44.0,15.0,1.0,2.0,0.0,0.0,3.0,30.0,6.0,36.0
 206084,University of Toledo,Toledo,OH,1,Public,11,City,16,4,1,2,-83.614714,41.660572,39095,95.0,56.0,14939.0,11447.0,54.0,63.0,9.0,6.0,4.0,0.0,0.0,4.0,5.0,10.0,26.0
-206154,Tri-State Bible College,South Point,OH,2,Private nonprofit,22,Suburb,24,1,2,2,-82.579887,38.426238,39087,,0.0,20.0,16.0,20.0,90.0,10.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,52.0
 206279,Union Institute & University,Cincinnati,OH,2,Private nonprofit,11,City,17,1,2,2,-84.497652,39.119091,39061,,,,,,,,,,,,,,,
 206288,United Theological Seminary,Dayton,OH,2,Private nonprofit,21,Suburb,24,1,2,2,-84.276913,39.813423,39113,,,471.0,0.0,40.0,17.0,29.0,5.0,4.0,0.0,0.0,1.0,27.0,16.0,
 206349,Ursuline College,Pepper Pike,OH,2,Private nonprofit,21,Suburb,19,1,2,2,-81.465118,41.497035,39035,84.0,49.0,923.0,637.0,91.0,55.0,24.0,2.0,4.0,0.0,0.0,7.0,4.0,4.0,39.0
@@ -1774,7 +1752,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 219295,Presentation College,Aberdeen,SD,2,Private nonprofit,41,Rural,26,-2,2,2,-98.49129,45.483339,46013,,,,,,,,,,,,,,,
 219347,South Dakota School of Mines and Technology,Rapid City,SD,1,Public,13,City,27,2,1,2,-103.205753,44.075439,46103,85.0,52.0,2492.0,2170.0,24.0,78.0,1.0,6.0,2.0,1.0,0.0,2.0,4.0,5.0,16.0
 219356,South Dakota State University,Brookings,SD,1,Public,33,Town,16,4,1,2,-96.782139,44.317485,46011,99.0,59.0,11498.0,10177.0,56.0,83.0,1.0,3.0,1.0,1.0,0.0,2.0,3.0,6.0,16.0
-219374,Sinte Gleska University,Mission,SD,1,Public,43,Rural,33,1,1,2,-100.622549,43.298878,46121,,0.0,683.0,607.0,77.0,11.0,0.0,0.0,0.0,88.0,0.0,0.0,0.0,0.0,52.0
 219383,University of Sioux Falls,Sioux Falls,SD,2,Private nonprofit,12,City,19,2,2,2,-96.738229,43.531574,46099,82.0,58.0,1509.0,1276.0,59.0,79.0,5.0,6.0,1.0,1.0,0.0,6.0,1.0,1.0,29.0
 219408,Sisseton Wahpeton College,Sisseton,SD,1,Public,43,Rural,33,1,1,2,-97.060835,45.562731,46109,,,215.0,215.0,62.0,4.0,3.0,0.0,0.0,92.0,0.0,0.0,0.0,0.0,58.0
 219471,University of South Dakota,Vermillion,SD,1,Public,32,Town,16,3,1,2,-96.925283,42.786019,46027,99.0,60.0,9868.0,7095.0,63.0,78.0,3.0,4.0,1.0,2.0,0.0,3.0,2.0,6.0,18.0
@@ -1830,7 +1807,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 222983,Austin College,Sherman,TX,2,Private nonprofit,13,City,21,2,2,2,-96.596331,33.646345,48181,47.0,68.0,1136.0,1128.0,52.0,50.0,7.0,25.0,11.0,1.0,0.0,4.0,0.0,1.0,30.0
 222992,Austin Community College District,Austin,TX,1,Public,11,City,5,5,1,2,-97.713778,30.326304,48453,,,35600.0,35600.0,57.0,38.0,8.0,41.0,7.0,0.0,0.0,3.0,1.0,1.0,23.0
 223001,Austin Presbyterian Theological Seminary,Austin,TX,2,Private nonprofit,11,City,24,1,2,2,-97.736958,30.29201,48453,,,168.0,0.0,61.0,76.0,11.0,5.0,2.0,1.0,0.0,1.0,0.0,4.0,
-223083,Baptist Health System School of Health Professions,San Antonio,TX,3,Private for-profit,11,City,26,1,3,2,-98.567486,29.517063,48029,0.0,,524.0,524.0,83.0,13.0,7.0,32.0,3.0,0.0,0.0,38.0,7.0,0.0,52.0
 223117,Baptist Missionary Association Theological Seminary,Jacksonville,TX,2,Private nonprofit,32,Town,24,1,2,2,-95.255524,31.978961,48073,23.0,100.0,95.0,52.0,19.0,49.0,20.0,23.0,5.0,0.0,0.0,1.0,0.0,1.0,34.0
 223223,Baylor College of Medicine,Houston,TX,2,Private nonprofit,11,City,25,2,2,2,-95.395743,29.7106,48201,,,1699.0,0.0,59.0,40.0,7.0,15.0,23.0,1.0,0.0,1.0,1.0,14.0,
 223232,Baylor University,Waco,TX,2,Private nonprofit,12,City,16,5,2,2,-97.121041,31.546872,48309,51.0,82.0,20824.0,15155.0,61.0,60.0,6.0,16.0,8.0,0.0,0.0,5.0,1.0,4.0,13.0
@@ -1901,7 +1877,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 228431,Stephen F Austin State University,Nacogdoches,TX,1,Public,33,Town,17,4,1,2,-94.64908,31.621056,48347,88.0,53.0,10888.0,9575.0,63.0,57.0,11.0,22.0,1.0,0.0,0.0,4.0,2.0,1.0,37.0
 228459,Texas State University,San Marcos,TX,1,Public,13,City,16,5,1,2,-97.943029,29.888885,48209,89.0,57.0,38722.0,34547.0,61.0,39.0,9.0,41.0,3.0,0.0,0.0,3.0,2.0,2.0,36.0
 228468,Southwestern Adventist University,Keene,TX,2,Private nonprofit,31,Town,22,1,2,2,-97.32702,32.397617,48251,56.0,42.0,817.0,813.0,56.0,22.0,12.0,49.0,6.0,0.0,1.0,4.0,2.0,4.0,39.0
-228486,Southwestern Christian College,Terrell,TX,2,Private nonprofit,32,Town,23,1,2,1,-96.285649,32.735508,48257,,0.0,128.0,128.0,58.0,0.0,91.0,3.0,0.0,1.0,1.0,5.0,0.0,0.0,91.0
 228501,Sul Ross State University,Alpine,TX,1,Public,33,Town,18,2,1,2,-103.651469,30.363139,48043,96.0,29.0,1942.0,1441.0,59.0,24.0,6.0,67.0,1.0,0.0,0.0,1.0,1.0,1.0,52.0
 228529,Tarleton State University,Stephenville,TX,1,Public,33,Town,18,4,1,2,-98.219039,32.217805,48143,94.0,49.0,15937.0,13688.0,63.0,62.0,7.0,24.0,1.0,1.0,0.0,3.0,1.0,1.0,37.0
 228635,University of Texas Southwestern Medical Center,Dallas,TX,1,Public,11,City,25,2,1,2,-96.841156,32.812307,48113,,,2501.0,0.0,56.0,26.0,6.0,14.0,21.0,0.0,0.0,3.0,6.0,24.0,
@@ -1964,7 +1939,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 231624,William & Mary,Williamsburg,VA,1,Public,23,Suburb,16,3,1,2,-76.708214,37.269489,51830,33.0,91.0,9762.0,6963.0,59.0,61.0,7.0,8.0,10.0,0.0,0.0,6.0,2.0,6.0,12.0
 231651,Regent University,Virginia Beach,VA,2,Private nonprofit,11,City,17,4,2,2,-76.194627,36.801173,51810,41.0,63.0,10168.0,4577.0,64.0,42.0,30.0,10.0,2.0,1.0,0.0,4.0,10.0,2.0,48.0
 231712,Christopher Newport University,Newport News,VA,1,Public,12,City,20,2,1,2,-76.494364,37.062495,51700,88.0,75.0,4503.0,4407.0,52.0,72.0,8.0,8.0,4.0,0.0,0.0,5.0,1.0,0.0,15.0
-231785,Bryant & Stratton College-Virginia Beach,Virginia Beach,VA,2,Private nonprofit,11,City,23,2,2,2,-76.13819,36.827826,51810,,0.0,1339.0,1339.0,84.0,25.0,57.0,7.0,2.0,0.0,0.0,6.0,1.0,0.0,62.0
 231970,Eastern Virginia Medical School,Norfolk,VA,1,Public,12,City,25,2,1,2,-76.302131,36.860042,51710,,,1235.0,0.0,65.0,50.0,13.0,8.0,18.0,0.0,1.0,6.0,3.0,0.0,
 232025,Emory & Henry University,Emory,VA,2,Private nonprofit,41,Rural,21,2,2,2,-81.829142,36.772857,51191,96.0,51.0,1364.0,1107.0,57.0,68.0,10.0,3.0,2.0,0.0,0.0,3.0,9.0,3.0,41.0
 232043,Eastern Mennonite University,Harrisonburg,VA,2,Private nonprofit,13,City,19,2,2,2,-78.880326,38.471134,51660,100.0,55.0,1292.0,863.0,66.0,64.0,10.0,9.0,2.0,0.0,0.0,3.0,5.0,6.0,27.0
@@ -2197,10 +2171,8 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 245953,Mid-America Christian University,Oklahoma City,OK,2,Private nonprofit,11,City,19,2,2,2,-97.578297,35.347785,40027,,36.0,2183.0,1636.0,67.0,52.0,13.0,13.0,1.0,7.0,0.0,6.0,3.0,5.0,40.0
 246345,Houston Graduate School of Theology,Houston,TX,2,Private nonprofit,11,City,24,1,2,2,-95.448846,29.673594,48201,,,,,,,,,,,,,,,
 246789,HJ International Graduate School for Peace and Public Leadership,New York,NY,2,Private nonprofit,11,City,24,1,2,2,-73.981154,40.754309,36061,,,127.0,0.0,33.0,20.0,10.0,2.0,10.0,0.0,0.0,4.0,47.0,6.0,
-247065,Beckfield College-Florence,Florence,KY,3,Private for-profit,21,Suburb,23,1,3,2,-84.641475,39.017166,21015,,0.0,612.0,612.0,93.0,79.0,15.0,0.0,0.0,1.0,0.0,2.0,1.0,0.0,57.0
 247162,Ecumenical Theological Seminary,Detroit,MI,2,Private nonprofit,11,City,24,1,2,2,-83.055266,42.344129,26163,,,63.0,11.0,54.0,25.0,67.0,5.0,2.0,0.0,0.0,0.0,0.0,2.0,0.0
 247649,Landmark College,Putney,VT,2,Private nonprofit,42,Rural,23,1,2,2,-72.512549,42.977172,50025,44.0,,650.0,598.0,40.0,73.0,5.0,5.0,2.0,0.0,0.0,5.0,8.0,2.0,14.0
-247773,Yeshiva Gedolah of Greater Detroit,Oak Park,MI,2,Private nonprofit,21,Suburb,24,1,2,2,-83.200754,42.471924,26125,93.0,0.0,71.0,71.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,38.0
 247834,Collin County Community College District,McKinney,TX,1,Public,21,Suburb,2,5,1,2,-96.63894,33.16241,48085,,,37772.0,37772.0,54.0,41.0,12.0,23.0,15.0,0.0,0.0,5.0,3.0,1.0,16.0
 248934,ECPI University,Virginia Beach,VA,3,Private for-profit,11,City,19,4,3,2,-76.178773,36.842526,51810,83.0,33.0,11745.0,11385.0,58.0,34.0,39.0,15.0,3.0,1.0,0.0,5.0,3.0,0.0,49.0
 251312,South University-Columbia,Columbia,SC,3,Private for-profit,21,Suburb,19,1,3,2,-80.961839,34.098042,45079,,8.0,509.0,445.0,83.0,15.0,71.0,4.0,1.0,0.0,0.0,4.0,4.0,1.0,58.0
@@ -2208,15 +2180,12 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 260789,Platt College-Los Angeles,Alhambra,CA,3,Private for-profit,21,Suburb,26,1,3,2,-118.150013,34.081723,6037,,,598.0,598.0,79.0,13.0,3.0,69.0,9.0,1.0,0.0,5.0,1.0,0.0,55.0
 260813,Platt College-Aurora,Greenwood Village,CO,3,Private for-profit,21,Suburb,26,1,3,2,-104.899235,39.613133,8005,36.0,50.0,215.0,215.0,88.0,50.0,9.0,30.0,5.0,0.0,0.0,3.0,2.0,0.0,31.0
 260992,Northwestern College,Oak Lawn,IL,3,Private for-profit,21,Suburb,10,1,3,2,-87.742567,41.721406,17031,,,464.0,464.0,96.0,9.0,67.0,21.0,1.0,0.0,0.0,0.0,0.0,0.0,75.0
-262086,University of Massachusetts Global,Irvine,CA,1,Public,11,City,17,3,1,2,-117.769012,33.656401,6059,,0.0,9069.0,5511.0,71.0,55.0,12.0,6.0,5.0,1.0,1.0,5.0,16.0,0.0,23.0
 262129,New College of Florida,Sarasota,FL,1,Public,13,City,21,1,1,2,-82.55858,27.384925,12115,74.0,66.0,732.0,710.0,57.0,57.0,5.0,22.0,4.0,0.0,0.0,5.0,1.0,5.0,30.0
 262165,Montana Bible College,Billings,MT,2,Private nonprofit,22,Suburb,-2,1,2,2,-108.615675,45.741788,30111,85.0,,47.0,47.0,43.0,83.0,0.0,9.0,0.0,0.0,0.0,2.0,4.0,2.0,0.0
-363712,Yeshivah Gedolah Rabbinical College,Miami Beach,FL,2,Private nonprofit,13,City,24,1,2,2,-80.141334,25.782445,12086,,0.0,77.0,77.0,0.0,91.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,9.0,39.0
 363907,Caribbean University-Ponce,Ponce,PR,2,Private nonprofit,12,City,22,1,2,2,-66.59425,18.006633,72113,,16.0,607.0,438.0,48.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,75.0
 363916,Caribbean University-Vega Baja,Vega Baja,PR,2,Private nonprofit,21,Suburb,22,1,2,2,-66.40315,18.444882,72145,,50.0,215.0,194.0,73.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,79.0
 363934,University of Advancing Technology,Tempe,AZ,3,Private for-profit,12,City,28,1,3,2,-111.976087,33.377712,4013,95.0,33.0,960.0,892.0,22.0,46.0,14.0,17.0,3.0,2.0,0.0,8.0,9.0,0.0,58.0
 364016,Paradise Valley Community College,Phoenix,AZ,1,Public,11,City,2,3,1,2,-112.009865,33.652135,4013,,,5880.0,5880.0,56.0,52.0,4.0,29.0,4.0,1.0,0.0,5.0,3.0,1.0,19.0
-366003,South Florida Bible College and Theological Seminary,Deerfield Beach,FL,2,Private nonprofit,13,City,24,1,2,2,-80.134508,26.30294,12011,,0.0,355.0,273.0,58.0,22.0,17.0,21.0,1.0,0.0,0.0,2.0,5.0,32.0,21.0
 366252,Pennsylvania College of Technology,Williamsport,PA,1,Public,13,City,23,2,1,2,-77.023665,41.234145,42081,,55.0,4307.0,4287.0,34.0,86.0,4.0,5.0,1.0,0.0,0.0,3.0,1.0,0.0,32.0
 366340,Stone Child College,Box Elder,MT,1,Public,43,Rural,33,1,1,2,-109.870182,48.289808,30015,,,261.0,261.0,68.0,7.0,0.0,0.0,0.0,93.0,0.0,0.0,0.0,0.0,42.0
 366368,New York Academy of Art,New York,NY,2,Private nonprofit,11,City,30,1,2,2,-74.006019,40.718388,36061,,,116.0,0.0,74.0,40.0,2.0,16.0,7.0,0.0,0.0,4.0,7.0,25.0,
@@ -2243,7 +2212,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 380359,Bay Mills Community College,Brimley,MI,1,Public,42,Rural,33,1,1,2,-84.606312,46.45482,26033,,,577.0,577.0,79.0,31.0,2.0,1.0,0.0,66.0,0.0,0.0,0.0,0.0,42.0
 380368,Fond du Lac Tribal and Community College,Cloquet,MN,1,Public,31,Town,33,2,1,2,-92.451326,46.690069,27017,,,1749.0,1749.0,60.0,71.0,1.0,3.0,1.0,9.0,0.0,6.0,8.0,0.0,19.0
 380377,Northwest Indian College,Bellingham,WA,1,Public,22,Suburb,33,1,1,2,-122.614656,48.794131,53073,,26.0,696.0,696.0,74.0,2.0,0.0,10.0,0.0,77.0,1.0,9.0,0.0,0.0,49.0
-380438,Provo College,Provo,UT,3,Private for-profit,12,City,23,1,3,2,-111.68431,40.245294,49049,,0.0,705.0,705.0,86.0,70.0,1.0,13.0,2.0,1.0,1.0,1.0,10.0,0.0,57.0
 381352,Colorado Chinese Medicine University,Denver,CO,3,Private for-profit,11,City,26,1,3,2,-104.960118,39.739437,8031,,,84.0,0.0,76.0,67.0,4.0,4.0,8.0,1.0,0.0,4.0,12.0,1.0,
 381459,Phoenix Seminary,Scottsdale,AZ,2,Private nonprofit,12,City,24,1,2,2,-111.910665,33.581645,4013,,,312.0,0.0,32.0,71.0,3.0,10.0,5.0,2.0,1.0,5.0,4.0,2.0,
 383020,Midwest College of Oriental Medicine-Racine,Racine,WI,3,Private for-profit,13,City,26,1,3,2,-87.856679,42.678051,55101,,,47.0,3.0,79.0,81.0,6.0,9.0,4.0,0.0,0.0,0.0,0.0,0.0,50.0
@@ -2262,8 +2230,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 401250,Yo San University of Traditional Chinese Medicine,Los Angeles,CA,2,Private nonprofit,21,Suburb,26,1,2,2,-118.442756,33.993287,6037,,,132.0,0.0,73.0,54.0,7.0,12.0,23.0,0.0,0.0,3.0,0.0,2.0,
 404055,Brookline College-Tempe,Tempe,AZ,3,Private for-profit,12,City,13,1,3,2,-111.961365,33.4163,4013,,,294.0,294.0,88.0,25.0,17.0,36.0,1.0,6.0,0.0,1.0,14.0,0.0,58.0
 404222,Inter American University of Puerto Rico-School of Optometry,Bayamon,PR,2,Private nonprofit,12,City,26,1,2,2,-66.182473,18.351631,72021,,,217.0,0.0,71.0,16.0,6.0,67.0,10.0,1.0,0.0,0.0,0.0,0.0,
-404338,Schiller International University,Tampa,FL,3,Private for-profit,11,City,29,1,3,2,-82.459292,27.947866,12057,,0.0,54.0,35.0,50.0,24.0,19.0,15.0,2.0,0.0,0.0,2.0,37.0,2.0,11.0
-405058,Yeshivas Novominsk,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.989968,40.623395,36047,90.0,0.0,163.0,163.0,0.0,99.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,35.0
 405854,Rabbinical College of Ohr Shimon Yisroel,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.956772,40.704389,36047,,44.0,233.0,233.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,80.0
 406024,Galen College of Nursing-Tampa Bay,Saint Petersburg,FL,3,Private for-profit,11,City,10,2,3,2,-82.648151,27.865391,12103,,,1601.0,1601.0,86.0,39.0,23.0,19.0,5.0,0.0,0.0,3.0,10.0,0.0,48.0
 406033,Galen College of Nursing-San Antonio,San Antonio,TX,3,Private for-profit,11,City,26,2,3,2,-98.585653,29.507685,48029,,,3206.0,3206.0,85.0,21.0,12.0,49.0,3.0,0.0,1.0,2.0,12.0,0.0,53.0
@@ -2277,7 +2243,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 413413,Capella University,Minneapolis,MN,3,Private for-profit,11,City,17,5,3,2,-93.268796,44.976286,27053,,50.0,43915.0,16177.0,84.0,46.0,29.0,13.0,3.0,0.0,0.0,4.0,4.0,1.0,37.0
 413617,College of Menominee Nation,Keshena,WI,2,Private nonprofit,42,Rural,33,1,2,2,-88.625628,44.859044,55078,,,219.0,219.0,70.0,5.0,0.0,2.0,0.0,92.0,0.0,0.0,0.0,0.0,51.0
 414595,Pacific College of Health and Science,New York,NY,3,Private for-profit,11,City,26,1,3,2,-74.006721,40.7088,36061,,100.0,678.0,307.0,82.0,19.0,4.0,4.0,9.0,0.0,0.0,3.0,49.0,12.0,28.0
-414878,Trine University-Regional/Non-Traditional Campuses,Angola,IN,2,Private nonprofit,32,Town,18,3,2,2,-85.008009,41.632502,18151,22.0,0.0,8230.0,444.0,31.0,4.0,1.0,0.0,0.0,0.0,0.0,0.0,1.0,94.0,13.0
 414966,Phillips Theological Seminary,Tulsa,OK,2,Private nonprofit,11,City,24,1,2,2,-95.868146,36.167983,40143,,,98.0,0.0,54.0,70.0,19.0,3.0,1.0,2.0,0.0,3.0,0.0,1.0,
 416801,The University of Texas MD Anderson Cancer Center,Houston,TX,1,Public,11,City,26,1,1,2,-95.396804,29.707016,48201,,,355.0,322.0,78.0,23.0,7.0,35.0,25.0,0.0,0.0,4.0,1.0,5.0,32.0
 417734,Southeast Missouri Hospital College of Nursing and Health Sciences,Cape Girardeau,MO,2,Private nonprofit,13,City,26,1,2,2,-89.54587,37.302453,29031,100.0,,147.0,147.0,88.0,89.0,5.0,3.0,0.0,0.0,0.0,3.0,0.0,0.0,46.0
@@ -2303,7 +2268,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 431983,Yeshiva of the Telshe Alumni,Riverdale,NY,2,Private nonprofit,11,City,24,1,2,2,-73.911096,40.896668,36005,,67.0,78.0,78.0,0.0,99.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,47.0
 432348,Appalachian School of Law,Grundy,VA,2,Private nonprofit,43,Rural,31,1,2,2,-82.095648,37.277669,51027,,,140.0,0.0,51.0,69.0,13.0,8.0,1.0,3.0,0.0,0.0,4.0,1.0,
 432384,Platt College-Ontario,Ontario,CA,3,Private for-profit,12,City,23,1,3,2,-117.571744,34.068595,6071,,,467.0,467.0,82.0,9.0,7.0,74.0,5.0,0.0,0.0,4.0,0.0,0.0,66.0
-433004,American University of Health Sciences,Signal Hill,CA,3,Private for-profit,21,Suburb,26,1,3,2,-118.171366,33.796849,6037,100.0,0.0,523.0,364.0,73.0,6.0,11.0,24.0,49.0,1.0,4.0,3.0,1.0,2.0,46.0
 433013,Career Networks Institute,Santa Ana,CA,3,Private for-profit,11,City,26,1,3,2,-117.8478,33.721058,6059,,,971.0,971.0,70.0,14.0,8.0,44.0,27.0,2.0,1.0,2.0,0.0,1.0,48.0
 433174,Carolinas College of Health Sciences,Charlotte,NC,1,Public,11,City,10,1,1,2,-80.927508,35.181863,37119,81.0,,410.0,410.0,85.0,46.0,19.0,8.0,3.0,0.0,1.0,3.0,20.0,0.0,17.0
 433387,Western Governors University,Salt Lake City,UT,2,Private nonprofit,21,Suburb,18,5,2,2,-111.869752,40.68481,49035,,64.0,185015.0,135822.0,60.0,57.0,13.0,14.0,4.0,1.0,0.0,4.0,7.0,0.0,35.0
@@ -2321,7 +2285,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 436818,University of Connecticut-Waterbury Campus,Waterbury,CT,1,Public,12,City,-2,1,1,2,-73.039242,41.555617,9140,87.0,65.0,760.0,760.0,56.0,41.0,11.0,28.0,11.0,0.0,0.0,6.0,0.0,2.0,50.0
 436827,University of Connecticut-Avery Point,Groton,CT,1,Public,22,Suburb,-2,1,1,2,-72.065336,41.316419,9180,87.0,56.0,474.0,474.0,41.0,61.0,3.0,17.0,9.0,0.0,0.0,6.0,3.0,1.0,34.0
 436836,University of Connecticut-Stamford,Stamford,CT,1,Public,12,City,-2,2,1,2,-73.542206,41.056081,9190,80.0,58.0,2240.0,2240.0,48.0,30.0,15.0,34.0,11.0,0.0,0.0,4.0,1.0,6.0,50.0
-437097,University of Management and Technology,Arlington,VA,3,Private for-profit,12,City,17,2,3,2,-77.072001,38.89743,51013,,0.0,1167.0,323.0,39.0,3.0,4.0,1.0,4.0,0.0,0.0,0.0,87.0,0.0,5.0
 438586,American InterContinental University-Atlanta,Atlanta,GA,3,Private for-profit,12,City,19,1,3,2,-84.354907,33.938779,13121,,25.0,729.0,670.0,71.0,8.0,50.0,0.0,0.0,0.0,0.0,3.0,38.0,0.0,83.0
 439020,Midwest College of Oriental Medicine-Skokie,Skokie,IL,3,Private for-profit,13,City,26,1,3,2,-87.754597,42.044312,17031,,,39.0,1.0,77.0,62.0,26.0,5.0,8.0,0.0,0.0,0.0,0.0,0.0,33.0
 439190,Cascadia College,Bothell,WA,1,Public,21,Suburb,14,2,1,2,-122.191572,47.760915,53033,,,2013.0,2013.0,51.0,40.0,2.0,13.0,16.0,0.0,0.0,10.0,14.0,6.0,10.0
@@ -2349,7 +2312,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 441238,Irell & Manella Graduate School of Biological Sciences at City of Hope,Duarte,CA,2,Private nonprofit,21,Suburb,26,-1,2,2,-117.972791,34.129048,6037,,,,,,,,,,,,,,,
 441609,Yeshiva Shaarei Torah of Rockland,Suffern,NY,2,Private nonprofit,21,Suburb,24,1,2,2,-74.090159,41.12362,36087,35.0,,141.0,141.0,0.0,91.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,9.0,24.0
 441636,American Institute of Alternative Medicine,Columbus,OH,3,Private for-profit,11,City,26,1,3,2,-82.988733,40.102442,39049,84.0,,393.0,374.0,87.0,17.0,73.0,2.0,3.0,1.0,1.0,3.0,0.0,0.0,66.0
-441690,Universidad Pentecostal Mizpa,Rio Piedras,PR,2,Private nonprofit,11,City,24,1,2,2,-66.085117,18.358258,72127,,0.0,232.0,176.0,41.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,58.0
 441900,Nevada State University,Henderson,NV,1,Public,41,Rural,22,3,1,2,-114.938044,35.982345,32003,86.0,29.0,7283.0,7224.0,72.0,18.0,9.0,41.0,12.0,0.0,1.0,6.0,12.0,0.0,22.0
 441937,California State University-Channel Islands,Camarillo,CA,1,Public,41,Rural,19,3,1,2,-119.04356,34.162949,6111,93.0,58.0,5688.0,5290.0,65.0,23.0,2.0,58.0,7.0,0.0,0.0,4.0,4.0,2.0,47.0
 441982,Franklin W Olin College of Engineering,Needham,MA,2,Private nonprofit,21,Suburb,27,1,2,2,-71.263378,42.293527,25021,22.0,97.0,402.0,402.0,48.0,40.0,3.0,10.0,21.0,0.0,0.0,9.0,8.0,8.0,13.0
@@ -2364,17 +2326,14 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 442930,University of Antelope Valley,Lancaster,CA,3,Private for-profit,21,Suburb,22,1,3,2,-118.134968,34.683587,6037,,51.0,,,,,,,,,,,,,53.0
 443030,NorthShore University HealthSystem School of Nurse Anesthesia,Evanston,IL,2,Private nonprofit,13,City,-2,1,2,2,-87.684445,42.065549,17031,,,75.0,0.0,68.0,68.0,5.0,8.0,13.0,0.0,0.0,5.0,0.0,0.0,
 443049,Faith International University,Tacoma,WA,2,Private nonprofit,12,City,24,1,2,2,-122.51687,47.280168,53053,,25.0,370.0,196.0,49.0,41.0,22.0,12.0,18.0,0.0,0.0,4.0,2.0,1.0,47.0
-443058,Family of Faith Christian University,Shawnee,OK,2,Private nonprofit,42,Rural,-2,1,2,2,-96.901413,35.462234,40125,100.0,0.0,302.0,89.0,50.0,55.0,6.0,5.0,5.0,0.0,0.0,3.0,1.0,26.0,41.0
 443076,Hood Theological Seminary,Salisbury,NC,2,Private nonprofit,21,Suburb,24,1,2,2,-80.480643,35.644603,37159,,,132.0,0.0,46.0,11.0,88.0,1.0,0.0,0.0,0.0,0.0,0.0,1.0,
 443331,West Coast University-Los Angeles,North Hollywood,CA,3,Private for-profit,11,City,26,2,3,2,-118.39941,34.187134,6037,,83.0,2687.0,2687.0,79.0,34.0,3.0,35.0,21.0,0.0,1.0,6.0,0.0,0.0,45.0
-443340,Williamson Christian College,Franklin,TN,2,Private nonprofit,13,City,29,1,2,2,-86.828311,35.95616,47187,,0.0,57.0,40.0,51.0,70.0,4.0,18.0,7.0,0.0,0.0,2.0,0.0,0.0,39.0
 443410,DigiPen Institute of Technology,Redmond,WA,3,Private for-profit,13,City,22,2,3,2,-122.150603,47.68871,53033,68.0,57.0,1100.0,1042.0,31.0,53.0,3.0,10.0,11.0,0.0,0.0,9.0,2.0,12.0,22.0
 443562,Dewey University-Hato Rey,Hato Rey,PR,2,Private nonprofit,11,City,26,1,2,2,-66.043033,18.417614,72127,,6.0,387.0,270.0,83.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,90.0
 443571,InterCoast Colleges-West Covina,West Covina,CA,3,Private for-profit,21,Suburb,-2,1,3,2,-117.897148,34.073357,6037,,,507.0,507.0,49.0,32.0,13.0,43.0,4.0,2.0,0.0,5.0,1.0,0.0,58.0
 443599,American College of Healthcare Sciences,Portland,OR,3,Private for-profit,11,City,26,2,3,2,-122.675858,45.486902,41051,58.0,,1042.0,812.0,93.0,52.0,19.0,10.0,1.0,1.0,0.0,5.0,11.0,0.0,62.0
 443650,Miller-Motte College-Chattanooga,Chattanooga,TN,3,Private for-profit,12,City,10,2,3,2,-85.181925,35.034287,47065,,,3667.0,3667.0,81.0,31.0,54.0,6.0,0.0,1.0,0.0,6.0,1.0,0.0,85.0
 443702,"Bexley Hall Seabury Western Theological Seminary Federation, Inc.",Chicago,IL,2,Private nonprofit,11,City,24,1,2,2,-87.591178,41.785701,17031,,,76.0,0.0,53.0,66.0,4.0,3.0,4.0,12.0,1.0,0.0,9.0,1.0,
-443766,Strayer University-Tennessee,Memphis,TN,3,Private for-profit,11,City,29,2,3,2,-89.901042,35.076643,47157,,0.0,2920.0,2670.0,81.0,31.0,63.0,1.0,0.0,0.0,0.0,3.0,1.0,0.0,86.0
 443784,Strayer University-Pennsylvania,Trevose,PA,3,Private for-profit,21,Suburb,19,2,3,2,-74.962991,40.13955,42017,,100.0,1503.0,1334.0,76.0,27.0,51.0,15.0,1.0,0.0,0.0,3.0,2.0,0.0,68.0
 444088,Brookline College-Albuquerque,Albuquerque,NM,3,Private for-profit,11,City,22,1,3,2,-106.68749,35.08781,35001,,33.0,492.0,492.0,85.0,21.0,9.0,55.0,4.0,8.0,0.0,1.0,2.0,0.0,52.0
 444103,Byzantine Catholic Seminary of Saints Cyril and Methodius,Pittsburgh,PA,2,Private nonprofit,11,City,24,1,2,2,-80.015825,40.484409,42003,,,35.0,0.0,17.0,69.0,0.0,3.0,0.0,0.0,0.0,0.0,29.0,0.0,
@@ -2384,13 +2343,11 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 444398,Baptist University of the Americas,San Antonio,TX,2,Private nonprofit,11,City,24,1,2,2,-98.541223,29.342919,48029,,35.0,101.0,98.0,50.0,4.0,5.0,47.0,2.0,0.0,0.0,0.0,1.0,42.0,32.0
 444413,Beis Medrash Heichal Dovid,Far Rockaway,NY,2,Private nonprofit,11,City,24,1,2,2,-73.751633,40.596845,36081,70.0,20.0,183.0,183.0,0.0,95.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5.0,15.0
 444699,Institute of Clinical Acupuncture & Oriental Med,Honolulu,HI,3,Private for-profit,11,City,26,1,3,2,-157.86111,21.313602,15003,,,57.0,0.0,86.0,46.0,0.0,16.0,30.0,0.0,7.0,0.0,0.0,2.0,
-444778,Charlotte Christian College and Theological Seminary,Charlotte,NC,2,Private nonprofit,11,City,24,1,2,2,-80.737194,35.159664,37119,,0.0,82.0,36.0,63.0,10.0,88.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,56.0
 444787,Nightingale College,Salt Lake City,UT,3,Private for-profit,12,City,26,2,3,2,-111.887917,40.767465,49035,,,4265.0,4244.0,85.0,28.0,17.0,21.0,18.0,1.0,2.0,0.0,12.0,0.0,43.0
 445027,American InterContinental University System,Chandler,AZ,3,Private for-profit,11,City,18,4,3,2,-111.804036,33.278816,4013,,8.0,10997.0,6830.0,60.0,22.0,27.0,8.0,2.0,1.0,1.0,3.0,36.0,0.0,73.0
 445054,Toyota Technological Institute at Chicago,Chicago,IL,2,Private nonprofit,11,City,28,1,2,2,-87.592682,41.784721,17031,,,38.0,0.0,26.0,8.0,0.0,3.0,5.0,0.0,0.0,3.0,3.0,79.0,
 445133,American InterContinental University-Houston,Houston,TX,3,Private for-profit,11,City,29,1,3,2,-95.548302,29.728216,48201,,33.0,163.0,124.0,61.0,10.0,40.0,1.0,6.0,1.0,0.0,1.0,41.0,0.0,77.0
 445188,University of California-Merced,Merced,CA,1,Public,22,Suburb,16,3,1,2,-120.424944,37.366237,6047,39.0,72.0,9147.0,8372.0,47.0,10.0,5.0,55.0,21.0,0.0,0.0,4.0,1.0,4.0,59.0
-445267,Central Methodist University-College of Graduate and Extended Studies,Fayette,MO,2,Private nonprofit,42,Rural,20,2,2,2,-92.685253,39.150497,29089,87.0,0.0,3601.0,3247.0,62.0,82.0,8.0,3.0,1.0,1.0,0.0,2.0,3.0,0.0,27.0
 445692,Neumont College of Computer Science,Salt Lake City,UT,3,Private for-profit,12,City,28,1,3,2,-111.890573,40.766096,49035,89.0,54.0,530.0,530.0,18.0,51.0,8.0,16.0,4.0,2.0,1.0,4.0,15.0,0.0,57.0
 445708,Johnson & Wales University-Charlotte,Charlotte,NC,2,Private nonprofit,11,City,23,2,2,2,-80.851208,35.233502,37119,75.0,36.0,1128.0,1128.0,64.0,34.0,43.0,13.0,2.0,1.0,0.0,2.0,4.0,2.0,52.0
 445735,Roseman University of Health Sciences,Henderson,NV,2,Private nonprofit,11,City,26,2,2,2,-115.064633,36.073182,32003,,,1398.0,554.0,63.0,37.0,4.0,10.0,33.0,0.0,1.0,11.0,4.0,1.0,23.0
@@ -2407,7 +2364,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 446604,Uta Mesivta of Kiryas Joel,Monroe,NY,2,Private nonprofit,13,City,24,2,2,2,-74.161179,41.333864,36071,,66.0,2729.0,2729.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,86.0
 446640,Harrisburg University of Science and Technology,Harrisburg,PA,2,Private nonprofit,13,City,18,2,2,2,-76.880261,40.26193,42043,82.0,32.0,3558.0,718.0,43.0,9.0,6.0,4.0,2.0,0.0,0.0,1.0,1.0,78.0,48.0
 447014,Daytona College,Ormond Beach,FL,3,Private for-profit,13,City,10,1,3,2,-81.080155,29.270088,12127,,,199.0,199.0,92.0,45.0,39.0,12.0,0.0,0.0,1.0,2.0,2.0,0.0,58.0
-447050,United States University,San Diego,CA,3,Private for-profit,11,City,19,2,3,2,-117.162166,32.761148,6073,,0.0,2539.0,178.0,81.0,33.0,13.0,19.0,28.0,0.0,0.0,2.0,2.0,1.0,12.0
 447263,Joyce University of Nursing and Health Sciences,Draper,UT,3,Private for-profit,21,Suburb,26,2,3,2,-111.892792,40.527932,49035,89.0,100.0,1937.0,1892.0,84.0,69.0,2.0,14.0,4.0,1.0,1.0,1.0,8.0,0.0,34.0
 447421,Eagle Gate College-Layton,Layton,UT,3,Private for-profit,21,Suburb,23,1,3,2,-111.973885,41.073374,49011,,40.0,205.0,205.0,87.0,68.0,3.0,14.0,3.0,1.0,1.0,0.0,9.0,0.0,59.0
 447689,Georgia Gwinnett College,Lawrenceville,GA,1,Public,21,Suburb,22,4,1,2,-84.00459,33.979409,13135,96.0,21.0,11907.0,11907.0,59.0,21.0,32.0,27.0,11.0,0.0,0.0,4.0,1.0,3.0,50.0
@@ -2431,13 +2387,10 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 449889,American College of Education,Indianapolis,IN,3,Private for-profit,11,City,32,4,3,2,-86.160161,39.76975,18097,,,11961.0,277.0,77.0,69.0,10.0,10.0,3.0,0.0,0.0,2.0,2.0,3.0,0.0
 449898,South University-Tampa,Tampa,FL,3,Private for-profit,11,City,26,1,3,2,-82.500357,27.982269,12057,,30.0,720.0,390.0,83.0,34.0,26.0,28.0,5.0,1.0,0.0,1.0,4.0,1.0,48.0
 449922,Appalachian College of Pharmacy,Oakwood,VA,2,Private nonprofit,42,Rural,26,1,2,2,-82.006195,37.211629,51027,,,125.0,0.0,58.0,73.0,12.0,1.0,9.0,2.0,0.0,0.0,0.0,4.0,
-450298,Strayer University-Delaware,Wilmington,DE,3,Private for-profit,13,City,22,1,3,2,-75.547914,39.743357,10003,,0.0,269.0,240.0,77.0,28.0,58.0,7.0,1.0,0.0,0.0,4.0,1.0,0.0,69.0
 450304,Brite Divinity School,Fort Worth,TX,2,Private nonprofit,11,City,24,1,2,2,-97.359137,32.710145,48439,,,119.0,0.0,62.0,69.0,23.0,4.0,3.0,1.0,0.0,0.0,0.0,1.0,
 450377,Strayer University-Alabama,Birmingham,AL,3,Private for-profit,12,City,29,2,3,2,-86.80574,33.513375,1073,,,1596.0,1473.0,83.0,27.0,67.0,2.0,0.0,1.0,0.0,2.0,1.0,0.0,83.0
-450571,Rasmussen University-Wisconsin,Green Bay,WI,3,Private for-profit,12,City,23,1,3,2,-88.080783,44.526244,55009,,0.0,154.0,154.0,95.0,71.0,5.0,6.0,3.0,3.0,0.0,3.0,11.0,0.0,57.0
 450933,Columbia Southern University,Orange Beach,AL,3,Private for-profit,31,Town,17,4,3,2,-87.653162,30.329288,1003,,24.0,18487.0,13111.0,37.0,58.0,18.0,2.0,2.0,1.0,1.0,3.0,15.0,0.0,21.0
 451079,Academy for Five Element Acupuncture,Gainesville,FL,2,Private nonprofit,12,City,26,1,2,2,-82.321994,29.650075,12001,,,55.0,0.0,76.0,80.0,2.0,9.0,2.0,0.0,0.0,2.0,5.0,0.0,
-451103,Miami Regional University,Miami Springs,FL,3,Private for-profit,21,Suburb,26,1,3,2,-80.267007,25.810667,12086,,0.0,955.0,310.0,75.0,5.0,10.0,85.0,0.0,0.0,0.0,0.0,0.0,0.0,23.0
 451370,Yeshivas Be'er Yitzchok,Elizabeth,NJ,2,Private nonprofit,21,Suburb,24,1,2,2,-74.213255,40.682465,34039,100.0,11.0,52.0,52.0,0.0,92.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,8.0,57.0
 451398,Yeshiva Toras Chaim,Lakewood,NJ,2,Private nonprofit,21,Suburb,24,1,2,2,-74.182143,40.098692,34029,98.0,13.0,225.0,225.0,0.0,85.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15.0,42.0
 451404,Talmudical Seminary of Bobov,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.995378,40.634485,36047,98.0,30.0,515.0,515.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,95.0
@@ -2450,8 +2403,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 451927,Patrick Henry College,Purcellville,VA,2,Private nonprofit,31,Town,-2,1,2,2,-77.690939,39.138687,51107,82.0,71.0,408.0,408.0,46.0,46.0,0.0,4.0,5.0,0.0,0.0,0.0,45.0,0.0,0.0
 452373,ATA College-Cincinnati,Cincinnati,OH,3,Private for-profit,21,Suburb,8,1,3,2,-84.478867,39.29671,39061,,,264.0,264.0,94.0,18.0,71.0,2.0,6.0,0.0,1.0,2.0,0.0,0.0,84.0
 452948,Galen College of Nursing-Cincinnati,Cincinnati,OH,3,Private for-profit,21,Suburb,10,1,3,2,-84.365946,39.283693,39061,,,670.0,670.0,90.0,55.0,26.0,3.0,5.0,0.0,0.0,3.0,9.0,0.0,57.0
-453163,Strayer University-North Carolina,Greensboro,NC,3,Private for-profit,11,City,18,2,3,2,-79.882713,36.051694,37081,,0.0,3112.0,2728.0,81.0,21.0,69.0,3.0,0.0,1.0,0.0,4.0,1.0,0.0,80.0
-453215,Strayer University-New Jersey,Piscataway,NJ,3,Private for-profit,21,Suburb,29,1,3,2,-74.474974,40.554506,34023,,0.0,602.0,538.0,75.0,15.0,55.0,20.0,2.0,1.0,0.0,4.0,3.0,0.0,66.0
 454184,The King's College,New York,NY,2,Private nonprofit,11,City,21,1,2,2,-74.012342,40.706677,36061,,,,,,,,,,,,,,,
 454227,Chamberlain University-Illinois,Addison,IL,3,Private for-profit,21,Suburb,26,5,3,2,-88.038558,41.949727,17043,89.0,73.0,28897.0,12214.0,90.0,48.0,22.0,14.0,8.0,1.0,0.0,1.0,5.0,0.0,30.0
 454236,Chamberlain University-Ohio,Columbus,OH,3,Private for-profit,11,City,26,1,3,2,-82.912163,40.054055,39049,75.0,50.0,336.0,336.0,90.0,49.0,35.0,7.0,5.0,0.0,0.0,2.0,1.0,0.0,49.0
@@ -2480,7 +2431,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 456621,Strayer University-West Virginia,Scott Depot,WV,3,Private for-profit,22,Suburb,29,1,3,2,-81.92619,38.454588,54079,,,395.0,377.0,71.0,82.0,10.0,2.0,0.0,0.0,0.0,4.0,1.0,0.0,85.0
 456959,University of Minnesota-Rochester,Rochester,MN,1,Public,12,City,26,1,1,2,-92.463471,44.022339,27109,72.0,47.0,588.0,588.0,79.0,54.0,16.0,8.0,14.0,0.0,0.0,3.0,4.0,1.0,36.0
 457086,Homestead Schools,Torrance,CA,2,Private nonprofit,12,City,26,1,2,2,-118.35009,33.809096,6037,,,178.0,176.0,76.0,2.0,27.0,34.0,37.0,0.0,0.0,0.0,0.0,0.0,59.0
-457129,Chamberlain University-Florida,Jacksonville,FL,3,Private for-profit,11,City,26,1,3,2,-81.586421,30.243517,12031,100.0,0.0,839.0,839.0,89.0,20.0,51.0,21.0,4.0,0.0,0.0,1.0,2.0,0.0,53.0
 457226,Horizon University,Indianapolis,IN,2,Private nonprofit,21,Suburb,24,1,2,2,-85.986809,39.894654,18097,,100.0,66.0,58.0,35.0,80.0,3.0,6.0,3.0,0.0,2.0,3.0,0.0,3.0,15.0
 457271,Academy for Jewish Religion California,Los Angeles,CA,2,Private nonprofit,11,City,24,1,2,2,-118.415744,33.97085,6037,,,40.0,0.0,55.0,93.0,8.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
 457299,Angeles College,Los Angeles,CA,3,Private for-profit,11,City,26,1,3,2,-118.29903,34.061223,6037,,50.0,493.0,484.0,75.0,3.0,9.0,22.0,56.0,0.0,0.0,2.0,0.0,7.0,51.0
@@ -2488,20 +2438,17 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 457484,Pacific Rim Christian University,Honolulu,HI,2,Private nonprofit,11,City,21,1,2,2,-157.888379,21.328198,15003,,57.0,169.0,114.0,57.0,15.0,9.0,16.0,23.0,1.0,11.0,16.0,0.0,9.0,86.0
 457527,Ambria College of Nursing,Hoffman Estates,IL,3,Private for-profit,21,Suburb,26,1,3,2,-88.2109,42.075628,17031,,,195.0,195.0,90.0,30.0,15.0,25.0,25.0,0.0,0.0,1.0,4.0,0.0,32.0
 457697,City Vision University,Kansas City,MO,2,Private nonprofit,11,City,26,1,2,2,-94.569475,39.101164,29095,,,234.0,188.0,53.0,38.0,9.0,14.0,1.0,1.0,0.0,8.0,26.0,3.0,66.0
-458113,Ascent College,Gainesville,VA,2,Private nonprofit,21,Suburb,24,1,2,2,-77.624657,38.805988,51153,,0.0,87.0,87.0,64.0,39.0,9.0,3.0,3.0,0.0,1.0,5.0,39.0,0.0,26.0
 458210,West Coast University-Orange County,Anaheim,CA,3,Private for-profit,11,City,26,2,3,2,-117.911811,33.81104,6059,,50.0,4481.0,3168.0,79.0,18.0,4.0,33.0,36.0,0.0,1.0,7.0,1.0,0.0,41.0
 458229,West Coast University-Ontario,Ontario,CA,3,Private for-profit,12,City,26,2,3,2,-117.590035,34.066591,6071,,50.0,2647.0,2647.0,77.0,13.0,5.0,50.0,23.0,0.0,1.0,7.0,0.0,0.0,50.0
 458496,The Art Institute of Virginia Beach,Virginia Beach,VA,3,Private for-profit,11,City,22,-2,3,2,-76.131737,36.842383,51810,,,,,,,,,,,,,,,
 458885,Strayer University-Arkansas,Little Rock,AR,3,Private for-profit,12,City,29,1,3,2,-92.271192,34.745489,5119,,,483.0,456.0,81.0,37.0,55.0,3.0,0.0,1.0,0.0,3.0,2.0,0.0,93.0
 458919,Strayer University-Georgia,Chamblee,GA,3,Private for-profit,21,Suburb,29,3,3,2,-84.267177,33.870686,13089,,9.0,5497.0,4878.0,78.0,17.0,75.0,3.0,0.0,0.0,0.0,3.0,1.0,0.0,78.0
 458955,Strayer University-Mississippi,Jackson,MS,3,Private for-profit,12,City,29,1,3,2,-90.188097,32.300562,28049,,,422.0,400.0,81.0,10.0,84.0,0.0,0.0,1.0,0.0,2.0,2.0,0.0,83.0
-458964,Strayer University-South Carolina,Greenville,SC,3,Private for-profit,13,City,29,2,3,2,-82.399535,34.839766,45045,,0.0,2061.0,1830.0,81.0,25.0,67.0,3.0,0.0,1.0,0.0,3.0,2.0,0.0,79.0
 458973,Strayer University-Texas,Farmers Branch,TX,3,Private for-profit,21,Suburb,29,2,3,2,-96.887509,32.910744,48113,,17.0,2579.0,2397.0,72.0,22.0,54.0,18.0,1.0,1.0,0.0,3.0,1.0,0.0,74.0
 458982,The Art Institute of San Antonio,San Antonio,TX,3,Private for-profit,11,City,22,-2,3,2,-98.56556,29.532925,48029,,,,,,,,,,,,,,,
 459204,Unitek College,Fremont,CA,3,Private for-profit,12,City,26,3,3,2,-121.961761,37.50904,6001,,,5191.0,5191.0,84.0,10.0,6.0,27.0,26.0,1.0,2.0,1.0,28.0,0.0,42.0
 459213,Gurnick Academy of Medical Arts,San Jose,CA,3,Private for-profit,11,City,26,2,3,2,-121.912991,37.364294,6085,,,2861.0,2844.0,75.0,16.0,8.0,34.0,29.0,1.0,2.0,6.0,4.0,0.0,44.0
 459259,South University-Richmond,Glen Allen,VA,3,Private for-profit,21,Suburb,26,1,3,2,-77.599967,37.64706,51087,,7.0,417.0,320.0,69.0,28.0,39.0,4.0,4.0,0.0,0.0,4.0,22.0,1.0,41.0
-459268,South University-Virginia Beach,Virginia Beach,VA,3,Private for-profit,11,City,20,1,3,2,-76.124288,36.8336,51810,,0.0,270.0,252.0,84.0,17.0,58.0,11.0,6.0,0.0,1.0,3.0,2.0,1.0,51.0
 459417,Compass College of Film and Media,Grand Rapids,MI,2,Private nonprofit,12,City,30,-2,2,2,-85.667065,42.961875,26081,,,,,,,,,,,,,,,
 459727,Touro University Worldwide,Los Alamitos,CA,2,Private nonprofit,21,Suburb,18,2,2,2,-118.057754,33.808683,6059,,58.0,2357.0,451.0,75.0,37.0,18.0,8.0,6.0,0.0,1.0,10.0,20.0,0.0,52.0
 459736,Touro University California,Vallejo,CA,2,Private nonprofit,12,City,25,2,2,2,-122.263949,38.085479,6095,,,1090.0,0.0,64.0,24.0,6.0,12.0,48.0,0.0,0.0,4.0,6.0,0.0,
@@ -2511,7 +2458,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 459851,Herzing University-Brookfield,Brookfield,WI,2,Private nonprofit,21,Suburb,26,1,2,2,-88.110994,43.035738,55133,91.0,40.0,383.0,379.0,91.0,38.0,40.0,13.0,4.0,0.0,0.0,3.0,3.0,0.0,60.0
 459949,Texas A&M University-San Antonio,San Antonio,TX,1,Public,11,City,18,3,1,2,-98.52417,29.304762,48029,92.0,,7584.0,6706.0,65.0,17.0,6.0,70.0,1.0,0.0,0.0,2.0,1.0,1.0,51.0
 459994,Strayer University-Global Region,Washington,DC,3,Private for-profit,11,City,29,4,3,2,-77.034133,38.904881,11001,,14.0,12782.0,10093.0,67.0,46.0,32.0,12.0,3.0,1.0,0.0,4.0,2.0,0.0,53.0
-460349,Johnson & Wales University-Online,Providence,RI,2,Private nonprofit,12,City,29,2,2,2,-71.41277,41.819956,44007,54.0,0.0,2597.0,1990.0,69.0,48.0,23.0,17.0,3.0,1.0,0.0,0.0,7.0,1.0,36.0
 460376,Fairfax University of America,Fairfax,VA,2,Private nonprofit,21,Suburb,28,1,2,2,-77.347751,38.84905,51059,,17.0,25.0,5.0,44.0,4.0,0.0,4.0,4.0,0.0,0.0,0.0,0.0,88.0,0.0
 460871,Chamberlain University-Virginia,Vienna,VA,3,Private for-profit,21,Suburb,26,1,3,2,-77.220505,38.910459,51059,100.0,25.0,567.0,567.0,90.0,14.0,52.0,21.0,7.0,1.0,0.0,2.0,3.0,1.0,44.0
 461023,National Paralegal College,Phoenix,AZ,3,Private for-profit,11,City,32,1,3,2,-112.064275,33.530663,4013,,9.0,438.0,388.0,85.0,27.0,6.0,8.0,2.0,0.0,0.0,0.0,57.0,0.0,40.0
@@ -2526,14 +2472,12 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 461643,Bergin University of Canine Studies,Penngrove,CA,2,Private nonprofit,23,Suburb,32,1,2,2,-122.68099,38.302849,6097,,,18.0,18.0,72.0,28.0,6.0,6.0,0.0,0.0,0.0,22.0,0.0,39.0,29.0
 461759,Simmons College of Kentucky,Louisville,KY,2,Private nonprofit,11,City,24,1,2,1,-85.764811,38.239519,21111,98.0,43.0,389.0,389.0,37.0,0.0,39.0,1.0,0.0,0.0,0.0,0.0,60.0,0.0,43.0
 461795,North American University,Stafford,TX,2,Private nonprofit,21,Suburb,19,1,2,2,-95.588338,29.646303,48157,,29.0,923.0,573.0,34.0,15.0,25.0,7.0,8.0,0.0,0.0,1.0,12.0,33.0,51.0
-461847,Keser Torah-Mayan Hatalmud,Lakewood,NJ,2,Private nonprofit,21,Suburb,-2,1,2,2,-74.17029,40.098369,34029,71.0,0.0,59.0,59.0,0.0,80.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,20.0,19.0
 461883,Millennia Atlantic University,Doral,FL,3,Private for-profit,13,City,29,1,3,2,-80.352717,25.808134,12086,,,155.0,104.0,39.0,3.0,5.0,28.0,0.0,0.0,0.0,0.0,0.0,64.0,7.0
 462044,Institute for Doctoral Studies in the Visual Arts,Portland,ME,2,Private nonprofit,13,City,32,1,2,2,-70.272161,43.65405,23005,,,93.0,0.0,74.0,62.0,12.0,14.0,4.0,0.0,0.0,2.0,2.0,3.0,
 462354,John Paul the Great Catholic University,Escondido,CA,2,Private nonprofit,21,Suburb,22,1,2,2,-117.082401,33.12085,6073,79.0,62.0,298.0,298.0,47.0,39.0,1.0,33.0,6.0,1.0,0.0,7.0,10.0,2.0,38.0
 463056,University of Connecticut-Hartford Campus,Hartford,CT,1,Public,12,City,-2,2,1,2,-72.672175,41.762673,9110,86.0,65.0,1494.0,1494.0,47.0,42.0,14.0,18.0,19.0,0.0,0.0,4.0,1.0,2.0,46.0
 464226,Ottawa University-Surprise,Surprise,AZ,2,Private nonprofit,21,Suburb,-2,1,2,2,-112.368233,33.628923,4013,40.0,,836.0,768.0,36.0,41.0,10.0,35.0,1.0,2.0,1.0,7.0,0.0,3.0,37.0
 466921,Chamberlain University-Missouri,St. Louis,MO,3,Private for-profit,21,Suburb,26,1,3,2,-90.436283,38.701907,29189,83.0,75.0,328.0,328.0,92.0,53.0,36.0,4.0,2.0,0.0,0.0,1.0,4.0,0.0,48.0
-466930,Chamberlain University-Texas,Houston,TX,3,Private for-profit,11,City,26,2,3,2,-95.560414,29.838386,48201,96.0,0.0,2416.0,2416.0,87.0,13.0,41.0,26.0,15.0,1.0,0.0,2.0,2.0,0.0,50.0
 469416,Dewey University-Manati,Manati,PR,2,Private nonprofit,21,Suburb,26,1,2,2,-66.487333,18.433307,72091,,6.0,255.0,255.0,75.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,89.0
 474863,Los Angeles Pacific University,San Dimas,CA,2,Private nonprofit,21,Suburb,20,2,2,2,-117.827484,34.110723,6037,,27.0,1829.0,1617.0,81.0,20.0,16.0,47.0,8.0,1.0,1.0,4.0,3.0,0.0,48.0
 475033,Relay Graduate School of Education,New York,NY,2,Private nonprofit,11,City,32,2,2,2,-74.013948,40.70563,36061,,,1911.0,96.0,73.0,28.0,41.0,20.0,5.0,0.0,0.0,2.0,1.0,2.0,0.0
@@ -2549,28 +2493,23 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 475635,Beverly Hills Design Institute,Beverly Hills,CA,3,Private for-profit,21,Suburb,30,1,3,2,-118.375621,34.06463,6037,,,14.0,14.0,57.0,14.0,50.0,21.0,0.0,0.0,0.0,7.0,0.0,7.0,50.0
 475714,American Medical Academy,Miami,FL,3,Private for-profit,21,Suburb,10,1,3,2,-80.393361,25.66273,12086,,,303.0,303.0,20.0,6.0,3.0,89.0,0.0,0.0,0.0,1.0,1.0,0.0,10.0
 475732,Chamberlain University-Georgia,Sandy Springs,GA,3,Private for-profit,12,City,26,2,3,2,-84.351949,33.911943,13121,96.0,40.0,1588.0,1588.0,91.0,15.0,64.0,10.0,6.0,1.0,0.0,2.0,2.0,0.0,48.0
-475741,Chamberlain University-Indiana,Indianapolis,IN,3,Private for-profit,11,City,26,1,3,2,-86.111061,39.91916,18097,100.0,0.0,177.0,177.0,91.0,50.0,35.0,7.0,4.0,1.0,1.0,2.0,1.0,1.0,49.0
 475839,Sessions College for Professional Design,Tempe,AZ,3,Private for-profit,12,City,12,1,3,2,-111.941123,33.427133,4013,,,154.0,154.0,70.0,56.0,18.0,10.0,1.0,0.0,1.0,8.0,6.0,0.0,33.0
 476601,Bais HaMedrash and Mesivta of Baltimore,Baltimore,MD,2,Private nonprofit,21,Suburb,24,1,2,2,-76.674414,39.379528,24005,100.0,55.0,91.0,91.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,47.0
-476692,Yeshiva Gedolah Zichron Leyma,Union,NJ,2,Private nonprofit,21,Suburb,24,1,2,2,-74.268351,40.6992,34039,71.0,0.0,47.0,47.0,0.0,87.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,13.0,45.0
 476717,Be'er Yaakov Talmudic Seminary,Spring Valley,NY,2,Private nonprofit,21,Suburb,24,1,2,2,-74.029573,41.138206,36087,,57.0,679.0,679.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,89.0
 476975,Colorado State University Global,Aurora,CO,1,Public,11,City,18,3,1,2,-104.786666,39.724786,8005,93.0,,9507.0,6568.0,54.0,56.0,9.0,17.0,5.0,0.0,0.0,2.0,10.0,1.0,24.0
 477039,West Coast University-Dallas,Richardson,TX,3,Private for-profit,12,City,26,2,3,2,-96.716284,32.98221,48113,,,1615.0,1014.0,87.0,19.0,27.0,34.0,11.0,0.0,0.0,5.0,2.0,1.0,52.0
 479956,Pennsylvania State University-World Campus,University Park,PA,1,Public,13,City,18,4,1,2,-77.862848,40.7965,42027,80.0,31.0,13564.0,7945.0,50.0,67.0,7.0,10.0,6.0,0.0,0.0,4.0,2.0,3.0,30.0
 480073,South University-Austin,Round Rock,TX,3,Private for-profit,12,City,22,1,3,2,-97.689972,30.479474,48491,,20.0,290.0,243.0,80.0,27.0,30.0,30.0,5.0,0.0,1.0,3.0,1.0,2.0,54.0
-480091,Bryant & Stratton College-Online,Orchard Park,NY,2,Private nonprofit,21,Suburb,23,3,2,2,-78.770363,42.790174,36029,,0.0,9418.0,9418.0,88.0,44.0,40.0,7.0,1.0,1.0,0.0,5.0,1.0,0.0,75.0
 480198,Warner Pacific University Professional and Graduate Studies,Portland,OR,2,Private nonprofit,11,City,22,1,2,2,-122.592498,45.506265,41051,67.0,100.0,280.0,161.0,67.0,35.0,24.0,22.0,6.0,3.0,3.0,4.0,4.0,0.0,29.0
 480204,Platt College-Riverside,Riverside,CA,3,Private for-profit,11,City,23,1,3,2,-117.298365,33.932923,6065,,,416.0,416.0,85.0,14.0,5.0,72.0,2.0,1.0,0.0,5.0,1.0,0.0,70.0
 480569,Florida Institute of Technology-Online,Melbourne,FL,2,Private nonprofit,13,City,18,2,2,2,-80.623123,28.065773,12009,44.0,,1071.0,629.0,57.0,47.0,17.0,18.0,4.0,0.0,0.0,2.0,8.0,2.0,49.0
 480657,Rasmussen University-Kansas,Topeka,KS,3,Private for-profit,12,City,14,1,3,2,-95.704151,38.998726,20177,,,333.0,333.0,89.0,49.0,24.0,10.0,3.0,1.0,0.0,3.0,10.0,0.0,57.0
 480781,California Miramar University,San Diego,CA,3,Private for-profit,11,City,29,1,3,2,-117.11851,32.77942,6073,66.0,54.0,222.0,105.0,21.0,0.0,14.0,14.0,1.0,1.0,1.0,2.0,6.0,62.0,46.0
 480790,Rocky Vista University,Parker,CO,3,Private for-profit,21,Suburb,25,2,3,2,-104.815034,39.563516,8035,,,1574.0,0.0,53.0,71.0,2.0,3.0,5.0,0.0,0.0,15.0,3.0,0.0,
-480985,Midwives College of Utah,Salt Lake City,UT,2,Private nonprofit,12,City,26,1,2,2,-111.857036,40.71089,49035,60.0,0.0,258.0,253.0,100.0,58.0,17.0,10.0,1.0,2.0,0.0,4.0,7.0,0.0,52.0
 481030,Future Generations University,Franklin,WV,2,Private nonprofit,43,Rural,32,1,2,2,-79.405423,38.70907,54071,,,44.0,0.0,61.0,43.0,2.0,0.0,0.0,0.0,2.0,2.0,50.0,0.0,
 481058,Grace Mission University,Fullerton,CA,2,Private nonprofit,21,Suburb,24,1,2,2,-117.958208,33.867663,6059,,44.0,232.0,72.0,50.0,0.0,0.0,0.0,31.0,0.0,0.0,0.0,0.0,69.0,19.0
 481094,Sotheby's Institute of Art-NY,New York,NY,3,Private for-profit,11,City,30,1,3,2,-73.972232,40.756988,36061,,,175.0,0.0,85.0,29.0,2.0,8.0,46.0,1.0,0.0,1.0,14.0,0.0,
 481225,Mid-South Christian College,Memphis,TN,2,Private nonprofit,11,City,24,1,2,2,-89.911799,35.064172,47157,100.0,100.0,32.0,24.0,47.0,19.0,31.0,28.0,0.0,0.0,0.0,0.0,0.0,22.0,35.0
-481401,Grace School of Theology,Conroe,TX,2,Private nonprofit,12,City,24,1,2,2,-95.472493,30.205731,48339,,0.0,593.0,220.0,34.0,14.0,7.0,3.0,0.0,0.0,0.0,0.0,76.0,0.0,12.0
 481410,Yeshiva Gedolah Kesser Torah,Monsey,NY,2,Private nonprofit,21,Suburb,24,1,2,2,-74.068553,41.124819,36087,36.0,39.0,82.0,82.0,0.0,98.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,38.0
 481438,Yeshiva Yesodei Hatorah,Lakewood,NJ,2,Private nonprofit,21,Suburb,24,1,2,2,-74.202016,40.065908,34029,100.0,18.0,72.0,72.0,0.0,94.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.0,39.0
 481535,Sanford Burnham Prebys Medical Discovery Institute,La Jolla,CA,2,Private nonprofit,11,City,26,1,2,2,-117.241748,32.900056,6073,,,48.0,0.0,63.0,31.0,0.0,6.0,6.0,0.0,0.0,0.0,0.0,56.0,
@@ -2586,13 +2525,9 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 482468,DeVry University-Georgia,Decatur,GA,3,Private for-profit,21,Suburb,18,1,3,2,-84.297316,33.775112,13089,81.0,11.0,487.0,472.0,60.0,18.0,65.0,6.0,1.0,0.0,0.0,2.0,5.0,3.0,61.0
 482477,DeVry University-Illinois,Lisle,IL,3,Private for-profit,21,Suburb,18,5,3,2,-88.116625,41.807204,17043,43.0,32.0,29346.0,26146.0,66.0,39.0,31.0,16.0,3.0,1.0,0.0,3.0,8.0,0.0,65.0
 482538,DeVry University-Missouri,Kansas City,MO,3,Private for-profit,11,City,20,-2,3,2,-94.575014,38.939506,29095,,,,,,,,,,,,,,,
-482547,DeVry University-Nevada,Henderson,NV,3,Private for-profit,11,City,29,1,3,2,-115.096601,36.020266,32003,,0.0,4.0,4.0,50.0,25.0,25.0,50.0,0.0,0.0,0.0,0.0,0.0,0.0,30.0
 482556,DeVry University-New Jersey,Iselin,NJ,3,Private for-profit,21,Suburb,20,1,3,2,-74.311372,40.557503,34023,100.0,12.0,74.0,68.0,51.0,23.0,32.0,20.0,8.0,0.0,0.0,0.0,7.0,9.0,60.0
-482565,DeVry University-North Carolina,Charlotte,NC,3,Private for-profit,11,City,29,1,3,2,-80.931971,35.13766,37119,,0.0,,,,,,,,,,,,,50.0
 482574,DeVry University-Ohio,Columbus,OH,3,Private for-profit,11,City,19,1,3,2,-82.906219,40.046679,39049,89.0,17.0,221.0,218.0,60.0,55.0,29.0,4.0,2.0,0.0,0.0,3.0,7.0,1.0,55.0
 482617,DeVry University-Tennessee,Nashville,TN,3,Private for-profit,11,City,29,-2,3,2,-86.697403,36.083795,47037,,,,,,,,,,,,,,,
-482635,DeVry University-Texas,Irving,TX,3,Private for-profit,11,City,29,1,3,2,-97.012494,32.934524,48113,0.0,25.0,38.0,26.0,39.0,32.0,24.0,21.0,0.0,0.0,0.0,3.0,0.0,21.0,37.0
-482653,DeVry University-Virginia,Arlington,VA,3,Private for-profit,12,City,29,1,3,2,-77.049759,38.861096,51013,100.0,0.0,32.0,25.0,47.0,9.0,59.0,3.0,0.0,0.0,0.0,3.0,3.0,22.0,42.0
 482680,University of North Georgia,Dahlonega,GA,1,Public,32,Town,19,4,1,2,-83.985694,34.530219,13187,72.0,46.0,18074.0,17242.0,57.0,70.0,4.0,16.0,4.0,0.0,0.0,3.0,2.0,1.0,28.0
 482699,South Georgia State College,Douglas,GA,1,Public,33,Town,23,2,1,2,-82.855231,31.495903,13069,,,1853.0,1853.0,68.0,60.0,22.0,11.0,0.0,0.0,0.0,2.0,3.0,1.0,52.0
 482705,Northeastern University Professional Programs,Boston,MA,2,Private nonprofit,11,City,17,3,2,2,-71.088782,42.339992,25025,,,7471.0,2525.0,58.0,26.0,6.0,6.0,7.0,0.0,0.0,3.0,4.0,49.0,4.0
@@ -2615,18 +2550,15 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 484871,Rabbinical College Ohr Yisroel,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.896524,40.629707,36047,,48.0,116.0,116.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,38.0
 484905,University of North Texas at Dallas,Dallas,TX,1,Public,11,City,19,2,1,2,-96.803446,32.659588,48113,94.0,37.0,3797.0,3018.0,66.0,15.0,27.0,50.0,3.0,0.0,0.0,3.0,1.0,0.0,51.0
 485111,Georgia Military College,Milledgeville,GA,1,Public,32,Town,14,3,1,2,-83.224211,33.07944,13009,,,6765.0,6765.0,62.0,41.0,38.0,9.0,3.0,1.0,0.0,0.0,7.0,0.0,33.0
-485272,West Coast University-Miami,Doral,FL,3,Private for-profit,13,City,26,1,3,2,-80.347651,25.81071,12086,,0.0,900.0,900.0,88.0,5.0,16.0,75.0,2.0,0.0,0.0,2.0,0.0,0.0,64.0
 485403,High Tech High Graduate School of Education,San Diego,CA,2,Private nonprofit,11,City,32,1,2,2,-117.217661,32.732001,6073,,,105.0,0.0,73.0,42.0,7.0,29.0,9.0,1.0,0.0,11.0,1.0,1.0,
 485519,Lionel University,Carpinteria,CA,3,Private for-profit,22,Suburb,13,1,3,2,-119.486417,34.38768,6083,,,494.0,480.0,41.0,53.0,24.0,15.0,0.0,2.0,0.0,5.0,0.0,0.0,37.0
 485546,California Intercontinental University,Sioux Falls,SD,3,Private for-profit,12,City,29,1,3,2,-96.723619,43.547576,46099,,100.0,484.0,141.0,49.0,19.0,52.0,8.0,8.0,2.0,1.0,1.0,5.0,4.0,78.0
 485698,American College of the Building Arts,Charleston,SC,2,Private nonprofit,12,City,-2,1,2,2,-79.946888,32.805094,45019,62.0,46.0,140.0,140.0,19.0,93.0,2.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,20.0
 485768,Atlantis University,Miami,FL,3,Private for-profit,11,City,22,1,3,2,-80.211287,25.786495,12086,,78.0,668.0,313.0,38.0,4.0,9.0,43.0,1.0,0.0,0.0,0.0,1.0,41.0,49.0
 485999,Bet Medrash Gadol Ateret Torah,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.969945,40.607809,36047,65.0,23.0,108.0,108.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,58.0
-486017,Yeshiva Ohr Yisrael,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.944041,40.61359,36047,100.0,0.0,17.0,17.0,0.0,94.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.0,26.0
 486026,Yeshiva Sholom Shachna,Brooklyn,NY,2,Private nonprofit,11,City,24,1,2,2,-73.973431,40.6275,36047,87.0,18.0,118.0,118.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,48.0
 486053,Bethlehem College & Seminary,Minneapolis,MN,2,Private nonprofit,11,City,24,1,2,2,-93.255399,44.968872,27053,,61.0,194.0,92.0,23.0,78.0,1.0,3.0,5.0,1.0,1.0,2.0,6.0,4.0,0.0
 486080,Elmezzi Graduate School of Molecular Medicine,Manhasset,NY,2,Private nonprofit,21,Suburb,26,1,2,2,-73.702257,40.775582,36059,,,1.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,
-486196,Beth Medrash Meor Yitzchok,Monsey,NY,2,Private nonprofit,21,Suburb,24,1,2,2,-74.060843,41.100906,36087,52.0,0.0,222.0,222.0,0.0,97.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,53.0
 486239,San Ignacio University,Doral,FL,3,Private for-profit,13,City,29,1,3,2,-80.367975,25.81067,12086,,100.0,291.0,211.0,55.0,0.0,0.0,25.0,1.0,0.0,0.0,0.0,0.0,74.0,6.0
 486257,Valor Christian College,Canal Winchester,OH,2,Private nonprofit,11,City,13,1,2,2,-82.829696,39.891571,39049,,,352.0,352.0,54.0,47.0,27.0,15.0,4.0,1.0,1.0,3.0,2.0,1.0,58.0
 486284,Bethany Global University,Bloomington,MN,2,Private nonprofit,13,City,24,1,2,2,-93.371754,44.795501,27053,94.0,56.0,201.0,162.0,70.0,72.0,3.0,4.0,4.0,1.0,0.0,2.0,9.0,4.0,47.0
@@ -2636,7 +2568,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 486488,California Jazz Conservatory,Berkeley,CA,2,Private nonprofit,12,City,30,1,2,2,-122.268878,37.871235,6001,100.0,100.0,20.0,20.0,30.0,50.0,0.0,45.0,0.0,0.0,0.0,5.0,0.0,0.0,35.0
 486840,Kennesaw State University,Kennesaw,GA,1,Public,21,Suburb,16,5,1,2,-84.583052,34.038807,13067,69.0,49.0,45069.0,40509.0,51.0,43.0,26.0,15.0,6.0,0.0,0.0,5.0,2.0,3.0,35.0
 486901,Milligan University,Milligan,TN,2,Private nonprofit,22,Suburb,19,2,2,2,-82.29407,36.300147,47019,70.0,70.0,1200.0,834.0,52.0,77.0,4.0,5.0,2.0,0.0,0.0,3.0,2.0,7.0,23.0
-486938,Chamberlain University-Nevada,Las Vegas,NV,3,Private for-profit,11,City,26,1,3,2,-115.313525,36.185176,32003,75.0,0.0,573.0,573.0,80.0,25.0,10.0,27.0,31.0,1.0,2.0,2.0,1.0,0.0,43.0
 486947,Chamberlain University-Michigan,Troy,MI,3,Private for-profit,13,City,26,1,3,2,-83.150571,42.557063,26125,89.0,,643.0,643.0,86.0,64.0,19.0,5.0,7.0,0.0,0.0,2.0,3.0,0.0,45.0
 486956,Chamberlain University-New Jersey,North Brunswick,NJ,3,Private for-profit,21,Suburb,-2,2,3,2,-74.438877,40.465934,34023,90.0,100.0,1316.0,1316.0,86.0,20.0,45.0,21.0,9.0,0.0,0.0,1.0,2.0,1.0,34.0
 486965,Hussian College-Los Angeles,Los Angeles,CA,3,Private for-profit,11,City,-2,-2,3,2,-118.26069,34.054877,6037,,,,,,,,,,,,,,,
@@ -2654,7 +2585,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 488031,Abraham Lincoln University,Glendale,CA,3,Private for-profit,12,City,31,1,3,2,-118.256726,34.146294,6037,,,166.0,49.0,53.0,37.0,12.0,26.0,7.0,2.0,1.0,4.0,8.0,2.0,49.0
 488068,Huntington University of Health Sciences,Knoxville,TN,3,Private for-profit,21,Suburb,21,-2,3,2,-83.99327,36.027559,47093,,,,,,,,,,,,,,,
 488305,Elim Bible Institute and College,Lima,NY,2,Private nonprofit,42,Rural,13,1,2,2,-77.615151,42.909692,36051,100.0,,98.0,98.0,39.0,62.0,11.0,6.0,0.0,0.0,0.0,3.0,9.0,8.0,47.0
-488314,Beth Medrash of Asbury Park,Lakewood,NJ,2,Private nonprofit,21,Suburb,24,1,2,2,-74.210816,40.043705,34029,42.0,0.0,109.0,109.0,0.0,84.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,16.0,44.0
 488350,Yeshiva Gedolah Shaarei Shmuel,Lakewood,NJ,2,Private nonprofit,13,City,24,1,2,2,-74.197596,40.091,34029,53.0,18.0,132.0,132.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,38.0
 488387,Claremont Lincoln University,Claremont,CA,2,Private nonprofit,21,Suburb,29,1,2,2,-117.716117,34.094273,6037,,,178.0,17.0,74.0,28.0,35.0,20.0,10.0,1.0,1.0,4.0,0.0,2.0,0.0
 488448,Seattle Film Institute,Seattle,WA,3,Private for-profit,11,City,30,1,3,2,-122.377121,47.64894,53033,,,81.0,60.0,28.0,56.0,16.0,10.0,5.0,0.0,4.0,7.0,0.0,2.0,41.0
@@ -2699,14 +2629,12 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 491288,University of Wisconsin-Milwaukee Flex,Milwaukee,WI,1,Public,11,City,22,1,1,2,-87.880488,43.076848,55079,92.0,,580.0,580.0,71.0,76.0,6.0,7.0,2.0,0.0,0.0,3.0,5.0,0.0,17.0
 491297,University of Wisconsin-Parkside Flex,Kenosha,WI,1,Public,41,Rural,-2,1,1,2,-87.855007,42.645603,55059,,,143.0,143.0,57.0,74.0,7.0,9.0,1.0,1.0,0.0,3.0,4.0,0.0,18.0
 491525,Union Bible College,Westfield,IN,2,Private nonprofit,21,Suburb,-2,1,2,2,-86.126025,40.038757,18057,87.0,38.0,164.0,164.0,52.0,48.0,2.0,24.0,24.0,0.0,0.0,1.0,0.0,1.0,26.0
-491613,Yeshiva Gedolah Tiferes Boruch,North Plainfield,NJ,2,Private nonprofit,21,Suburb,-2,1,2,2,-74.4346,40.619593,34035,100.0,0.0,70.0,70.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,55.0
 491622,Yeshiva Chemdas Hatorah,Lakewood,NJ,2,Private nonprofit,21,Suburb,-2,1,2,2,-74.229304,40.063509,34029,75.0,38.0,79.0,79.0,0.0,95.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5.0,47.0
 491631,Women's Institute of Torah Seminary and College,Baltimore,MD,2,Private nonprofit,11,City,-2,1,2,2,-76.699496,39.361349,24510,96.0,67.0,191.0,191.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,24.0
 491640,Yeshiva Gedolah Keren Hatorah,Lakewood,NJ,2,Private nonprofit,13,City,-2,1,2,2,-74.184418,40.109281,34029,95.0,5.0,189.0,189.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,60.0
 491710,Yeshiva Gedolah of Cliffwood,Keyport,NJ,2,Private nonprofit,21,Suburb,-2,1,2,2,-74.224235,40.442213,34025,80.0,13.0,55.0,55.0,0.0,91.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,9.0,9.0
 491765,Yeshivas Emek Hatorah,Howell,NJ,2,Private nonprofit,41,Rural,-2,1,2,2,-74.232083,40.112501,34025,100.0,4.0,93.0,93.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0
 491808,Meridian University,Petaluma,CA,3,Private for-profit,13,City,-2,1,3,2,-122.640029,38.230878,6097,,,226.0,0.0,80.0,55.0,12.0,10.0,9.0,1.0,2.0,3.0,8.0,0.0,
-491914,Yeshiva Gedola Tiferes Yerachmiel,Lakewood,NJ,2,Private nonprofit,13,City,-2,1,2,2,-74.194376,40.1037,34029,43.0,0.0,172.0,172.0,0.0,90.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,43.0
 492069,Champion Christian College,Hot Springs,AR,2,Private nonprofit,13,City,-2,1,2,2,-93.065945,34.499589,5051,,,139.0,139.0,35.0,60.0,20.0,5.0,1.0,4.0,0.0,7.0,1.0,1.0,61.0
 492087,The Continents States University,St. Louis,MO,2,Private nonprofit,11,City,-2,1,2,2,-90.260576,38.643521,29510,,,,,,,,,,,,,,,
 492209,Reiss-Davis Graduate School,Los Angeles,CA,2,Private nonprofit,11,City,-2,1,2,2,-118.41001,34.030844,6037,,,33.0,0.0,79.0,30.0,12.0,39.0,9.0,0.0,0.0,3.0,6.0,0.0,
@@ -2721,7 +2649,6 @@ UNITID,INSTNM,CITY,STABBR,SECTOR,sector_label,LOCALE,locale_group,C18BASIC,INSTS
 493512,San Diego Global Knowledge University,San Diego,CA,3,Private for-profit,11,City,-2,1,3,2,-117.154966,32.708222,6073,,,111.0,98.0,52.0,9.0,10.0,20.0,5.0,0.0,1.0,0.0,0.0,56.0,5.0
 493594,Yeshiva of Ocean,Greenfield Park,NY,2,Private nonprofit,42,Rural,-2,1,2,2,-74.501698,41.732961,36111,38.0,13.0,57.0,57.0,0.0,98.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,63.0
 493600,Congregation Talmidei Mesivta Tiferes Shmiel Aleksander,Brooklyn,NY,2,Private nonprofit,11,City,-2,1,2,2,-73.994778,40.624233,36047,,,169.0,169.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,78.0
-493664,Yeshivat Hechal Shemuel,Brooklyn,NY,2,Private nonprofit,11,City,-2,1,2,2,-73.955944,40.610906,36047,100.0,0.0,65.0,65.0,0.0,98.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,37.0
 493673,Professional University Dr. Carlos J. Borrero Rios,Hato Rey,PR,3,Private for-profit,11,City,-2,1,3,2,-66.054156,18.411332,72127,,,166.0,5.0,53.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,33.0
 493707,Yeshiva Gedolah of Woodlake Village,Lakewood,NJ,2,Private nonprofit,21,Suburb,-2,1,2,2,-74.169645,40.099738,34029,95.0,5.0,79.0,79.0,0.0,85.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15.0,32.0
 493716,Yeshiva Gedola Tiferes Yaakov Yitzchok,Lakewood,NJ,2,Private nonprofit,21,Suburb,-2,1,2,2,-74.223022,40.056542,34029,50.0,24.0,69.0,69.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,19.0
