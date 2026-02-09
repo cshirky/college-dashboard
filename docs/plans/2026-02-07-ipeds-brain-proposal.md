@@ -187,12 +187,6 @@ After the initial build, the retainer provides:
 
 ---
 
-## About the Consultant
-
-Jesse Vincent is a software engineer and technical consultant specializing in AI-assisted tooling and data infrastructure. He is the creator of Superpowers, a behavioral constraint system for AI-assisted development used by engineering teams to enforce disciplined software workflows. His work focuses on building systems where AI augments expert judgment rather than replacing it — with mandatory evidence, reproducibility, and human oversight at every step.
-
----
-
 ## Engagement Terms
 
 **Timeline:** 8-12 weeks for initial build (Phases 1-4)
