@@ -1,7 +1,7 @@
 # IPEDSBrain: Agentic Research Infrastructure for Institutional Intelligence
 
 **Proposal for Consulting Engagement**
-**Prepared by:** Jesse Vincent
+**Prepared by:** John Dimatos
 **Date:** February 2026
 
 ---

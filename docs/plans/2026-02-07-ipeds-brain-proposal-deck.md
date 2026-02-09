@@ -10,7 +10,7 @@ footer: 'IPEDSBrain — Proposal'
 # IPEDSBrain
 
 ## Agentic Research Infrastructure for Institutional Intelligence
-### Jesse Vincent — February 2026
+### John Dimatos — February 2026
 
 ---
 
