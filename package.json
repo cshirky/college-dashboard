@@ -15,5 +15,8 @@
   "type": "module",
   "dependencies": {
     "@observablehq/framework": "^1.13.3"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.2.3"
   }
 }
