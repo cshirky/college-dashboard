@@ -11,17 +11,11 @@ Interactive scatterplot dashboard of all U.S. 4-year bachelor's-granting institu
 
 ### Install and Run
 
+Pre-built data files are included in the repo — no Python step is needed to view the dashboard.
+
 ```bash
 # Install Node dependencies
 npm install
-
-# Create Python virtual environment and install dependencies
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-
-# (Optional) Rebuild the data pipeline — pre-built CSVs are included
-python data/pipeline/build_dataset.py
 
 # Start the dev server
 npx observable preview
@@ -66,9 +60,17 @@ Static site output goes to `dist/`.
 └── requirements.txt             # Python dependencies
 ```
 
-## Data Pipeline
+## Data Pipeline (Optional)
 
-The Python pipeline reads 6 IPEDS 2023 survey files, joins them on UNITID, and outputs two clean CSVs:
+The pre-built CSVs are checked into the repo, so you only need the Python pipeline if you want to modify the data processing or refresh with newer IPEDS data.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+The pipeline reads 6 IPEDS 2023 survey files, joins them on UNITID, and outputs two clean CSVs:
 
 - **institutions.csv** — one row per 4-year institution with admissions, graduation rates, enrollment, demographics, and Pell grant data
 - **programs.csv** — one row per institution per CIP program family, with bachelor's degree counts
