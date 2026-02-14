@@ -38,9 +38,11 @@ const localeFilter = view(Inputs.checkbox(
 ```
 
 ```js
-const stateFilter = view(Inputs.select(allStates, {
-  label: "State", multiple: true, value: allStates, width: 240,
+const stateOptions = ["All", ...allStates];
+const stateSelection = view(Inputs.select(stateOptions, {
+  label: "State", multiple: true, value: ["All"], width: 240,
 }));
+const stateFilter = stateSelection.includes("All") ? allStates : stateSelection;
 ```
 
 ```js
@@ -83,7 +85,7 @@ const filtered = institutions.filter(d => {
     (d.pct_pell == null || d.pct_pell >= pellMin) &&
     (d.pct_women == null || (d.pct_women >= womenMin && d.pct_women <= womenMax)) &&
     d.grad_rate_6yr !== 100 &&
-    (d.admission_rate == null || d.admission_rate <= 67)
+    (d.admission_rate == null || d.admission_rate <= 70)
   );
 });
 ```
@@ -96,13 +98,9 @@ const filtered = institutions.filter(d => {
 ```js
 // Scatterplot
 {
-  // Polynomial regression (degree 3)
+  // Polynomial regression (degree 3) per sector
   const trendData = filtered.filter(d => d.grad_rate_6yr != null && d.admission_rate != null);
-  const n = trendData.length;
-  const xs = trendData.map(d => d.grad_rate_6yr);
-  const ys = trendData.map(d => d.admission_rate);
 
-  // Fit degree-3 polynomial via least squares (normal equations)
   function polyFit(xs, ys, degree) {
     const n = xs.length;
     const size = degree + 1;
@@ -110,7 +108,6 @@ const filtered = institutions.filter(d => {
       xs.reduce((s, x) => s + x ** (i + j), 0)));
     const Y = Array.from({length: size}, (_, i) =>
       xs.reduce((s, x, k) => s + x ** i * ys[k], 0));
-    // Gaussian elimination
     for (let i = 0; i < size; i++) {
       let max = i;
       for (let j = i + 1; j < size; j++) if (Math.abs(X[j][i]) > Math.abs(X[max][i])) max = j;
@@ -131,23 +128,34 @@ const filtered = institutions.filter(d => {
     return coeffs;
   }
 
-  const coeffs = polyFit(xs, ys, 3);
-  const trendLine = d3.range(0, 101, 1).map(x => ({
-    x,
-    y: Math.max(0, Math.min(100, coeffs[0] + coeffs[1] * x + coeffs[2] * x ** 2 + coeffs[3] * x ** 3)),
-  }));
+  const sectorColors = {"Public": "#4e79a7", "Private nonprofit": "#e15759", "Private for-profit": "#f28e2b"};
+  const trendLines = [];
+  for (const sector of sectorFilter) {
+    const sectorData = trendData.filter(d => d.sector_label === sector);
+    if (sectorData.length < 4) continue;
+    const xs = sectorData.map(d => d.grad_rate_6yr);
+    const ys = sectorData.map(d => d.admission_rate);
+    const coeffs = polyFit(xs, ys, 3);
+    for (const x of d3.range(0, 101, 1)) {
+      trendLines.push({
+        x,
+        y: Math.max(0, Math.min(70, coeffs[0] + coeffs[1] * x + coeffs[2] * x ** 2 + coeffs[3] * x ** 3)),
+        sector,
+      });
+    }
+  }
 
   display(Plot.plot({
     width: 900,
     height: 600,
     x: {
       label: "6-Year Graduation Rate (%)",
-      domain: [0, 100],
+      domain: [100, 33],
       grid: true,
     },
     y: {
       label: "Admission Rate (%)",
-      domain: [0, 67],
+      domain: [70, 0],
       grid: true,
     },
     r: { range: [2, 15] },
@@ -157,7 +165,7 @@ const filtered = institutions.filter(d => {
       range: ["#4e79a7", "#e15759", "#f28e2b"],
     },
     marks: [
-      Plot.line(trendLine, {x: "x", y: "y", stroke: "#888", strokeWidth: 2, strokeDasharray: "6,4"}),
+      Plot.line(trendLines, {x: "x", y: "y", z: "sector", stroke: d => sectorColors[d.sector], strokeWidth: 2, strokeDasharray: "6,4"}),
       Plot.dot(filtered.filter(d => d.INSTNM !== "New York University"), {
         x: "grad_rate_6yr",
         y: "admission_rate",
