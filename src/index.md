@@ -81,7 +81,9 @@ const filtered = institutions.filter(d => {
     d.enrollment_total <= enrollMax &&
     programFilter.some(p => cips.has(p)) &&
     (d.pct_pell == null || d.pct_pell >= pellMin) &&
-    (d.pct_women == null || (d.pct_women >= womenMin && d.pct_women <= womenMax))
+    (d.pct_women == null || (d.pct_women >= womenMin && d.pct_women <= womenMax)) &&
+    d.grad_rate_6yr !== 100 &&
+    (d.admission_rate == null || d.admission_rate <= 67)
   );
 });
 ```
@@ -93,45 +95,106 @@ const filtered = institutions.filter(d => {
 
 ```js
 // Scatterplot
-Plot.plot({
-  width: 900,
-  height: 600,
-  x: {
-    label: "6-Year Graduation Rate (%)",
-    domain: [0, 100],
-    grid: true,
-  },
-  y: {
-    label: "Admission Rate (%)",
-    domain: [0, 100],
-    grid: true,
-  },
-  r: { range: [2, 15] },
-  color: {
-    legend: true,
-    domain: ["Public", "Private nonprofit", "Private for-profit"],
-    range: ["#4e79a7", "#e15759", "#f28e2b"],
-  },
-  marks: [
-    Plot.dot(filtered, {
-      x: "grad_rate_6yr",
-      y: "admission_rate",
-      fill: "sector_label",
-      r: "enrollment_total",
-      fillOpacity: 0.5,
-      stroke: "currentColor",
-      strokeWidth: 0.5,
-      tip: true,
-      channels: {
-        Name: "INSTNM",
-        State: "STABBR",
-        Enrollment: "enrollment_total",
-        "Grad Rate": "grad_rate_6yr",
-        "Admit Rate": "admission_rate",
-      },
-    }),
-  ],
-})
+{
+  // Polynomial regression (degree 3)
+  const trendData = filtered.filter(d => d.grad_rate_6yr != null && d.admission_rate != null);
+  const n = trendData.length;
+  const xs = trendData.map(d => d.grad_rate_6yr);
+  const ys = trendData.map(d => d.admission_rate);
+
+  // Fit degree-3 polynomial via least squares (normal equations)
+  function polyFit(xs, ys, degree) {
+    const n = xs.length;
+    const size = degree + 1;
+    const X = Array.from({length: size}, (_, i) => Array.from({length: size}, (_, j) =>
+      xs.reduce((s, x) => s + x ** (i + j), 0)));
+    const Y = Array.from({length: size}, (_, i) =>
+      xs.reduce((s, x, k) => s + x ** i * ys[k], 0));
+    // Gaussian elimination
+    for (let i = 0; i < size; i++) {
+      let max = i;
+      for (let j = i + 1; j < size; j++) if (Math.abs(X[j][i]) > Math.abs(X[max][i])) max = j;
+      [X[i], X[max]] = [X[max], X[i]];
+      [Y[i], Y[max]] = [Y[max], Y[i]];
+      for (let j = i + 1; j < size; j++) {
+        const f = X[j][i] / X[i][i];
+        for (let k = i; k < size; k++) X[j][k] -= f * X[i][k];
+        Y[j] -= f * Y[i];
+      }
+    }
+    const coeffs = new Array(size);
+    for (let i = size - 1; i >= 0; i--) {
+      coeffs[i] = Y[i];
+      for (let j = i + 1; j < size; j++) coeffs[i] -= X[i][j] * coeffs[j];
+      coeffs[i] /= X[i][i];
+    }
+    return coeffs;
+  }
+
+  const coeffs = polyFit(xs, ys, 3);
+  const trendLine = d3.range(0, 101, 1).map(x => ({
+    x,
+    y: Math.max(0, Math.min(100, coeffs[0] + coeffs[1] * x + coeffs[2] * x ** 2 + coeffs[3] * x ** 3)),
+  }));
+
+  display(Plot.plot({
+    width: 900,
+    height: 600,
+    x: {
+      label: "6-Year Graduation Rate (%)",
+      domain: [0, 100],
+      grid: true,
+    },
+    y: {
+      label: "Admission Rate (%)",
+      domain: [0, 67],
+      grid: true,
+    },
+    r: { range: [2, 15] },
+    color: {
+      legend: true,
+      domain: ["Public", "Private nonprofit", "Private for-profit"],
+      range: ["#4e79a7", "#e15759", "#f28e2b"],
+    },
+    marks: [
+      Plot.line(trendLine, {x: "x", y: "y", stroke: "#888", strokeWidth: 2, strokeDasharray: "6,4"}),
+      Plot.dot(filtered.filter(d => d.INSTNM !== "New York University"), {
+        x: "grad_rate_6yr",
+        y: "admission_rate",
+        fill: "sector_label",
+        r: "enrollment_total",
+        fillOpacity: 0.5,
+        stroke: "currentColor",
+        strokeWidth: 0.5,
+        tip: true,
+        channels: {
+          Name: "INSTNM",
+          State: "STABBR",
+          Enrollment: "enrollment_total",
+          "Grad Rate": "grad_rate_6yr",
+          "Admit Rate": "admission_rate",
+        },
+      }),
+      Plot.dot(filtered.filter(d => d.INSTNM === "New York University"), {
+        x: "grad_rate_6yr",
+        y: "admission_rate",
+        fill: "purple",
+        r: "enrollment_total",
+        fillOpacity: 0.7,
+        stroke: "purple",
+        strokeWidth: 1.5,
+        tip: true,
+        channels: {
+          Name: "INSTNM",
+          State: "STABBR",
+          Enrollment: "enrollment_total",
+          "Grad Rate": "grad_rate_6yr",
+          "Admit Rate": "admission_rate",
+        },
+      }),
+    ],
+  }));
+}
 ```
 
 </div>
