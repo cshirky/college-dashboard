@@ -1,5 +1,6 @@
 # IPEDS College Dashboard
 
+
 Explore graduation rates vs. admission selectivity across four-year bachelor's-granting institutions. Data source: IPEDS 2023.
 
 ```js
@@ -24,6 +25,38 @@ const allStates = [...new Set(institutions.map(d => d.STABBR))].sort();
 ## Filters
 
 ```js
+const resetBtn = view(Inputs.button("Clear all filters", {reduce: () => {
+  // Find all Observable form containers in the sidebar
+  const sidebar = document.querySelector("div[style*='grid-template-columns']")?.firstElementChild;
+  if (!sidebar) return;
+  const forms = sidebar.querySelectorAll("form");
+  for (const form of forms) {
+    // Reset checkboxes
+    for (const cb of form.querySelectorAll("input[type=checkbox]")) {
+      cb.checked = true;
+    }
+    // Reset range inputs with known defaults
+    const range = form.querySelector("input[type=range]");
+    if (range) {
+      const label = form.querySelector("label")?.textContent || "";
+      if (label.includes("Max enrollment")) range.value = 80000;
+      else if (label.includes("Max % women")) range.value = 100;
+      else range.value = 0;
+      range.dispatchEvent(new Event("input", {bubbles: true}));
+    }
+    // Reset multi-selects
+    const sel = form.querySelector("select[multiple]");
+    if (sel) {
+      for (const opt of sel.options) opt.selected = true;
+    }
+    // Dispatch input on the form to trigger Observable reactivity
+    form.value = form.value;
+    form.dispatchEvent(new Event("input", {bubbles: true}));
+  }
+}}));
+```
+
+```js
 const sectorFilter = view(Inputs.checkbox(
   ["Public", "Private nonprofit", "Private for-profit"],
   {label: "Sector", value: ["Public", "Private nonprofit", "Private for-profit"]}
@@ -39,24 +72,31 @@ const localeFilter = view(Inputs.checkbox(
 
 ```js
 const stateOptions = ["All", ...allStates];
-const stateSelection = view(Inputs.select(stateOptions, {
+const stateInput = Inputs.select(stateOptions, {
   label: "State", multiple: true, value: ["All"], width: 240,
-}));
+});
+stateInput.querySelector("select").size = 4;
+const stateSelection = view(stateInput);
+```
+
+```js
 const stateFilter = stateSelection.includes("All") ? allStates : stateSelection;
 ```
 
 ```js
-const enrollMin = view(Inputs.range([0, 80000], {label: "Min enrollment", step: 500, value: 0, width: 240}));
+const enrollMin = view(Inputs.range([0, 80000], {label: "Min enrollment", step: 500, value: 0, width: 220}));
 ```
 
 ```js
-const enrollMax = view(Inputs.range([0, 80000], {label: "Max enrollment", step: 500, value: 80000, width: 240}));
+const enrollMax = view(Inputs.range([0, 80000], {label: "Max enrollment", step: 500, value: 80000, width: 220}));
 ```
 
 ```js
-const programFilter = view(Inputs.select(cipLabels, {
+const programInput = Inputs.select(cipLabels, {
   label: "Programs offered", multiple: true, value: cipLabels, width: 240,
-}));
+});
+programInput.querySelector("select").size = 4;
+const programFilter = view(programInput);
 ```
 
 ```js
@@ -91,6 +131,9 @@ const filtered = institutions.filter(d => {
 ```
 
 **${filtered.length}** of ${institutions.length} institutions
+
+Undergrad: **${filtered.reduce((s, d) => s + (d.enrollment_ug || 0), 0).toLocaleString()}**<br>
+Grad: **${filtered.reduce((s, d) => s + ((d.enrollment_total || 0) - (d.enrollment_ug || 0)), 0).toLocaleString()}**
 
 </div>
 <div>
@@ -148,15 +191,15 @@ const filtered = institutions.filter(d => {
   display(Plot.plot({
     width: 900,
     height: 600,
+    grid: true,
+    style: {"--plot-grid-stroke": "#999"},
     x: {
       label: "6-Year Graduation Rate (%)",
       domain: [100, 33],
-      grid: true,
     },
     y: {
       label: "Admission Rate (%)",
       domain: [70, 0],
-      grid: true,
     },
     r: { range: [2, 15] },
     color: {
@@ -174,13 +217,16 @@ const filtered = institutions.filter(d => {
         fillOpacity: 0.5,
         stroke: "currentColor",
         strokeWidth: 0.5,
-        tip: true,
+        tip: {format: {x: false, y: false, fill: false, r: false}},
         channels: {
           Name: "INSTNM",
           State: "STABBR",
-          Enrollment: "enrollment_total",
-          "Grad Rate": "grad_rate_6yr",
           "Admit Rate": "admission_rate",
+          "6-Year Graduation Rate": "grad_rate_6yr",
+          "% Men": d => d.pct_women != null ? (100 - d.pct_women) + "%" : "N/A",
+          "% White": d => d.pct_white != null ? d.pct_white + "%" : "N/A",
+          "Undergrad Enrollment": "enrollment_ug",
+          "Grad Enrollment": d => d.enrollment_total != null && d.enrollment_ug != null ? d.enrollment_total - d.enrollment_ug : "N/A",
         },
       }),
       Plot.dot(filtered.filter(d => d.INSTNM === "New York University"), {
@@ -191,14 +237,26 @@ const filtered = institutions.filter(d => {
         fillOpacity: 0.7,
         stroke: "purple",
         strokeWidth: 1.5,
-        tip: true,
+        tip: {format: {x: false, y: false, fill: false, r: false}},
         channels: {
           Name: "INSTNM",
           State: "STABBR",
-          Enrollment: "enrollment_total",
-          "Grad Rate": "grad_rate_6yr",
           "Admit Rate": "admission_rate",
+          "6-Year Graduation Rate": "grad_rate_6yr",
+          "% Men": d => d.pct_women != null ? (100 - d.pct_women) + "%" : "N/A",
+          "% White": d => d.pct_white != null ? d.pct_white + "%" : "N/A",
+          "Undergrad Enrollment": "enrollment_ug",
+          "Grad Enrollment": d => d.enrollment_total != null && d.enrollment_ug != null ? d.enrollment_total - d.enrollment_ug : "N/A",
         },
+      }),
+      Plot.crosshair(filtered, {x: "grad_rate_6yr", y: "admission_rate", color: "#555"}),
+      Plot.dot(filtered.filter(d => d.INSTNM === selectedName), {
+        x: "grad_rate_6yr",
+        y: "admission_rate",
+        r: 12,
+        fill: "none",
+        stroke: "black",
+        strokeWidth: 3,
       }),
     ],
   }));
@@ -216,7 +274,7 @@ const filtered = institutions.filter(d => {
 const selectedName = view(Inputs.text({
   label: "Search institution",
   placeholder: "Type to search...",
-  datalist: filtered.map(d => d.INSTNM),
+  datalist: filtered.map(d => d.INSTNM).sort(),
   width: 400,
 }));
 ```
