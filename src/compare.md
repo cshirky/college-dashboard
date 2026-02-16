@@ -37,24 +37,25 @@ const axisVars = [
 ### Category 1
 
 ```js
+const show1 = view(Inputs.toggle({label: "Show on plot", value: false}));
 const name1 = view(Inputs.text({label: "Name", value: "Group 1", width: 200}));
-const sector1 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: sectorOptions}));
-const grad1 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: gradOptions, format: d => gradLabels[d]}));
-const locale1 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: localeOptions}));
+const sector1 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: []}));
+const grad1 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}));
+const locale1 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: []}));
 ```
 
 ```js
-const stateInput1 = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: ["All"], width: 200});
+const stateInput1 = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: [], width: 200});
 stateInput1.querySelector("select").size = 4;
 const stateSelection1 = view(stateInput1);
 ```
 
 ```js
 const state1 = stateSelection1.includes("All") ? allStates : stateSelection1;
-const filtered1 = institutions.filter(d =>
+const filtered1 = !show1 ? [] : institutions.filter(d =>
   sector1.includes(d.sector_label) &&
   locale1.includes(d.locale_group) &&
-  state1.includes(d.STABBR) &&
+  (state1.length === 0 || state1.includes(d.STABBR)) &&
   grad1.includes(d.grad_ratio)
 );
 ```
@@ -68,24 +69,25 @@ const filtered1 = institutions.filter(d =>
 ### Category 2
 
 ```js
+const show2 = view(Inputs.toggle({label: "Show on plot", value: false}));
 const name2 = view(Inputs.text({label: "Name", value: "Group 2", width: 200}));
-const sector2 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: sectorOptions}));
-const grad2 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: gradOptions, format: d => gradLabels[d]}));
-const locale2 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: localeOptions}));
+const sector2 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: []}));
+const grad2 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}));
+const locale2 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: []}));
 ```
 
 ```js
-const stateInput2 = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: ["All"], width: 200});
+const stateInput2 = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: [], width: 200});
 stateInput2.querySelector("select").size = 4;
 const stateSelection2 = view(stateInput2);
 ```
 
 ```js
 const state2 = stateSelection2.includes("All") ? allStates : stateSelection2;
-const filtered2 = institutions.filter(d =>
+const filtered2 = !show2 ? [] : institutions.filter(d =>
   sector2.includes(d.sector_label) &&
   locale2.includes(d.locale_group) &&
-  state2.includes(d.STABBR) &&
+  (state2.length === 0 || state2.includes(d.STABBR)) &&
   grad2.includes(d.grad_ratio)
 );
 ```
@@ -99,24 +101,25 @@ const filtered2 = institutions.filter(d =>
 ### Category 3
 
 ```js
+const show3 = view(Inputs.toggle({label: "Show on plot", value: false}));
 const name3 = view(Inputs.text({label: "Name", value: "Group 3", width: 200}));
-const sector3 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: sectorOptions}));
-const grad3 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: gradOptions, format: d => gradLabels[d]}));
-const locale3 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: localeOptions}));
+const sector3 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: []}));
+const grad3 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}));
+const locale3 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: []}));
 ```
 
 ```js
-const stateInput3 = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: ["All"], width: 200});
+const stateInput3 = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: [], width: 200});
 stateInput3.querySelector("select").size = 4;
 const stateSelection3 = view(stateInput3);
 ```
 
 ```js
 const state3 = stateSelection3.includes("All") ? allStates : stateSelection3;
-const filtered3 = institutions.filter(d =>
+const filtered3 = !show3 ? [] : institutions.filter(d =>
   sector3.includes(d.sector_label) &&
   locale3.includes(d.locale_group) &&
-  state3.includes(d.STABBR) &&
+  (state3.length === 0 || state3.includes(d.STABBR)) &&
   grad3.includes(d.grad_ratio)
 );
 ```
@@ -138,11 +141,12 @@ const yVar = view(Inputs.select(axisVars, {label: "Y axis", format: d => d.label
 
 ```js
 {
-  const categories = [
-    {key: "cat1", name: name1, data: filtered1, color: "#4e79a7"},
-    {key: "cat2", name: name2, data: filtered2, color: "#e15759"},
-    {key: "cat3", name: name3, data: filtered3, color: "#f28e2b"},
+  const allCategories = [
+    {key: "cat1", name: name1, data: filtered1, color: "#4e79a7", show: show1},
+    {key: "cat2", name: name2, data: filtered2, color: "#e15759", show: show2},
+    {key: "cat3", name: name3, data: filtered3, color: "#f28e2b", show: show3},
   ];
+  const categories = allCategories.filter(c => c.show);
 
   const allPoints = [];
   for (const cat of categories) {
