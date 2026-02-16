@@ -102,8 +102,23 @@ def join_tuition(df: pd.DataFrame, raw_dir: str) -> pd.DataFrame:
 
 
 def join_sat_act(df: pd.DataFrame, raw_dir: str) -> pd.DataFrame:
-    """Join SAT/ACT score data. (Stub — not yet implemented.)"""
-    raise NotImplementedError("join_sat_act is not yet implemented")
+    """Join SAT and ACT score data from ADM2023."""
+    path = Path(raw_dir) / "adm2023.csv"
+    if not path.exists():
+        path = Path(raw_dir) / "ADM2023.csv"
+    adm = _read_csv(path)
+    score_cols = ["UNITID", "SATVR25", "SATVR75", "SATMT25", "SATMT75", "ACTCM25", "ACTCM75"]
+    score_cols = [c for c in score_cols if c in adm.columns]
+    adm = adm[score_cols].copy()
+    for col in score_cols[1:]:
+        adm[col] = pd.to_numeric(adm[col], errors="coerce")
+    if "SATVR25" in adm.columns:
+        adm["sat_avg"] = ((adm["SATVR25"] + adm["SATVR75"]) / 2 +
+                          (adm["SATMT25"] + adm["SATMT75"]) / 2).round(0)
+    if "ACTCM25" in adm.columns:
+        adm["act_avg"] = ((adm["ACTCM25"] + adm["ACTCM75"]) / 2).round(1)
+    keep = ["UNITID"] + [c for c in ["sat_avg", "act_avg"] if c in adm.columns]
+    return df.merge(adm[keep], on="UNITID", how="left")
 
 
 def add_grad_ratio(df: pd.DataFrame) -> pd.DataFrame:
