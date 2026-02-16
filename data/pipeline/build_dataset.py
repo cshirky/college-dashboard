@@ -86,6 +86,31 @@ def join_pell(df: pd.DataFrame, raw_dir: str) -> pd.DataFrame:
     return df.merge(sfa, on="UNITID", how="left")
 
 
+def join_tuition(df: pd.DataFrame, raw_dir: str) -> pd.DataFrame:
+    """Join tuition data from IC2023_AY."""
+    path = Path(raw_dir) / "ic2023_ay.csv"
+    if not path.exists():
+        path = Path(raw_dir) / "IC2023_AY.csv"
+    ic = _read_csv(path)
+    ic = ic[["UNITID", "TUITION2", "TUITION3"]].rename(columns={
+        "TUITION2": "tuition_in_state",
+        "TUITION3": "tuition_out_of_state",
+    })
+    ic["tuition_in_state"] = pd.to_numeric(ic["tuition_in_state"], errors="coerce")
+    ic["tuition_out_of_state"] = pd.to_numeric(ic["tuition_out_of_state"], errors="coerce")
+    return df.merge(ic, on="UNITID", how="left")
+
+
+def join_sat_act(df: pd.DataFrame, raw_dir: str) -> pd.DataFrame:
+    """Join SAT/ACT score data. (Stub — not yet implemented.)"""
+    raise NotImplementedError("join_sat_act is not yet implemented")
+
+
+def add_grad_ratio(df: pd.DataFrame) -> pd.DataFrame:
+    """Add graduation ratio column. (Stub — not yet implemented.)"""
+    raise NotImplementedError("add_grad_ratio is not yet implemented")
+
+
 def add_labels(df: pd.DataFrame) -> pd.DataFrame:
     """Add human-readable sector and locale labels."""
     df = df.copy()
