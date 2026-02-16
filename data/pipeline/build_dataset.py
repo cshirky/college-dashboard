@@ -198,8 +198,17 @@ def main(raw_dir: str = "data/raw", output_dir: str = "data/output"):
     print("Joining Pell grant data...")
     df = join_pell(df, raw_dir)
 
+    print("Joining tuition data...")
+    df = join_tuition(df, raw_dir)
+
+    print("Joining SAT/ACT scores...")
+    df = join_sat_act(df, raw_dir)
+
     print("Adding labels...")
     df = add_labels(df)
+
+    print("Adding grad ratio...")
+    df = add_grad_ratio(df)
 
     # Filter out institutions with 0% admission rate or 0% graduation rate
     # (these are data artifacts, not truly zero)
@@ -216,6 +225,8 @@ def main(raw_dir: str = "data/raw", output_dir: str = "data/output"):
         "pct_women", "pct_white", "pct_black", "pct_hispanic",
         "pct_asian", "pct_aian", "pct_nhpi", "pct_two_or_more",
         "pct_unknown", "pct_nonresident", "pct_pell",
+        "tuition_in_state", "tuition_out_of_state",
+        "sat_avg", "act_avg", "grad_ratio",
     ]
     institutions = df[[c for c in institutions_cols if c in df.columns]]
     institutions.to_csv(output_path / "institutions.csv", index=False)
