@@ -13,7 +13,10 @@ from build_dataset import (
     join_graduation_rates,
     join_enrollment_demographics,
     join_pell,
+    join_tuition,
+    join_sat_act,
     add_labels,
+    add_grad_ratio,
     build_programs,
     main,
 )
@@ -91,6 +94,41 @@ def test_join_pell_adds_percentage():
     valid = df["pct_pell"].dropna()
     assert valid.min() >= 0
     assert valid.max() <= 100
+
+
+# --- Join tuition data ---
+
+def test_join_tuition_adds_columns():
+    inst = load_institutions(RAW_DIR)
+    df = join_tuition(inst, RAW_DIR)
+    assert "tuition_in_state" in df.columns
+    assert "tuition_out_of_state" in df.columns
+    valid_in = df["tuition_in_state"].dropna()
+    assert valid_in.min() >= 0
+    assert len(df) == len(inst)
+
+
+# --- Join SAT/ACT data ---
+
+def test_join_sat_act_adds_columns():
+    inst = load_institutions(RAW_DIR)
+    df = join_sat_act(inst, RAW_DIR)
+    assert "sat_avg" in df.columns
+    assert "act_avg" in df.columns
+    valid_sat = df["sat_avg"].dropna()
+    assert valid_sat.min() >= 400  # minimum possible SAT total is 400
+    assert valid_sat.max() <= 1600  # maximum possible SAT total is 1600
+    assert len(df) == len(inst)
+
+
+# --- Add grad ratio ---
+
+def test_add_grad_ratio():
+    inst = load_institutions(RAW_DIR)
+    df = join_enrollment_demographics(inst, RAW_DIR)
+    df = add_grad_ratio(df)
+    assert "grad_ratio" in df.columns
+    assert set(df["grad_ratio"].dropna().unique()).issubset({"none", "minority", "majority"})
 
 
 # --- Task 8: Add locale and sector labels ---
