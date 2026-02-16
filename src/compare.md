@@ -38,9 +38,21 @@ const axisVars = [
 
 ```js
 const show1 = view(Inputs.toggle({label: "Show on plot", value: false}));
+```
+
+```js
 const name1 = view(Inputs.text({label: "Name", value: "Group 1", width: 200}));
+```
+
+```js
 const sector1 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: []}));
+```
+
+```js
 const grad1 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}));
+```
+
+```js
 const locale1 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: []}));
 ```
 
@@ -70,9 +82,21 @@ const filtered1 = !show1 ? [] : institutions.filter(d =>
 
 ```js
 const show2 = view(Inputs.toggle({label: "Show on plot", value: false}));
+```
+
+```js
 const name2 = view(Inputs.text({label: "Name", value: "Group 2", width: 200}));
+```
+
+```js
 const sector2 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: []}));
+```
+
+```js
 const grad2 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}));
+```
+
+```js
 const locale2 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: []}));
 ```
 
@@ -102,9 +126,21 @@ const filtered2 = !show2 ? [] : institutions.filter(d =>
 
 ```js
 const show3 = view(Inputs.toggle({label: "Show on plot", value: false}));
+```
+
+```js
 const name3 = view(Inputs.text({label: "Name", value: "Group 3", width: 200}));
+```
+
+```js
 const sector3 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: []}));
+```
+
+```js
 const grad3 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}));
+```
+
+```js
 const locale3 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: []}));
 ```
 
