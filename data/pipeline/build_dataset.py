@@ -122,8 +122,24 @@ def join_sat_act(df: pd.DataFrame, raw_dir: str) -> pd.DataFrame:
 
 
 def add_grad_ratio(df: pd.DataFrame) -> pd.DataFrame:
-    """Add graduation ratio column. (Stub — not yet implemented.)"""
-    raise NotImplementedError("add_grad_ratio is not yet implemented")
+    """Add grad_ratio column: none, minority, or majority."""
+    df = df.copy()
+
+    def ratio(row):
+        total = row.get("enrollment_total")
+        ug = row.get("enrollment_ug")
+        if pd.isna(total) or pd.isna(ug):
+            return None
+        g = total - ug
+        if g <= 0:
+            return "none"
+        elif g < ug:
+            return "minority"
+        else:
+            return "majority"
+
+    df["grad_ratio"] = df.apply(ratio, axis=1)
+    return df
 
 
 def add_labels(df: pd.DataFrame) -> pd.DataFrame:
