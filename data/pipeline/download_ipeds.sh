@@ -13,6 +13,8 @@ FILES=(
   "C2023_A"
   "drvef2023"
   "SFA2223"
+  "IC2023_AY"
+  "ADM2023"
 )
 
 for f in "${FILES[@]}"; do
