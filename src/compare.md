@@ -31,15 +31,36 @@ const axisVars = [
 ```
 
 ```js
+function addAllButton(input, allValues) {
+  const btn = document.createElement("button");
+  btn.textContent = "All";
+  btn.type = "button";
+  btn.style.cssText = "margin-left: 0.5rem; padding: 0 0.4rem; font-size: 0.75rem; cursor: pointer;";
+  btn.onclick = () => {
+    for (const cb of input.querySelectorAll("input[type=checkbox]")) cb.checked = true;
+    input.value = allValues;
+    input.dispatchEvent(new Event("input", {bubbles: true}));
+  };
+  const label = input.querySelector("label");
+  if (label) label.appendChild(btn);
+  return input;
+}
+
 function buildCategoryForm(name, color) {
   const stateSelect = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: [], width: 200});
   stateSelect.querySelector("select").size = 4;
+  const sectorInput = Inputs.checkbox(sectorOptions, {label: "Sector", value: []});
+  const gradInput = Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]});
+  const localeInput = Inputs.checkbox(localeOptions, {label: "Locale", value: []});
+  addAllButton(sectorInput, sectorOptions);
+  addAllButton(gradInput, gradOptions);
+  addAllButton(localeInput, localeOptions);
   const form = Inputs.form({
     show: Inputs.toggle({label: "Show on plot", value: false}),
     name: Inputs.text({label: "Name", value: name, width: 200}),
-    sector: Inputs.checkbox(sectorOptions, {label: "Sector", value: []}),
-    grad: Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}),
-    locale: Inputs.checkbox(localeOptions, {label: "Locale", value: []}),
+    sector: sectorInput,
+    grad: gradInput,
+    locale: localeInput,
     state: stateSelect,
   });
   form.style.border = `2px solid ${color}`;
