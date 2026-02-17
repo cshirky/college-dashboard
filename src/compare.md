@@ -1,4 +1,4 @@
-# Compare Institutions
+<h1>Compare Institutions</h1>
 
 <a href="/">← Back to Explorer</a>
 
@@ -30,159 +30,78 @@ const axisVars = [
 ];
 ```
 
-<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
-
-<div style="border: 2px solid #4e79a7; border-radius: 8px; padding: 1rem;">
-
-### Category 1
-
 ```js
-const show1 = view(Inputs.toggle({label: "Show on plot", value: false}));
+function buildCategoryForm(name, color) {
+  const stateSelect = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: [], width: 200});
+  stateSelect.querySelector("select").size = 4;
+  const form = Inputs.form({
+    show: Inputs.toggle({label: "Show on plot", value: false}),
+    name: Inputs.text({label: "Name", value: name, width: 200}),
+    sector: Inputs.checkbox(sectorOptions, {label: "Sector", value: []}),
+    grad: Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}),
+    locale: Inputs.checkbox(localeOptions, {label: "Locale", value: []}),
+    state: stateSelect,
+  });
+  form.style.border = `2px solid ${color}`;
+  form.style.borderRadius = "8px";
+  form.style.padding = "1rem";
+  return form;
+}
 ```
 
 ```js
-const name1 = view(Inputs.text({label: "Name", value: "Group 1", width: 200}));
+const cat1 = view(buildCategoryForm("Group 1", "#4e79a7"));
 ```
 
 ```js
-const sector1 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: []}));
+const cat2 = view(buildCategoryForm("Group 2", "#e15759"));
 ```
 
 ```js
-const grad1 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}));
+const cat3 = view(buildCategoryForm("Group 3", "#f28e2b"));
 ```
 
 ```js
-const locale1 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: []}));
+function filterCategory(cat) {
+  if (!cat.show) return [];
+  const states = cat.state.includes("All") ? allStates : cat.state;
+  return institutions.filter(d =>
+    cat.sector.includes(d.sector_label) &&
+    cat.locale.includes(d.locale_group) &&
+    (states.length === 0 || states.includes(d.STABBR)) &&
+    cat.grad.includes(d.grad_ratio)
+  );
+}
+const filtered1 = filterCategory(cat1);
+const filtered2 = filterCategory(cat2);
+const filtered3 = filterCategory(cat3);
 ```
 
 ```js
-const stateInput1 = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: [], width: 200});
-stateInput1.querySelector("select").size = 4;
-const stateSelection1 = view(stateInput1);
+display(html`<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+  <div style="text-align: center;"><strong>${filtered1.length}</strong> schools</div>
+  <div style="text-align: center;"><strong>${filtered2.length}</strong> schools</div>
+  <div style="text-align: center;"><strong>${filtered3.length}</strong> schools</div>
+</div>`);
 ```
 
-```js
-const state1 = stateSelection1.includes("All") ? allStates : stateSelection1;
-const filtered1 = !show1 ? [] : institutions.filter(d =>
-  sector1.includes(d.sector_label) &&
-  locale1.includes(d.locale_group) &&
-  (state1.length === 0 || state1.includes(d.STABBR)) &&
-  grad1.includes(d.grad_ratio)
-);
-```
-
-**${filtered1.length}** schools
-
-</div>
-
-<div style="border: 2px solid #e15759; border-radius: 8px; padding: 1rem;">
-
-### Category 2
-
-```js
-const show2 = view(Inputs.toggle({label: "Show on plot", value: false}));
-```
-
-```js
-const name2 = view(Inputs.text({label: "Name", value: "Group 2", width: 200}));
-```
-
-```js
-const sector2 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: []}));
-```
-
-```js
-const grad2 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}));
-```
-
-```js
-const locale2 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: []}));
-```
-
-```js
-const stateInput2 = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: [], width: 200});
-stateInput2.querySelector("select").size = 4;
-const stateSelection2 = view(stateInput2);
-```
-
-```js
-const state2 = stateSelection2.includes("All") ? allStates : stateSelection2;
-const filtered2 = !show2 ? [] : institutions.filter(d =>
-  sector2.includes(d.sector_label) &&
-  locale2.includes(d.locale_group) &&
-  (state2.length === 0 || state2.includes(d.STABBR)) &&
-  grad2.includes(d.grad_ratio)
-);
-```
-
-**${filtered2.length}** schools
-
-</div>
-
-<div style="border: 2px solid #f28e2b; border-radius: 8px; padding: 1rem;">
-
-### Category 3
-
-```js
-const show3 = view(Inputs.toggle({label: "Show on plot", value: false}));
-```
-
-```js
-const name3 = view(Inputs.text({label: "Name", value: "Group 3", width: 200}));
-```
-
-```js
-const sector3 = view(Inputs.checkbox(sectorOptions, {label: "Sector", value: []}));
-```
-
-```js
-const grad3 = view(Inputs.checkbox(gradOptions, {label: "Grad enrollment", value: [], format: d => gradLabels[d]}));
-```
-
-```js
-const locale3 = view(Inputs.checkbox(localeOptions, {label: "Locale", value: []}));
-```
-
-```js
-const stateInput3 = Inputs.select(["All", ...allStates], {label: "State", multiple: true, value: [], width: 200});
-stateInput3.querySelector("select").size = 4;
-const stateSelection3 = view(stateInput3);
-```
-
-```js
-const state3 = stateSelection3.includes("All") ? allStates : stateSelection3;
-const filtered3 = !show3 ? [] : institutions.filter(d =>
-  sector3.includes(d.sector_label) &&
-  locale3.includes(d.locale_group) &&
-  (state3.length === 0 || state3.includes(d.STABBR)) &&
-  grad3.includes(d.grad_ratio)
-);
-```
-
-**${filtered3.length}** schools
-
-</div>
-
-</div>
-
----
-
-## Comparison Plot
+<h2>Comparison Plot</h2>
 
 ```js
 const xVar = view(Inputs.select(axisVars, {label: "X axis", format: d => d.label, value: axisVars.find(d => d.value === "grad_rate_6yr")}));
+```
+
+```js
 const yVar = view(Inputs.select(axisVars, {label: "Y axis", format: d => d.label, value: axisVars.find(d => d.value === "admission_rate")}));
 ```
 
 ```js
 {
-  const allCategories = [
-    {key: "cat1", name: name1, data: filtered1, color: "#4e79a7", show: show1},
-    {key: "cat2", name: name2, data: filtered2, color: "#e15759", show: show2},
-    {key: "cat3", name: name3, data: filtered3, color: "#f28e2b", show: show3},
-  ];
-  const categories = allCategories.filter(c => c.show);
+  const categories = [
+    {key: "cat1", name: cat1.name, data: filtered1, color: "#4e79a7", show: cat1.show},
+    {key: "cat2", name: cat2.name, data: filtered2, color: "#e15759", show: cat2.show},
+    {key: "cat3", name: cat3.name, data: filtered3, color: "#f28e2b", show: cat3.show},
+  ].filter(c => c.show);
 
   const allPoints = [];
   for (const cat of categories) {
