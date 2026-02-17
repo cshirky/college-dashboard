@@ -37,9 +37,11 @@ function addAllButton(input, allValues) {
   btn.type = "button";
   btn.style.cssText = "margin-left: 0.5rem; padding: 0 0.4rem; font-size: 0.75rem; cursor: pointer;";
   btn.onclick = () => {
-    for (const cb of input.querySelectorAll("input[type=checkbox]")) cb.checked = true;
-    input.value = allValues;
+    const allChecked = input.querySelectorAll("input[type=checkbox]:checked").length === allValues.length;
+    for (const cb of input.querySelectorAll("input[type=checkbox]")) cb.checked = !allChecked;
+    input.value = allChecked ? [] : allValues;
     input.dispatchEvent(new Event("input", {bubbles: true}));
+    btn.textContent = allChecked ? "All" : "None";
   };
   const label = input.querySelector("label");
   if (label) label.appendChild(btn);
