@@ -5,8 +5,9 @@
 Paste school names or UNITIDs (one per line) to find the three closest twin institutions for each.
 
 ```js
-const institutions = FileAttachment("data/institutions.csv").csv({typed: true});
+const allInstitutions = FileAttachment("data/institutions.csv").csv({typed: true});
 const programs = FileAttachment("data/programs.csv").csv({typed: true});
+const institutions = allInstitutions.filter(d => d.admission_rate != null && d.admission_rate <= 75);
 ```
 
 ```js
@@ -87,6 +88,28 @@ function twinScore(a, b) {
   const racialPenalty = 1 - racialDistance(a, b);
   const genderPenalty = 1 - genderDistance(a, b);
   return (programSim * 0.5 + enrollClose * 0.5) * balancePenalty * racialPenalty * genderPenalty;
+}
+
+// Count how many schools offer each CIP family
+const cipSchoolCount = new Map();
+for (const p of programs) {
+  if (!cipSchoolCount.has(p.cip_family)) cipSchoolCount.set(p.cip_family, new Set());
+  cipSchoolCount.get(p.cip_family).add(p.UNITID);
+}
+
+function topCips(unitid, n = 5) {
+  return programs
+    .filter(d => d.UNITID === unitid)
+    .sort((a, b) => b.total_awards - a.total_awards)
+    .slice(0, n);
+}
+
+function rarestCips(unitid, n = 5) {
+  return programs
+    .filter(d => d.UNITID === unitid)
+    .map(d => ({...d, schoolCount: cipSchoolCount.get(d.cip_family)?.size || 0}))
+    .sort((a, b) => a.schoolCount - b.schoolCount)
+    .slice(0, n);
 }
 
 function findTwins(school, n = 3) {
@@ -194,12 +217,36 @@ if (results.length > 0) {
             <span style="color: #666;">Score: ${(t.score * 100).toFixed(1)}%</span>
           </td>`;
         });
+        const top5 = topCips(s.UNITID);
+        const rare5 = rarestCips(s.UNITID);
         return html`<tr style="border-bottom: 1px solid #ddd;">
           <td style="padding: 0.5rem;"><strong>${s.INSTNM}</strong></td>
           <td style="padding: 0.5rem;">${s.STABBR}</td>
           <td style="text-align: right; padding: 0.5rem;">${(s.enrollment_ug || 0).toLocaleString()}</td>
           <td style="text-align: right; padding: 0.5rem;">${grad.toLocaleString()}</td>
           ${twinCells}
+        </tr>
+        <tr style="border-bottom: 2px solid #ddd;">
+          <td colspan="4" style="padding: 0.3rem 0.5rem; vertical-align: top;">
+            <details>
+              <summary style="cursor: pointer; font-size: 0.8rem; color: #555;">CIP details</summary>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.4rem; font-size: 0.8rem;">
+                <div>
+                  <strong>Top 5 by graduates:</strong>
+                  <ol style="margin: 0.2rem 0; padding-left: 1.2rem;">
+                    ${top5.map(p => html`<li>${p.cip_label} (${p.total_awards.toLocaleString()})</li>`)}
+                  </ol>
+                </div>
+                <div>
+                  <strong>5 rarest programs:</strong>
+                  <ol style="margin: 0.2rem 0; padding-left: 1.2rem;">
+                    ${rare5.map(p => html`<li>${p.cip_label} (offered at ${p.schoolCount.toLocaleString()} schools)</li>`)}
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </td>
+          <td colspan="3"></td>
         </tr>`;
       })}
     </tbody>
