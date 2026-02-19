@@ -3,7 +3,7 @@
 
 Explore graduation rates vs. admission selectivity across four-year bachelor's-granting institutions. Data source: IPEDS 2023.
 
-<a href="/compare">→ Compare categories</a>
+<a href="/compare">→ Compare categories</a> | <a href="/twins">→ Find school twins</a>
 
 ```js
 const institutions = FileAttachment("data/institutions.csv").csv({typed: true});

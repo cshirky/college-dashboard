@@ -1,6 +1,6 @@
 <h1>Compare Institutions</h1>
 
-<a href="/">← Back to Explorer</a>
+<a href="/">← Back to Explorer</a> | <a href="/twins">→ Find school twins</a>
 
 Define up to three categories of schools, choose axes, and compare.
 
