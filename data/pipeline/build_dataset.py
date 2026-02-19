@@ -161,7 +161,7 @@ def add_labels(df: pd.DataFrame) -> pd.DataFrame:
 
 def build_programs(raw_dir: str) -> pd.DataFrame:
     """Build programs dataset from completions data, filtered to bachelor's."""
-    path = Path(raw_dir) / "C2023_a.csv"
+    path = Path(raw_dir) / "C2023_a.csv.gz"
     comp = _read_csv(path, dtype={"CIPCODE": str})
     comp = comp[comp["AWLEVEL"] == 5].copy()
     comp = comp[comp["CIPCODE"] != "99"]
