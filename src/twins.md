@@ -53,10 +53,19 @@ function enrollmentCloseness(a, b) {
   return 1 - (ugDist * 0.5 + gradDist * 0.5);
 }
 
+function gradProportion(d) {
+  const total = d.enrollment_total || 0;
+  if (total === 0) return 0;
+  return ((total - (d.enrollment_ug || 0)) / total);
+}
+
 function twinScore(a, b) {
   const programSim = cosineSimilarity(a.UNITID, b.UNITID);
   const enrollClose = enrollmentCloseness(a, b);
-  return programSim * 0.5 + enrollClose * 0.5;
+  // Penalize large differences in grad/undergrad balance
+  const balanceDiff = Math.abs(gradProportion(a) - gradProportion(b));
+  const balancePenalty = 1 - balanceDiff;
+  return (programSim * 0.5 + enrollClose * 0.5) * balancePenalty;
 }
 
 function findTwins(school, n = 3) {
