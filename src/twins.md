@@ -59,13 +59,34 @@ function gradProportion(d) {
   return ((total - (d.enrollment_ug || 0)) / total);
 }
 
+const raceFields = ["pct_white", "pct_black", "pct_hispanic", "pct_asian", "pct_aian", "pct_nhpi", "pct_two_or_more", "pct_nonresident"];
+
+function racialDistance(a, b) {
+  // Euclidean distance on racial composition percentages, normalized to 0-1
+  // Max possible distance is sqrt(8 * 100^2) ≈ 283
+  let sumSq = 0;
+  for (const f of raceFields) {
+    const diff = (a[f] || 0) - (b[f] || 0);
+    sumSq += diff * diff;
+  }
+  return Math.sqrt(sumSq) / 283;
+}
+
+function genderDistance(a, b) {
+  // Difference in % women, normalized to 0-1
+  return Math.abs((a.pct_women || 50) - (b.pct_women || 50)) / 100;
+}
+
 function twinScore(a, b) {
   const programSim = cosineSimilarity(a.UNITID, b.UNITID);
   const enrollClose = enrollmentCloseness(a, b);
   // Penalize large differences in grad/undergrad balance
   const balanceDiff = Math.abs(gradProportion(a) - gradProportion(b));
   const balancePenalty = 1 - balanceDiff;
-  return (programSim * 0.5 + enrollClose * 0.5) * balancePenalty;
+  // Penalize differences in racial and gender makeup
+  const racialPenalty = 1 - racialDistance(a, b);
+  const genderPenalty = 1 - genderDistance(a, b);
+  return (programSim * 0.5 + enrollClose * 0.5) * balancePenalty * racialPenalty * genderPenalty;
 }
 
 function findTwins(school, n = 3) {
