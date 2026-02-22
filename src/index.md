@@ -6,6 +6,7 @@ Explore graduation rates vs. admission selectivity across four-year bachelor's-g
 <a href="/compare">→ Compare categories</a> | <a href="/twins">→ Find school twins</a>
 
 ```js
+import { collegeCard } from "./components/collegeCard.js";
 const institutions = FileAttachment("data/institutions.csv").csv({typed: true});
 const programs = FileAttachment("data/programs.csv").csv({typed: true});
 ```
@@ -286,20 +287,7 @@ const selected = filtered.find(d => d.INSTNM === selectedName) || null;
 ```
 
 ```js
-if (selected) {
-  display(html`<div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
-    <h2>${selected.INSTNM}</h2>
-    <p>${selected.CITY}, ${selected.STABBR} &middot; ${selected.sector_label} &middot; ${selected.locale_group}</p>
-    <table>
-      <tr><td><strong>Admission Rate</strong></td><td>${selected.admission_rate != null ? selected.admission_rate + "%" : "N/A"}</td></tr>
-      <tr><td><strong>6-Year Grad Rate</strong></td><td>${selected.grad_rate_6yr != null ? selected.grad_rate_6yr + "%" : "N/A"}</td></tr>
-      <tr><td><strong>Total Enrollment</strong></td><td>${selected.enrollment_total?.toLocaleString() ?? "N/A"}</td></tr>
-      <tr><td><strong>% Women</strong></td><td>${selected.pct_women != null ? selected.pct_women + "%" : "N/A"}</td></tr>
-      <tr><td><strong>% Pell Recipients</strong></td><td>${selected.pct_pell != null ? selected.pct_pell + "%" : "N/A"}</td></tr>
-      <tr><td><strong>HBCU</strong></td><td>${selected.HBCU === 1 ? "Yes" : "No"}</td></tr>
-    </table>
-  </div>`);
-}
+if (selected) display(collegeCard(selected));
 ```
 
 ```js

@@ -5,8 +5,9 @@
 Paste school names or UNITIDs (one per line) to find the three closest twin institutions for each.
 
 ```js
-const allInstitutions = FileAttachment("data/institutions.csv").csv({typed: true});
-const programs = FileAttachment("data/programs.csv").csv({typed: true});
+import { collegeCard } from "./components/collegeCard.js";
+const allInstitutions = await FileAttachment("data/institutions.csv").csv({typed: true});
+const programs = await FileAttachment("data/programs.csv").csv({typed: true});
 const institutions = allInstitutions.filter(d => d.admission_rate != null && d.admission_rate <= 75);
 ```
 
@@ -180,77 +181,46 @@ const results = uniqueMatched.map(r => findTwins(r.match));
 ```
 
 ```js
-// Display results table
+// Display results as cards
 if (results.length > 0) {
-  display(html`<table style="border-collapse: collapse; width: 100%; font-size: 0.85rem;">
-    <thead>
-      <tr style="border-bottom: 2px solid #333;">
-        <th style="text-align: left; padding: 0.5rem;">Input School</th>
-        <th style="text-align: left; padding: 0.5rem;">State</th>
-        <th style="text-align: right; padding: 0.5rem;">UG</th>
-        <th style="text-align: right; padding: 0.5rem;">Grad</th>
-        <th style="text-align: left; padding: 0.5rem;">Twin 1</th>
-        <th style="text-align: left; padding: 0.5rem;">Twin 2</th>
-        <th style="text-align: left; padding: 0.5rem;">Twin 3</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${results.map(r => {
-        const s = r.school;
-        const grad = (s.enrollment_total || 0) - (s.enrollment_ug || 0);
-        if (r.noPrograms) {
-          return html`<tr style="border-bottom: 1px solid #ddd;">
-            <td style="padding: 0.5rem;">${s.INSTNM}</td>
-            <td style="padding: 0.5rem;">${s.STABBR}</td>
-            <td style="text-align: right; padding: 0.5rem;">${(s.enrollment_ug || 0).toLocaleString()}</td>
-            <td style="text-align: right; padding: 0.5rem;">${grad.toLocaleString()}</td>
-            <td colspan="3" style="padding: 0.5rem; color: #999;"><em>No program data available</em></td>
-          </tr>`;
-        }
-        const twinCells = [0, 1, 2].map(i => {
-          const t = r.twins[i];
-          if (!t) return html`<td style="padding: 0.5rem; color: #999;">—</td>`;
-          const tGrad = (t.school.enrollment_total || 0) - (t.school.enrollment_ug || 0);
-          return html`<td style="padding: 0.5rem;">
-            <strong>${t.school.INSTNM}</strong><br>
-            ${t.school.STABBR} · UG ${(t.school.enrollment_ug || 0).toLocaleString()} · Grad ${tGrad.toLocaleString()}<br>
-            <span style="color: #666;">Score: ${(t.score * 100).toFixed(1)}%</span>
-          </td>`;
-        });
-        const top5 = topCips(s.UNITID);
-        const rare5 = rarestCips(s.UNITID);
-        return html`<tr style="border-bottom: 1px solid #ddd;">
-          <td style="padding: 0.5rem;"><strong>${s.INSTNM}</strong></td>
-          <td style="padding: 0.5rem;">${s.STABBR}</td>
-          <td style="text-align: right; padding: 0.5rem;">${(s.enrollment_ug || 0).toLocaleString()}</td>
-          <td style="text-align: right; padding: 0.5rem;">${grad.toLocaleString()}</td>
-          ${twinCells}
-        </tr>
-        <tr style="border-bottom: 2px solid #ddd;">
-          <td colspan="4" style="padding: 0.3rem 0.5rem; vertical-align: top;">
+  for (const r of results) {
+    const s = r.school;
+    const top5 = topCips(s.UNITID);
+    const rare5 = rarestCips(s.UNITID);
+    display(html`<div style="margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 2px solid #eee;">
+      ${collegeCard(s)}
+      ${r.noPrograms
+        ? html`<p style="margin-top: 0.75rem; color: #999; font-size: 0.9rem;"><em>No program data available — cannot compute twins.</em></p>`
+        : html`<div style="margin-top: 1rem;">
+            <div style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; color: #777; margin-bottom: 0.5rem;">Closest twins</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+              ${r.twins.map((t, i) => html`<div>
+                <div style="font-size: 0.78rem; color: #888; margin-bottom: 0.3rem;">
+                  Twin ${i + 1} &middot; Match score: ${(t.score * 100).toFixed(1)}%
+                </div>
+                ${collegeCard(t.school)}
+              </div>`)}
+            </div>
             <details>
-              <summary style="cursor: pointer; font-size: 0.8rem; color: #555;">CIP details</summary>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.4rem; font-size: 0.8rem;">
+              <summary style="cursor: pointer; font-size: 0.82rem; color: #555; user-select: none;">CIP program details for ${s.INSTNM}</summary>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem; font-size: 0.82rem;">
                 <div>
                   <strong>Top 5 by graduates:</strong>
-                  <ol style="margin: 0.2rem 0; padding-left: 1.2rem;">
+                  <ol style="margin: 0.3rem 0; padding-left: 1.2rem;">
                     ${top5.map(p => html`<li>${p.cip_label} (${p.total_awards.toLocaleString()})</li>`)}
                   </ol>
                 </div>
                 <div>
                   <strong>5 rarest programs:</strong>
-                  <ol style="margin: 0.2rem 0; padding-left: 1.2rem;">
+                  <ol style="margin: 0.3rem 0; padding-left: 1.2rem;">
                     ${rare5.map(p => html`<li>${p.cip_label} (offered at ${p.schoolCount.toLocaleString()} schools)</li>`)}
                   </ol>
                 </div>
               </div>
             </details>
-          </td>
-          <td colspan="3"></td>
-        </tr>`;
-      })}
-    </tbody>
-  </table>`);
+          </div>`}
+    </div>`);
+  }
 } else if (findBtn > 0 && searchLines.length > 0 && uniqueMatched.length === 0) {
   display(html`<p><em>No schools matched.</em></p>`);
 }

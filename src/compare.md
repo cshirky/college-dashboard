@@ -5,6 +5,7 @@
 Define up to three categories of schools, choose axes, and compare.
 
 ```js
+import { collegeCard } from "./components/collegeCard.js";
 const institutions = FileAttachment("data/institutions.csv").csv({typed: true});
 ```
 
@@ -219,4 +220,22 @@ const yVar = view(Inputs.select(axisVars, {label: "Y axis", format: d => d.label
     ],
   }));
 }
+```
+
+---
+
+## Institution Lookup
+
+```js
+const lookupName = view(Inputs.text({
+  label: "Search institution",
+  placeholder: "Type to search...",
+  datalist: institutions.map(d => d.INSTNM).sort(),
+  width: 400,
+}));
+```
+
+```js
+const lookupSelected = institutions.find(d => d.INSTNM === lookupName) || null;
+if (lookupSelected) display(collegeCard(lookupSelected));
 ```
