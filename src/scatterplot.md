@@ -15,7 +15,7 @@ const good_schools = FileAttachment("data/good_schools.csv").csv({typed: true});
 ```js
 const localeGroups = new Set([
   ...(localeFilter.includes("Cities") ? ["City"] : []),
-  ...(localeFilter.includes("Towns & Suburbs") ? ["Town", "Suburb"] : []),
+  ...(localeFilter.includes("Towns or Suburbs") ? ["Town", "Suburb"] : []),
   ...(localeFilter.includes("Rural") ? ["Rural"] : []),
 ]);
 
@@ -165,11 +165,14 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
         x: "yield_rate",
         y: "grad_rate_6yr",
         r: d => match(d) ? 7 : 5,
-        symbol: d => dupeKeys.has(`${d.yield_rate}|${d.grad_rate_6yr}`) ? "square" : "circle",
+        symbol: d => dupeKeys.has(`${d.yield_rate}|${d.grad_rate_6yr}`) ? "diamond" : "circle",
         fill: d => match(d) ? hiColor(d) : baseColor(d),
-        fillOpacity: d => match(d) ? 0.9 : 0.6,
+        fillOpacity: d => match(d) ? 0.9 : (query ? 0.15 : 0.6),
         stroke: "none",
       }),
+      Plot.ruleX(data.filter(match), {x: "yield_rate", y1: gradFloor, y2: "grad_rate_6yr", stroke: "#16a34a", strokeWidth: 1, strokeDasharray: "4,3"}),
+      Plot.ruleY(data.filter(match), {y: "grad_rate_6yr", x1: yieldFloor, x2: "yield_rate", stroke: "#16a34a", strokeWidth: 1, strokeDasharray: "4,3"}),
+      Plot.text(data.filter(match), {x: "yield_rate", y: "grad_rate_6yr", text: "INSTNM", dy: -10, fontSize: 11, fontWeight: "600", fill: "#111", stroke: "white", strokeWidth: 3, paintOrder: "stroke"}),
       Plot.text(colCounts, {x: "x", y: 100, text: "count", textAnchor: "middle", lineAnchor: "bottom", dy: -4, fontSize: 9, fontFamily: "sans-serif", fill: "#888", clip: false}),
       Plot.gridX({ticks: d3.range(yieldFloor, xMax + 5, 5)}),
       Plot.gridY({ticks: d3.range(gradFloor, 101, 5)}),
@@ -301,6 +304,54 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
     }
   });
 
+  // Legend: lower-right corner of plot area
+  // d3 diamond for r=5: M0,-8.25 L4.76,0 L0,8.25 L-4.76,0 — height/width ratio = sqrt(3)
+  const legW = 185, legPad = 7, legShapeR = 4;
+  const legDiamondHH = legShapeR * (8.25 / 4.76); // half-height matching d3 ratio ≈ 6.93
+  const legRow1Y = 13;   // relative to legRectY
+  const legRow2Y = 33;   // enough clearance for diamond half-height above
+  const legH = legRow2Y + Math.ceil(legDiamondHH) + legPad;
+  const legRectX = xRange[1] - legW - 8;
+  const legRectY = plotHeight - marginBottom - legH - 8;
+  const legShapeX = legRectX + legPad + legShapeR;
+  const legTextX  = legRectX + legPad + legShapeR * 2 + 6;
+
+  const r1Y = legRectY + legRow1Y, r2Y = legRectY + legRow2Y;
+
+  const legBg = document.createElementNS(ns, "rect");
+  legBg.setAttribute("x", legRectX); legBg.setAttribute("y", legRectY);
+  legBg.setAttribute("width", legW); legBg.setAttribute("height", legH);
+  legBg.setAttribute("fill", "white"); legBg.setAttribute("stroke", "#ccc");
+  legBg.setAttribute("stroke-width", "1"); legBg.setAttribute("rx", "3");
+  svgEl?.appendChild(legBg);
+
+  const legCircle = document.createElementNS(ns, "circle");
+  legCircle.setAttribute("cx", legShapeX); legCircle.setAttribute("cy", r1Y);
+  legCircle.setAttribute("r", legShapeR); legCircle.setAttribute("fill", "#888");
+  legCircle.setAttribute("fill-opacity", "0.6");
+  svgEl?.appendChild(legCircle);
+
+  const legT1 = document.createElementNS(ns, "text");
+  legT1.setAttribute("x", legTextX); legT1.setAttribute("y", r1Y);
+  legT1.setAttribute("font-size", "9"); legT1.setAttribute("font-family", "sans-serif");
+  legT1.setAttribute("fill", "#555"); legT1.setAttribute("dominant-baseline", "middle");
+  legT1.setAttribute("text-anchor", "start");
+  legT1.textContent = "One school at this position";
+  svgEl?.appendChild(legT1);
+
+  const legDiamond = document.createElementNS(ns, "path");
+  legDiamond.setAttribute("d", `M${legShapeX},${r2Y - legDiamondHH} L${legShapeX + legShapeR},${r2Y} L${legShapeX},${r2Y + legDiamondHH} L${legShapeX - legShapeR},${r2Y} Z`);
+  legDiamond.setAttribute("fill", "#888"); legDiamond.setAttribute("fill-opacity", "0.6");
+  svgEl?.appendChild(legDiamond);
+
+  const legT2 = document.createElementNS(ns, "text");
+  legT2.setAttribute("x", legTextX); legT2.setAttribute("y", r2Y);
+  legT2.setAttribute("font-size", "9"); legT2.setAttribute("font-family", "sans-serif");
+  legT2.setAttribute("fill", "#555"); legT2.setAttribute("dominant-baseline", "middle");
+  legT2.setAttribute("text-anchor", "start");
+  legT2.textContent = "Two+ schools at this position";
+  svgEl?.appendChild(legT2);
+
   display(wrapper);
 }
 ```
@@ -356,10 +407,10 @@ const selectedState = view(Inputs.select(
 
 ```js
 const localeFilter = view(Inputs.checkbox(
-  ["Cities", "Towns & Suburbs", "Rural"],
+  ["Cities", "Towns or Suburbs", "Rural"],
   {
     label: "Setting:",
-    value: ["Cities", "Towns & Suburbs", "Rural"],
+    value: ["Cities", "Towns or Suburbs", "Rural"],
   }
 ));
 ```
@@ -368,7 +419,7 @@ const localeFilter = view(Inputs.checkbox(
 const sizeFilter = view(Inputs.checkbox(
   ["Tiny", "Small", "Medium", "Large", "Very Large"],
   {
-    label: "School size:",
+    label: "Undergrad population:",
     value: ["Tiny", "Small", "Medium", "Large", "Very Large"],
     format: d => ({
       "Tiny": "Tiny (<1,000)",
