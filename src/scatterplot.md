@@ -43,33 +43,34 @@ const data = good_schools
     grad_rate_6yr: +d.grad_rate_6yr,
   }));
 
-const xMin = d3.min(data, d => d.yield_rate);
-const xMax = d3.max(data, d => d.yield_rate);
+const yieldMax = d3.max(data, d => d.yield_rate);
 
 const yieldStep = 5, gradStep = 5;
-const yieldStart = Math.floor(xMin / yieldStep) * yieldStep;
-const yieldEnd   = Math.ceil(xMax  / yieldStep) * yieldStep;
+const yieldStart = Math.floor(yieldFloor / yieldStep) * yieldStep;
+const yieldEnd   = Math.ceil(yieldMax / yieldStep) * yieldStep;
+const gradStart  = gradFloor;
+const gradEnd    = 100;
 const grid = [];
-for (let x1 = yieldStart; x1 < yieldEnd; x1 += yieldStep) {
-  for (let y1 = gradFloor; y1 < 100; y1 += gradStep) {
-    grid.push({x1, x2: x1 + yieldStep, y1, y2: y1 + gradStep});
+for (let x1 = gradStart; x1 < gradEnd; x1 += gradStep) {
+  for (let y1 = yieldStart; y1 < yieldEnd; y1 += yieldStep) {
+    grid.push({x1, x2: x1 + gradStep, y1, y2: y1 + yieldStep});
   }
 }
-// Shade levels: 0=darkest … 3=white. Yield columns and grad rows each carry a level;
+// Shade levels: 0=darkest … 3=white. Grad columns and yield rows each carry a level;
 // cells use whichever is darker (lower index).
 const shadeColors = ["#e9e9e9", "#efefef", "#f6f6f6", "white"];
 function cellShade(x1, y1) {
-  const yLevel = x1 < 15 ? 0 : x1 < 20 ? 1 : x1 < 25 ? 2 : 3;
-  const gLevel = y1 < 55 ? 0 : y1 < 60 ? 1 : y1 < 65 ? 2 : 3;
-  return shadeColors[Math.min(yLevel, gLevel)];
+  const gLevel = x1 < 55 ? 0 : x1 < 60 ? 1 : x1 < 65 ? 2 : 3;
+  const yLevel = y1 < 15 ? 0 : y1 < 20 ? 1 : y1 < 25 ? 2 : 3;
+  return shadeColors[Math.min(gLevel, yLevel)];
 }
-const colCounts = d3.range(yieldStart, yieldEnd, yieldStep).map(x1 => ({
-  x: x1 + yieldStep / 2,
-  count: data.filter(d => d.yield_rate >= x1 && d.yield_rate < x1 + yieldStep).length
+const colCounts = d3.range(gradStart, gradEnd, gradStep).map(x1 => ({
+  x: x1 + gradStep / 2,
+  count: data.filter(d => d.grad_rate_6yr >= x1 && d.grad_rate_6yr < x1 + gradStep).length
 }));
-const rowCounts = d3.range(gradFloor, 100, gradStep).map(y1 => ({
-  y: y1 + gradStep / 2,
-  count: data.filter(d => d.grad_rate_6yr >= y1 && d.grad_rate_6yr < y1 + gradStep).length
+const rowCounts = d3.range(yieldStart, yieldEnd, yieldStep).map(y1 => ({
+  y: y1 + yieldStep / 2,
+  count: data.filter(d => d.yield_rate >= y1 && d.yield_rate < y1 + yieldStep).length
 }));
 ```
 
@@ -138,17 +139,17 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
   const query = searchQuery.trim().toLowerCase();
   const match = d => query && d.INSTNM.toLowerCase().includes(query);
 
-  const baseColor = d => d.sector_label === "Public" ? "#ea580c" : "#1d4ed8";
-  const hiColor   = d => d.sector_label === "Public" ? "#9a3412" : "#1e3a8a";
+  const baseColor = d => d.sector_label === "Public" ? "#d50000" : "#1d4ed8";
+  const hiColor   = d => d.sector_label === "Public" ? "#7f0000" : "#1e3a8a";
 
   const stackKeys = new Set(), dupeKeys = new Set();
   for (const d of data) {
-    const key = `${d.yield_rate}|${d.grad_rate_6yr}`;
+    const key = `${d.grad_rate_6yr}|${d.yield_rate}`;
     if (stackKeys.has(key)) dupeKeys.add(key); else stackKeys.add(key);
   }
 
   const marginLeft = 65, marginRight = 45, marginTop = 36, marginBottom = 50;
-  const plotWidth = 800, plotHeight = 600;
+  const plotWidth = 860, plotHeight = 600;
 
   const plt = Plot.plot({
     width: plotWidth,
@@ -157,29 +158,49 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
     marginBottom,
     marginTop,
     marginRight,
-    x: { label: null, domain: [yieldFloor, xMax + 2], ticks: d3.range(yieldFloor, xMax + 5, 5) },
-    y: { label: null, domain: [gradFloor, 100] },
+    x: { label: null, domain: [gradFloor, 100], ticks: d3.range(gradFloor, 101, 5) },
+    y: { label: null, domain: [yieldFloor, yieldMax + 2], ticks: d3.range(yieldFloor, yieldMax + 5, 5) },
     marks: [
       Plot.rect(grid, {x1: "x1", x2: "x2", y1: "y1", y2: "y2", fill: d => cellShade(d.x1, d.y1)}),
-      Plot.dot(data, {
-        x: "yield_rate",
-        y: "grad_rate_6yr",
+      Plot.dot(data.filter(d => !dupeKeys.has(`${d.grad_rate_6yr}|${d.yield_rate}`)), {
+        x: "grad_rate_6yr",
+        y: "yield_rate",
         r: d => match(d) ? 7 : 5,
-        symbol: d => dupeKeys.has(`${d.yield_rate}|${d.grad_rate_6yr}`) ? "diamond" : "circle",
+        symbol: "circle",
         fill: d => match(d) ? hiColor(d) : baseColor(d),
         fillOpacity: d => match(d) ? 0.9 : (query ? 0.15 : 0.6),
         stroke: "none",
       }),
-      Plot.ruleX(data.filter(match), {x: "yield_rate", y1: gradFloor, y2: "grad_rate_6yr", stroke: "#16a34a", strokeWidth: 1, strokeDasharray: "4,3"}),
-      Plot.ruleY(data.filter(match), {y: "grad_rate_6yr", x1: yieldFloor, x2: "yield_rate", stroke: "#16a34a", strokeWidth: 1, strokeDasharray: "4,3"}),
-      Plot.text(data.filter(match), {x: "yield_rate", y: "grad_rate_6yr", text: "INSTNM", dy: -10, fontSize: 11, fontWeight: "600", fill: "#111", stroke: "white", strokeWidth: 3, paintOrder: "stroke"}),
-      Plot.text(colCounts, {x: "x", y: 100, text: "count", textAnchor: "middle", lineAnchor: "bottom", dy: -4, fontSize: 9, fontFamily: "sans-serif", fill: "#888", clip: false}),
-      Plot.gridX({ticks: d3.range(yieldFloor, xMax + 5, 5)}),
-      Plot.gridY({ticks: d3.range(gradFloor, 101, 5)}),
+      Plot.dot(data.filter(d => dupeKeys.has(`${d.grad_rate_6yr}|${d.yield_rate}`)), {
+        x: "grad_rate_6yr",
+        y: "yield_rate",
+        r: d => match(d) ? 7 : 5,
+        symbol: "diamond",
+        fill: d => match(d) ? hiColor(d) : baseColor(d),
+        fillOpacity: d => match(d) ? 0.9 : (query ? 0.15 : 0.6),
+        stroke: "none",
+      }),
+      Plot.ruleX(data.filter(match), {x: "grad_rate_6yr", y1: yieldFloor, y2: "yield_rate", stroke: "#16a34a", strokeWidth: 1, strokeDasharray: "4,3"}),
+      Plot.ruleY(data.filter(match), {y: "yield_rate", x1: gradFloor, x2: "grad_rate_6yr", stroke: "#16a34a", strokeWidth: 1, strokeDasharray: "4,3"}),
+      Plot.text(data.filter(match), {x: "grad_rate_6yr", y: "yield_rate", text: "INSTNM", dy: -10, fontSize: 11, fontWeight: "600", fill: "#111", stroke: "white", strokeWidth: 3, paintOrder: "stroke"}),
+      Plot.text(colCounts, {x: "x", y: yieldMax + 1, text: "count", textAnchor: "middle", lineAnchor: "bottom", dy: -4, fontSize: 9, fontFamily: "sans-serif", fill: "#888", clip: false}),
+      Plot.gridX({ticks: d3.range(gradFloor, 101, 5)}),
+      Plot.gridY({ticks: d3.range(yieldFloor, yieldMax + 5, 5)}),
     ],
   });
 
   const svgEl = plt.tagName === "svg" ? plt : plt.querySelector("svg");
+
+  // Rotate the dupe-diamond dot layer 90° so the long axis is horizontal.
+  // The second g[aria-label="dot"] in the SVG is the dupe layer.
+  const dotGroups = svgEl.querySelectorAll("g[aria-label='dot']");
+  if (dotGroups[1]) {
+    for (const path of dotGroups[1].querySelectorAll("path")) {
+      const t = path.getAttribute("transform") || "";
+      path.setAttribute("transform", t + " rotate(90)");
+    }
+  }
+
   const xs = plt.scale("x");
   const ys = plt.scale("y");
   const xRange = xs.range;
@@ -194,7 +215,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
   yAxisLabel.setAttribute("font-size", "11");
   yAxisLabel.setAttribute("font-family", "sans-serif");
   yAxisLabel.setAttribute("fill", "#555");
-  yAxisLabel.textContent = "6-year graduation rate (%)";
+  yAxisLabel.textContent = "Yield (% of admitted students who chose to attend)";
   svgEl?.appendChild(yAxisLabel);
 
   // X-axis label
@@ -206,7 +227,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
   xAxisLabel.setAttribute("font-size", "11");
   xAxisLabel.setAttribute("font-family", "sans-serif");
   xAxisLabel.setAttribute("fill", "#555");
-  xAxisLabel.textContent = "Yield (% of admitted students who chose to attend)";
+  xAxisLabel.textContent = "6-year graduation rate (%)";
   svgEl?.appendChild(xAxisLabel);
 
   // "Number of schools in each column" label across the top
@@ -217,7 +238,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
   colCountLabel.setAttribute("font-size", "9");
   colCountLabel.setAttribute("font-family", "sans-serif");
   colCountLabel.setAttribute("fill", "#888");
-  colCountLabel.textContent = "Number of schools in each column";
+  colCountLabel.textContent = "Number of schools in each grad-rate column";
   svgEl?.appendChild(colCountLabel);
 
   // Row counts to the right of the plot
@@ -241,7 +262,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
   rowCountLabel.setAttribute("font-size", "9");
   rowCountLabel.setAttribute("font-family", "sans-serif");
   rowCountLabel.setAttribute("fill", "#888");
-  rowCountLabel.textContent = "Number of schools in each row";
+  rowCountLabel.textContent = "Number of schools in each yield row";
   svgEl?.appendChild(rowCountLabel);
 
   const tipEl = html`<div style="position:absolute; display:none; background:white; border:1px solid #ddd; border-radius:6px; padding:0.4rem 0.65rem; font-size:0.8rem; pointer-events:none; box-shadow:0 2px 8px rgba(0,0,0,0.12); max-width:260px; line-height:1.5;"></div>`;
@@ -260,7 +281,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
     const px = evt.clientX - rect.left, py = evt.clientY - rect.top;
     let nearest = null, minDist = Infinity;
     for (const d of data) {
-      const dx = xs.apply(d.yield_rate) - px, dy = ys.apply(d.grad_rate_6yr) - py;
+      const dx = xs.apply(d.grad_rate_6yr) - px, dy = ys.apply(d.yield_rate) - py;
       const dist = dx * dx + dy * dy;
       if (dist < minDist) { minDist = dist; nearest = d; }
     }
@@ -288,7 +309,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
     const px = evt.clientX - r.left, py = evt.clientY - r.top;
     let nearest = null, minDist = Infinity;
     for (const d of data) {
-      const dx = xs.apply(d.yield_rate) - px, dy = ys.apply(d.grad_rate_6yr) - py;
+      const dx = xs.apply(d.grad_rate_6yr) - px, dy = ys.apply(d.yield_rate) - py;
       const dist = dx * dx + dy * dy;
       if (dist < minDist) { minDist = dist; nearest = d; }
     }
@@ -304,15 +325,15 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
     }
   });
 
-  // Legend: lower-right corner of plot area
+  // Legend: upper-left corner of plot area
   // d3 diamond for r=5: M0,-8.25 L4.76,0 L0,8.25 L-4.76,0 — height/width ratio = sqrt(3)
   const legW = 185, legPad = 7, legShapeR = 4;
   const legDiamondHH = legShapeR * (8.25 / 4.76); // half-height matching d3 ratio ≈ 6.93
   const legRow1Y = 13;   // relative to legRectY
   const legRow2Y = 33;   // enough clearance for diamond half-height above
   const legH = legRow2Y + Math.ceil(legDiamondHH) + legPad;
-  const legRectX = xRange[1] - legW - 8;
-  const legRectY = plotHeight - marginBottom - legH - 8;
+  const legRectX = marginLeft + 8;
+  const legRectY = marginTop + 8;
   const legShapeX = legRectX + legPad + legShapeR;
   const legTextX  = legRectX + legPad + legShapeR * 2 + 6;
 
@@ -340,7 +361,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
   svgEl?.appendChild(legT1);
 
   const legDiamond = document.createElementNS(ns, "path");
-  legDiamond.setAttribute("d", `M${legShapeX},${r2Y - legDiamondHH} L${legShapeX + legShapeR},${r2Y} L${legShapeX},${r2Y + legDiamondHH} L${legShapeX - legShapeR},${r2Y} Z`);
+  legDiamond.setAttribute("d", `M${legShapeX - legDiamondHH},${r2Y} L${legShapeX},${r2Y - legShapeR} L${legShapeX + legDiamondHH},${r2Y} L${legShapeX},${r2Y + legShapeR} Z`);
   legDiamond.setAttribute("fill", "#888"); legDiamond.setAttribute("fill-opacity", "0.6");
   svgEl?.appendChild(legDiamond);
 
