@@ -43,11 +43,13 @@ const data = good_schools
     grad_rate_6yr: +d.grad_rate_6yr,
   }));
 
+// yieldMax is used only for row-count labels (don't show zero-count rows at top).
+// Axis domains are fixed at [floor, 100] and only redraw when yieldFloor/gradFloor change.
 const yieldMax = d3.max(data, d => d.yield_rate);
 
 const yieldStep = 5, gradStep = 5;
 const yieldStart = Math.floor(yieldFloor / yieldStep) * yieldStep;
-const yieldEnd   = Math.ceil(yieldMax / yieldStep) * yieldStep;
+const yieldEnd   = 90;  // fixed — axis always runs to 90%
 const gradStart  = gradFloor;
 const gradEnd    = 100;
 const grid = [];
@@ -68,7 +70,8 @@ const colCounts = d3.range(gradStart, gradEnd, gradStep).map(x1 => ({
   x: x1 + gradStep / 2,
   count: data.filter(d => d.grad_rate_6yr >= x1 && d.grad_rate_6yr < x1 + gradStep).length
 }));
-const rowCounts = d3.range(yieldStart, yieldEnd, yieldStep).map(y1 => ({
+// rowCounts only goes up to yieldMax so we don't render zero-count labels at the top
+const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldStep, yieldStep).map(y1 => ({
   y: y1 + yieldStep / 2,
   count: data.filter(d => d.yield_rate >= y1 && d.yield_rate < y1 + yieldStep).length
 }));
@@ -149,7 +152,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
   }
 
   const marginLeft = 65, marginRight = 45, marginTop = 36, marginBottom = 50;
-  const plotWidth = 860, plotHeight = 600;
+  const plotWidth = 860, plotHeight = 650;
 
   const plt = Plot.plot({
     width: plotWidth,
@@ -159,7 +162,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
     marginTop,
     marginRight,
     x: { label: null, domain: [gradFloor, 100], ticks: d3.range(gradFloor, 101, 5) },
-    y: { label: null, domain: [yieldFloor, yieldMax + 2], ticks: d3.range(yieldFloor, yieldMax + 5, 5) },
+    y: { label: null, domain: [yieldFloor, 90], ticks: d3.range(yieldFloor, 91, 5) },
     marks: [
       Plot.rect(grid, {x1: "x1", x2: "x2", y1: "y1", y2: "y2", fill: d => cellShade(d.x1, d.y1)}),
       Plot.dot(data.filter(d => !dupeKeys.has(`${d.grad_rate_6yr}|${d.yield_rate}`)), {
@@ -183,9 +186,9 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
       Plot.ruleX(data.filter(match), {x: "grad_rate_6yr", y1: yieldFloor, y2: "yield_rate", stroke: "#16a34a", strokeWidth: 1, strokeDasharray: "4,3"}),
       Plot.ruleY(data.filter(match), {y: "yield_rate", x1: gradFloor, x2: "grad_rate_6yr", stroke: "#16a34a", strokeWidth: 1, strokeDasharray: "4,3"}),
       Plot.text(data.filter(match), {x: "grad_rate_6yr", y: "yield_rate", text: "INSTNM", dy: -10, fontSize: 11, fontWeight: "600", fill: "#111", stroke: "white", strokeWidth: 3, paintOrder: "stroke"}),
-      Plot.text(colCounts, {x: "x", y: yieldMax + 1, text: "count", textAnchor: "middle", lineAnchor: "bottom", dy: -4, fontSize: 9, fontFamily: "sans-serif", fill: "#888", clip: false}),
+      Plot.text(colCounts, {x: "x", y: 90, text: "count", textAnchor: "middle", lineAnchor: "bottom", dy: -4, fontSize: 9, fontFamily: "sans-serif", fill: "#888", clip: false}),
       Plot.gridX({ticks: d3.range(gradFloor, 101, 5)}),
-      Plot.gridY({ticks: d3.range(yieldFloor, yieldMax + 5, 5)}),
+      Plot.gridY({ticks: d3.range(yieldFloor, 91, 5)}),
     ],
   });
 
@@ -210,7 +213,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
   // Y-axis label
   const plotCenterY = (marginTop + (plotHeight - marginBottom)) / 2;
   const yAxisLabel = document.createElementNS(ns, "text");
-  yAxisLabel.setAttribute("transform", `translate(13, ${plotCenterY}) rotate(-90)`);
+  yAxisLabel.setAttribute("transform", `translate(22, ${plotCenterY}) rotate(-90)`);
   yAxisLabel.setAttribute("text-anchor", "middle");
   yAxisLabel.setAttribute("font-size", "11");
   yAxisLabel.setAttribute("font-family", "sans-serif");
