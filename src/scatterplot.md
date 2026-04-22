@@ -13,7 +13,7 @@ const good_schools = FileAttachment("data/good_schools.csv").csv({typed: true});
 ```
 
 ```js
-const programs_raw = FileAttachment("data/programs.csv").csv({typed: true});
+const programs_raw = await FileAttachment("data/programs.csv").csv({typed: true});
 const programsByUnitid = new Map();
 for (const row of programs_raw) {
   const key = String(row.UNITID);
@@ -117,7 +117,7 @@ const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldSt
       <li><p><strong>Yield</strong> is an input, a measure of the percentage of students who were admitted and chose to go.</p> 
       <p>Yield measures a <em>choice</em> -- if a student says Yes to one school, they are saying No to every other school they got into. Colleges obsess over yield internally, but don't mention it to applicants. If a school offers a spot to 100 students, and only 10 go, that tells you something very different than if 40 go, or 60: School A, at 10% yield, is a safety, School B, at 40%, has more people who want to be there in particular. Schoool C, at 60%, is beloved. So, higher Yield is a good proxy for an engaged and committed student body.</p></li>
       <li><p><strong>6 Year Graduation Rate</strong> is an output, and just what it sounds like: how many students have graduated 6 years after their arrival? (The Bachelor's is often called a 4 year degree, but many students take more time, hence the 6 year window.)</p> 
-        <p>Colleges don't like to talk about graduation rate either; out of thousands of colleges in the U.S. fewer than 100 graduate 9 out of 10 students, while thousands gradaute less than half their incoming classes. Gradaution rate is the single most important metric. It captures something about how prepared and serious the students there are, and something about how well the college supports them. If many students drop out or transfer out before graduating, it does not matter how nice the campus looks in fall -- just don't apply.</p></li>
+        <p>Colleges don't like to talk about graduation rate either; out of thousands of colleges in the U.S. fewer than 100 graduate 9 out of 10 students, while thousands graduate less than half their incoming classes. Graduation rate is the single most important metric. It captures something about how prepared and serious the students there are, and something about how well the college supports them. If many students drop out or transfer out before graduating, it does not matter how nice the campus looks in fall -- just don't apply.</p></li>
     </ul>
     <p>The chart below shows colleges that:</p>
     <ul>
