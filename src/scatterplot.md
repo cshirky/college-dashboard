@@ -402,6 +402,21 @@ const stateOptions = [
 ```
 
 ```js
+const localeCounts = {
+  "Cities":           good_schools.filter(d => d.locale_group === "City").length,
+  "Towns or Suburbs": good_schools.filter(d => d.locale_group === "Town" || d.locale_group === "Suburb").length,
+  "Rural":            good_schools.filter(d => d.locale_group === "Rural").length,
+};
+const sizeCounts = {
+  "Tiny":      good_schools.filter(d => +d.enrollment_ug < 1000).length,
+  "Small":     good_schools.filter(d => +d.enrollment_ug >= 1000  && +d.enrollment_ug < 2500).length,
+  "Medium":    good_schools.filter(d => +d.enrollment_ug >= 2500  && +d.enrollment_ug < 10000).length,
+  "Large":     good_schools.filter(d => +d.enrollment_ug >= 10000 && +d.enrollment_ug < 25000).length,
+  "Very Large":good_schools.filter(d => +d.enrollment_ug >= 25000).length,
+};
+```
+
+```js
 const controls = view(Inputs.form(
   {
     yieldFloor: Inputs.select([10, 15, 20, 25], {
@@ -424,16 +439,17 @@ const controls = view(Inputs.form(
     localeFilter: Inputs.checkbox(["Cities", "Towns or Suburbs", "Rural"], {
       label: "Setting:",
       value: ["Cities", "Towns or Suburbs", "Rural"],
+      format: d => `${d} (${localeCounts[d]})`,
     }),
     sizeFilter: Inputs.checkbox(["Tiny", "Small", "Medium", "Large", "Very Large"], {
       label: "Undergrad population:",
       value: ["Tiny", "Small", "Medium", "Large", "Very Large"],
       format: d => ({
-        "Tiny": "Tiny (<1,000)",
-        "Small": "Small (<2,500)",
-        "Medium": "Medium (<10,000)",
-        "Large": "Large (<25,000)",
-        "Very Large": "Very Large (25,000+)",
+        "Tiny":      `Tiny (<1,000) (${sizeCounts["Tiny"]})`,
+        "Small":     `Small (<2,500) (${sizeCounts["Small"]})`,
+        "Medium":    `Medium (<10,000) (${sizeCounts["Medium"]})`,
+        "Large":     `Large (<25,000) (${sizeCounts["Large"]})`,
+        "Very Large":`Very Large (25,000+) (${sizeCounts["Very Large"]})`,
       })[d],
     }),
   },
