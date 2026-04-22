@@ -2,7 +2,7 @@
 toc: false
 ---
 
-# College Scatterplot
+# The Landscape of American Colleges
 
 ```js
 import { collegeCard } from "./components/collegeCard.js";
@@ -79,14 +79,13 @@ const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldSt
 
 ```js
 {
-  const imgUrl = await FileAttachment("scatterplot_all_schools.png").url();
   const details = html`<details open style="border:1px solid #ddd; border-radius:6px; padding:0.6rem 1rem; margin-bottom:1.5rem; background:#f9fafb;">
   <summary style="font-weight:600; font-size:1rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
     What (and who) this is for
     <span class="toggle-hint" style="font-size:0.8rem; font-weight:400; color:#888;">click to close</span>
   </summary>
   <div style="margin-top:0.75rem; font-size:0.9rem; line-height:1.7; color:#333; max-width:720px;">
-    <p>This is an opinionated guide to picking U.S. colleges. It assumes you are:</p>
+    <p>This is an opinionated guide to picking U.S. colleges you might be interested in attending. It assumes you are:</p>
     <ul>
       <li>An American high school student…</li>
       <li>…with a B- grade average or better</li>
@@ -94,31 +93,34 @@ const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldSt
       <li>…at a college that has lots of options for majors</li>
       <li>…where you study full-time and live on campus.</li>
     </ul>
-    <p>If that describes you, the chart below, drawn from data collected in the <a href="https://nces.ed.gov/ipeds">Integrated Postsecondary Education Data System</a>, is designed to help you explore your options. (And maybe that doesn't describe you, because you want to go to community college, or art school, or study online. Maybe you want to live at home, or go to a women's college, or a school for people of your religion. Those are fine choices, but easier than picking among hundreds of broad curriculum residential schools.)</p>
+    <p>If that describes you, the chart below, drawn from data collected in the <a href="https://nces.ed.gov/ipeds">Integrated Postsecondary Education Data System</a>, is designed to help you explore your options. (And maybe that doesn't describe you, because you want to go to community college, or art school, or study online. Maybe you want to live at home, or go to a women's college, or a school for people of your religion. Those are fine choices, but present a narrower set of choices.)</p>
     <p>I'll start with three assertions:</p>
     <ol>
-      <li><strong>High school students worry too much</strong> about whether they will be accepted, while spending too little time trying to get a sense of the places they might like to go. This page is for you to get a sense of the layout of American higher ed generally.</li>
-      <li><strong>If you have a dream school</strong>, knock it off. Seriously, tf are you thinking? It's good to have a sense of what colleges you might like to attend, but no institution is worth that much adulation. Make a list and don't fixate on just one school.</li>
-      <li><strong>A college's acceptance rate</strong> is a fairly bullshit number. When the Common App went online in the late '90s, most of the selective colleges saw their admissions rates fall even though there were <em>no new students and no reductions in incoming classes</em> -- the change in rate came solely from students applying to more schools.</li>
+      <li><strong>High school students worry too much</strong> about whether they will be accepted to any particular college, while spending too little time trying to get a sense of the places they might like to go. This page is for you to get a sense of the layout of American shape.</li>
+      <li><strong>If you have a dream school</strong>, knock it off. Seriously, tf are you thinking? It's good to have a sense of what colleges you might like to attend, but no institution is worth that much of your hopes for yourself. Make a list and don't fixate on just one school.</li>
+      <li><strong>A college's acceptance rate</strong> is a fairly bullshit number. When the Common App went online in the late '90s, most of the selective colleges became more selective on paper, even though there were <em>no new students and no reductions in incoming classes</em> -- the change in rate came solely from the same number of students each applying to more schools.</li>
     </ol>
     <p>Colleges have every incentive to get you to focus on things like their mission statement (some version of "Knowledge is good", but in Latin), or how selective they are, or how nice the campus looks in the fall. These signals of quality are easy to understand but also easy to fake and relatively unimportant.</p>
     <p>On the other hand, there are two important and hard to fake measurements: Yield, and 6 Year Graduation rate.</p>
     <ul>
-      <li><p><strong>Yield</strong> is a measure of the percentage of students who were admitted and chose to go.</p> 
-      <p>Yield measures a <em>choice</em> -- if a student says Yes to one school, they are saying No to every other school they got into. Colleges obsess over yield internally, but don't mention it to applicants because the students control it, not their marketing department. If a school offers a spot to 100 students, and only 10 go, that tells you something very different than if 40 go: School A, at 10% yield, is a safety, School B, at 40%, has more people who want to be there in particular. So, higher Yield is a good proxy for an engaged and committed student body.</p></li>
-      <li><p><strong>6 Year Graduation Rate</strong> is just what it sounds like: how many students graduated by 6 years after their arrival?</p> 
-        <p>Graduation rate is the single most important metric, capturing how prepared and serious the students are, and how well the college supports them. (The Bachelor's is often called a "4 year degree", but many students take more time, hence the 6 year window.) If many students drop out or transfer out before graduating, it does not matter how nice the campus looks in fall -- just don't apply.</p></li>
+      <li><p><strong>Yield</strong> is an input, a measure of the percentage of students who were admitted and chose to go.</p> 
+      <p>Yield measures a <em>choice</em> -- if a student says Yes to one school, they are saying No to every other school they got into. Colleges obsess over yield internally, but don't mention it to applicants. If a school offers a spot to 100 students, and only 10 go, that tells you something very different than if 40 go, or 60: School A, at 10% yield, is a safety, School B, at 40%, has more people who want to be there in particular. Schoool C, at 60%, is beloved. So, higher Yield is a good proxy for an engaged and committed student body.</p></li>
+      <li><p><strong>6 Year Graduation Rate</strong> is an output, and just what it sounds like: how many students have graduated 6 years after their arrival? (The Bachelor's is often called a 4 year degree, but many students take more time, hence the 6 year window.)</p> 
+        <p>Colleges don't like to talk about graduation rate either; out of thousands of colleges in the U.S. fewer than 100 graduate 9 out of 10 students, while thousands gradaute less than half their incoming classes. Gradaution rate is the single most important metric. It captures something about how prepared and serious the students there are, and something about how well the college supports them. If many students drop out or transfer out before graduating, it does not matter how nice the campus looks in fall -- just don't apply.</p></li>
     </ul>
-    <p>The chart below lists colleges (including those inside universities) that:</p>
-    <ol>
-      <li>Have 10%+ Yield and 50%+ 6 year graduation rate (You can adjust this.)</li> 
+    <p>The chart below shows colleges that:</p>
+    <ul>
+      <li>Have 10%+ Yield and 50%+ 6 year graduation rate (You can adjust this to higher thresholds in the controls below the chart.)</li> 
       <li>Offers more Bachelor's degrees than Associates degrees</li>
       <li>Has students studying full-time, in person, and living on or near campus</li>
       <li>Has a broad curriculum (a lot of potential majors)</li>
-      <li>The chart excludes schools with highly specialized curricula -- art schools, engineering schools, health professions schools, seminaries</li>
-      <li>Is non-profit, whether public or private. (For-profit colleges are awful, none are listed here, because I would never.)</li>
-    </ol>
-    <p>Click any dot to see a school card. Click the triangle in any given Yield/Grad Rate square to see all the school cardss in that range.</p>
+    </ul>
+    <p>The chart excludes:</p>
+    <ul><li>For-profit schools, which typically have awful graduation rates, and are more reliable producers of debt than degrees. (Seriously, don't even <em>consider</em> attending a for-profit college.)</li>
+      <li>Schools with highly specialized curricula -- art schools, engineering schools, health professions schools, seminaries.</li>
+      <li>Schools designed for students of a specific gender, race, ethnicity, or religious affiliation.</li>
+    </ul>
+    <p>Click any dot to see a school card at the bottom of the page, and any diamond to see the two or more schools at that location.</p>
   </div>
 </details>`;
   details.addEventListener("toggle", () => {
@@ -207,7 +209,6 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
   const xs = plt.scale("x");
   const ys = plt.scale("y");
   const xRange = xs.range;
-  const yRange = ys.range;
   const ns = "http://www.w3.org/2000/svg";
 
   // Y-axis label
