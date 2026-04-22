@@ -13,19 +13,30 @@ const good_schools = FileAttachment("data/good_schools.csv").csv({typed: true});
 ```
 
 ```js
+const programs_raw = FileAttachment("data/programs.csv").csv({typed: true});
+const programsByUnitid = new Map();
+for (const row of programs_raw) {
+  const key = String(row.UNITID);
+  if (!programsByUnitid.has(key)) programsByUnitid.set(key, []);
+  programsByUnitid.get(key).push(row);
+}
+for (const v of programsByUnitid.values()) v.sort((a, b) => b.total_awards - a.total_awards);
+```
+
+```js
 const localeGroups = new Set([
-  ...(localeFilter.includes("Cities") ? ["City"] : []),
-  ...(localeFilter.includes("Towns or Suburbs") ? ["Town", "Suburb"] : []),
-  ...(localeFilter.includes("Rural") ? ["Rural"] : []),
+  ...(controls.localeFilter.includes("Cities") ? ["City"] : []),
+  ...(controls.localeFilter.includes("Towns or Suburbs") ? ["Town", "Suburb"] : []),
+  ...(controls.localeFilter.includes("Rural") ? ["Rural"] : []),
 ]);
 
 const data = good_schools
   .filter(d => {
-    if (d.instate_only === "true" && d.primary_recruit_state !== selectedState) return false;
+    if (d.instate_only === "true" && d.primary_recruit_state !== controls.selectedState) return false;
     if (!localeGroups.has(d.locale_group)) return false;
     const ug = d.enrollment_ug;
     const sizeLabel = ug < 1000 ? "Tiny" : ug < 2500 ? "Small" : ug < 10000 ? "Medium" : ug < 25000 ? "Large" : "Very Large";
-    if (!sizeFilter.includes(sizeLabel)) return false;
+    if (!controls.sizeFilter.includes(sizeLabel)) return false;
     return true;
   })
   .filter(d => d.grad_rate_6yr != null && d.yield_rate != null &&
@@ -154,7 +165,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
   }
 
   const marginLeft = 65, marginRight = 45, marginTop = 36, marginBottom = 50;
-  const plotWidth = 860, plotHeight = 650;
+  const plotWidth = 860, plotHeight = 720;
 
   const plt = Plot.plot({
     width: plotWidth,
@@ -325,7 +336,7 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
           <strong>${stack.length} schools</strong> at ${nearest.yield_rate}% yield · ${nearest.grad_rate_6yr}% grad rate
         </p>`);
       }
-      for (const school of stack) cardArea.append(collegeCard(school));
+      for (const school of stack) cardArea.append(collegeCard(school, (programsByUnitid.get(String(school.UNITID)) || []).slice(0, 5)));
     }
   });
 
@@ -382,79 +393,67 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
 ```
 
 ```js
-const filters = view(Inputs.form(
+const stateOptions = [
+  "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN",
+  "KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ",
+  "NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA",
+  "WI","WV","WY"
+];
+```
+
+```js
+const controls = view(Inputs.form(
   {
     yieldFloor: Inputs.select([10, 15, 20, 25], {
       label: null,
       format: d => `Exclude schools with < ${d}% yield`,
       value: 10,
+      width: 170,
     }),
     gradFloor: Inputs.select([50, 55, 60, 65], {
       label: null,
       format: d => `Exclude schools with < ${d}% grad rate`,
       value: 50,
+      width: 185,
+    }),
+    selectedState: Inputs.select([null, ...stateOptions], {
+      label: "Add regionally recruiting schools from state:",
+      format: d => d ?? "None",
+      value: null,
+    }),
+    localeFilter: Inputs.checkbox(["Cities", "Towns or Suburbs", "Rural"], {
+      label: "Setting:",
+      value: ["Cities", "Towns or Suburbs", "Rural"],
+    }),
+    sizeFilter: Inputs.checkbox(["Tiny", "Small", "Medium", "Large", "Very Large"], {
+      label: "Undergrad population:",
+      value: ["Tiny", "Small", "Medium", "Large", "Very Large"],
+      format: d => ({
+        "Tiny": "Tiny (<1,000)",
+        "Small": "Small (<2,500)",
+        "Medium": "Medium (<10,000)",
+        "Large": "Large (<25,000)",
+        "Very Large": "Very Large (25,000+)",
+      })[d],
     }),
   },
   {
     template: inputs => {
-      const div = document.createElement("div");
-      div.style.cssText = "display:flex; gap:1rem; margin-top:0.5rem;";
-      div.append(inputs.yieldFloor, inputs.gradFloor);
-      return div;
+      const wrap = document.createElement("div");
+      wrap.style.cssText = "border:1px solid #ddd; border-radius:6px; padding:0.75rem 1rem; margin-top:0.5rem; display:flex; flex-direction:column; gap:0.5rem;";
+      const row1 = document.createElement("div");
+      row1.style.cssText = "display:flex; gap:1rem;";
+      row1.append(inputs.yieldFloor, inputs.gradFloor);
+      wrap.append(row1, inputs.selectedState, inputs.localeFilter, inputs.sizeFilter);
+      return wrap;
     }
   }
 ));
 ```
 
 ```js
-const yieldFloor = filters.yieldFloor;
-const gradFloor  = filters.gradFloor;
-```
-
-```js
-const stateOptions = [...new Set(
-  good_schools
-    .filter(d => d.instate_only === "true")
-    .map(d => d.primary_recruit_state)
-)].filter(Boolean).sort();
-```
-
-```js
-const selectedState = view(Inputs.select(
-  [null, ...stateOptions],
-  {
-    label: "Add regionally recruiting schools from state:",
-    format: d => d ?? "None",
-    value: null,
-  }
-));
-```
-
-```js
-const localeFilter = view(Inputs.checkbox(
-  ["Cities", "Towns or Suburbs", "Rural"],
-  {
-    label: "Setting:",
-    value: ["Cities", "Towns or Suburbs", "Rural"],
-  }
-));
-```
-
-```js
-const sizeFilter = view(Inputs.checkbox(
-  ["Tiny", "Small", "Medium", "Large", "Very Large"],
-  {
-    label: "Undergrad population:",
-    value: ["Tiny", "Small", "Medium", "Large", "Very Large"],
-    format: d => ({
-      "Tiny": "Tiny (<1,000)",
-      "Small": "Small (<2,500)",
-      "Medium": "Medium (<10,000)",
-      "Large": "Large (<25,000)",
-      "Very Large": "Very Large (25,000+)",
-    })[d],
-  }
-));
+const yieldFloor = controls.yieldFloor;
+const gradFloor  = controls.gradFloor;
 ```
 
 ```js
