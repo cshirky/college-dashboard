@@ -90,10 +90,10 @@ const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldSt
 
 ```js
 {
-  const details = html`<details open style="border:1px solid #ddd; border-radius:6px; padding:0.6rem 1rem; margin-bottom:1.5rem; background:#f9fafb;">
+  const details = html`<details style="border:1px solid #ddd; border-radius:6px; padding:0.6rem 1rem; margin-bottom:1.5rem; background:#f9fafb;">
   <summary style="font-weight:600; font-size:1rem; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
     What (and who) this is for
-    <span class="toggle-hint" style="font-size:0.8rem; font-weight:400; color:#888;">click to close</span>
+    <span class="toggle-hint" style="font-size:0.8rem; font-weight:400; color:#888;">click to expand</span>
   </summary>
   <div style="margin-top:0.75rem; font-size:0.9rem; line-height:1.7; color:#333; max-width:720px;">
     <p>This is an opinionated guide to picking U.S. colleges you might be interested in attending. It assumes you are:</p>
@@ -104,11 +104,11 @@ const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldSt
       <li>…at a college that has lots of options for majors</li>
       <li>…where you study full-time and live on campus.</li>
     </ul>
-    <p>If that describes you, the chart below, drawn from data collected in the <a href="https://nces.ed.gov/ipeds">Integrated Postsecondary Education Data System</a>, is designed to help you explore your options. (And maybe that doesn't describe you, because you want to go to community college, or art school, or study online. Maybe you want to live at home, or go to a women's college, or a school for people of your religion. Those are fine choices, but present a narrower set of choices.)</p>
+    <p>If that describes you, the chart below, drawn from data collected in the <a href="https://nces.ed.gov/ipeds">Integrated Postsecondary Education Data System</a>, is designed to help you explore your options. (And maybe that doesn't describe you, because you want to go to community college, or art school, or study online. Maybe you want to live at home, or go to a women's college, or a school for people of your religion. Those are fine choices, but present a much narrower set of options.)</p>
     <p>I'll start with three assertions:</p>
     <ol>
-      <li><strong>High school students worry too much</strong> about whether they will be accepted to any particular college, while spending too little time trying to get a sense of the places they might like to go. This page is for you to get a sense of the layout of American shape.</li>
-      <li><strong>If you have a dream school</strong>, knock it off. Seriously, tf are you thinking? It's good to have a sense of what colleges you might like to attend, but no institution is worth that much of your hopes for yourself. Make a list and don't fixate on just one school.</li>
+      <li><strong>High school students worry too much</strong> about whether they will be accepted to any particular college, while spending too little time trying to get a sense of the places they might like to go. This page is for you to get a sense of the overall landscape.</li>
+      <li><strong>If you have a dream school</strong>, knock it off. Seriously, tf are you thinking? It's good to have a sense of what colleges you might like to attend, but no institution should have that much effect on your hopes for yourself. Make a list and don't fixate on just one school.</li>
       <li><strong>A college's acceptance rate</strong> is a fairly bullshit number. When the Common App went online in the late '90s, most of the selective colleges became more selective on paper, even though there were <em>no new students and no reductions in incoming classes</em> -- the change in rate came solely from the same number of students each applying to more schools.</li>
     </ol>
     <p>Colleges have every incentive to get you to focus on things like their mission statement (some version of "Knowledge is good", but in Latin), or how selective they are, or how nice the campus looks in the fall. These signals of quality are easy to understand but also easy to fake and relatively unimportant.</p>
@@ -121,12 +121,12 @@ const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldSt
     </ul>
     <p>The chart below shows colleges that:</p>
     <ul>
-      <li>Have 10%+ Yield and 50%+ 6 year graduation rate (You can adjust this to higher thresholds in the controls below the chart.)</li> 
-      <li>Offers more Bachelor's degrees than Associates degrees</li>
+      <li>Have 10%+ Yield and 50%+ graduation rate. (You can adjust this to higher thresholds in the controls below the chart.)</li> 
+      <li>Offers more Bachelor's degrees than Associate's ("two year") degrees</li>
       <li>Has students studying full-time, in person, and living on or near campus</li>
       <li>Has a broad curriculum (a lot of potential majors)</li>
     </ul>
-    <p>The chart excludes:</p>
+    <p>There are also some schools that are categorically excluded:</p>
     <ul><li>For-profit schools, which typically have awful graduation rates, and are more reliable producers of debt than degrees. (Seriously, don't even <em>consider</em> attending a for-profit college.)</li>
       <li>Schools with highly specialized curricula -- art schools, engineering schools, health professions schools, seminaries.</li>
       <li>Schools designed for students of a specific gender, race, ethnicity, or religious affiliation.</li>
@@ -147,7 +147,88 @@ const searchQuery = view(Inputs.text({placeholder: "Search for a school…", wid
 ```
 
 ```js
-const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:800px;"></div>`;
+document.getElementById("college-tray")?.remove();
+document.getElementById("college-modal")?.remove();
+
+const modal = document.createElement("div");
+modal.id = "college-modal";
+modal.style.cssText = "position:fixed; bottom:60px; left:50%; transform:translateX(-50%); width:min(600px, calc(100vw - 2rem)); max-height:calc(100vh - 80px); overflow-y:auto; z-index:1001; display:none;";
+modal.onclick = e => e.stopPropagation();
+
+const tray = document.createElement("div");
+tray.id = "college-tray";
+tray.style.cssText = "position:fixed; bottom:0; left:0; right:0; z-index:1000; background:#fff; border-top:2px solid #e5e7eb; box-shadow:0 -2px 12px rgba(0,0,0,0.1); display:flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; min-height:52px; flex-wrap:wrap;";
+document.body.style.marginBottom = "60px";
+
+const trayEmpty = document.createElement("span");
+trayEmpty.textContent = "Click any dot to see a school";
+trayEmpty.style.cssText = "font-size:0.8rem; color:#aaa; font-style:italic;";
+
+const trayChips = document.createElement("div");
+trayChips.style.cssText = "display:flex; gap:0.5rem; flex-wrap:wrap; flex:1; align-items:center;";
+
+tray.append(trayEmpty, trayChips);
+document.body.append(modal, tray);
+document.addEventListener("click", () => {
+  modal.style.display = "none";
+  trayChips.querySelectorAll("[data-unitid]").forEach(c => c.style.background = "#f3f4f6");
+  activeChip = null;
+});
+
+let activeChip = null;
+
+const cardArea = {
+  addSchool(school, majors) {
+    const key = String(school.UNITID);
+    const existing = trayChips.querySelector(`[data-unitid="${key}"]`);
+    if (existing) { existing.click(); return; }
+
+    trayEmpty.style.display = "none";
+
+    const chip = document.createElement("div");
+    chip.dataset.unitid = key;
+    chip.style.cssText = "display:inline-flex; align-items:center; gap:0.25rem; background:#f3f4f6; border:1px solid #d1d5db; border-radius:999px; padding:0.2rem 0.45rem 0.2rem 0.75rem; cursor:pointer; font-size:0.78rem; white-space:nowrap; user-select:none;";
+
+    const nameEl = document.createElement("span");
+    nameEl.textContent = school.INSTNM.replace(/\bUniversity\b/g, "U.").replace(/\bCollege\b/g, "Col.");
+    chip.append(nameEl);
+
+    const statsEl = document.createElement("span");
+    statsEl.style.cssText = "font-size:0.7rem; color:#888; margin-left:0.15rem;";
+    statsEl.textContent = ` ${Math.round(school.yield_rate)}%Y ${Math.round(school.grad_rate_6yr)}%G`;
+    chip.append(statsEl);
+
+    const xBtn = document.createElement("button");
+    xBtn.textContent = "×";
+    xBtn.style.cssText = "background:none; border:none; cursor:pointer; font-size:1.1rem; line-height:1; color:#9ca3af; padding:0 0.1rem; margin-left:0.2rem;";
+    xBtn.onclick = e => {
+      e.stopPropagation();
+      chip.remove();
+      if (activeChip === key) { modal.style.display = "none"; activeChip = null; }
+      if (!trayChips.querySelector("[data-unitid]")) trayEmpty.style.display = "";
+    };
+    chip.append(xBtn);
+
+    chip.onclick = e => {
+      e.stopPropagation();
+      if (activeChip === key) {
+        modal.style.display = "none";
+        chip.style.background = "#f3f4f6";
+        activeChip = null;
+        return;
+      }
+      trayChips.querySelectorAll("[data-unitid]").forEach(c => c.style.background = "#f3f4f6");
+      modal.innerHTML = "";
+      modal.append(collegeCard(school, majors));
+      modal.style.display = "block";
+      chip.style.background = "#dbeafe";
+      activeChip = key;
+    };
+
+    trayChips.append(chip);
+    chip.click();
+  }
+};
 ```
 
 ```js
@@ -330,13 +411,9 @@ const cardArea = html`<div style="display:grid; grid-template-columns:1fr 1fr; g
     }
     if (nearest && minDist < 100) {
       const stack = stackAt(nearest);
-      cardArea.innerHTML = "";
-      if (stack.length > 1) {
-        cardArea.append(html`<p style="grid-column:1/-1; margin:0 0 0.5rem; font-size:0.9rem; color:#555;">
-          <strong>${stack.length} schools</strong> at ${nearest.yield_rate}% yield · ${nearest.grad_rate_6yr}% grad rate
-        </p>`);
+      for (const school of stack) {
+        cardArea.addSchool(school, (programsByUnitid.get(String(school.UNITID)) || []).slice(0, 5));
       }
-      for (const school of stack) cardArea.append(collegeCard(school, (programsByUnitid.get(String(school.UNITID)) || []).slice(0, 5)));
     }
   });
 
@@ -472,7 +549,4 @@ const yieldFloor = controls.yieldFloor;
 const gradFloor  = controls.gradFloor;
 ```
 
-```js
-display(cardArea);
-```
 
