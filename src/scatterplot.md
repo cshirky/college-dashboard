@@ -143,10 +143,6 @@ const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldSt
 
 ## ${data.length} Residential Colleges with a Broad Student Body and Curriculum, arranged by Yield x Graduation Rate
 ```js
-const searchQuery = view(Inputs.text({placeholder: "Search for a school…", width: 300}));
-```
-
-```js
 document.getElementById("college-tray")?.remove();
 document.getElementById("college-modal")?.remove();
 
@@ -171,7 +167,7 @@ tray.append(trayEmpty, trayChips);
 document.body.append(modal, tray);
 document.addEventListener("click", () => {
   modal.style.display = "none";
-  trayChips.querySelectorAll("[data-unitid]").forEach(c => c.style.background = "#f3f4f6");
+  trayChips.querySelectorAll("[data-unitid]").forEach(c => c.style.background = c.dataset.basebg);
   activeChip = null;
 });
 
@@ -185,22 +181,63 @@ const cardArea = {
 
     trayEmpty.style.display = "none";
 
+    const isPublic = school.sector_label === "Public";
+    const chipBg      = isPublic ? "#fee2e2" : "#dbeafe";
+    const chipBorder  = isPublic ? "#fca5a5" : "#93c5fd";
+    const chipActiveBg = isPublic ? "#fecaca" : "#bfdbfe";
+    const chipColor   = isPublic ? "#7f0000" : "#1e3a8a";
+
     const chip = document.createElement("div");
     chip.dataset.unitid = key;
-    chip.style.cssText = "display:inline-flex; align-items:center; gap:0.25rem; background:#f3f4f6; border:1px solid #d1d5db; border-radius:999px; padding:0.2rem 0.45rem 0.2rem 0.75rem; cursor:pointer; font-size:0.78rem; white-space:nowrap; user-select:none;";
+    chip.dataset.basebg = chipBg;
+    chip.style.cssText = `display:inline-flex; align-items:center; gap:0.25rem; background:${chipBg}; border:1px solid ${chipBorder}; border-radius:999px; padding:0.2rem 0.45rem 0.2rem 0.75rem; font-size:0.78rem; white-space:nowrap; user-select:none;`;
 
     const nameEl = document.createElement("span");
+    nameEl.style.cssText = `font-weight:600; color:${chipColor}; cursor:pointer;`;
     nameEl.textContent = school.INSTNM.replace(/\bUniversity\b/g, "U.").replace(/\bCollege\b/g, "Col.");
     chip.append(nameEl);
 
     const statsEl = document.createElement("span");
-    statsEl.style.cssText = "font-size:0.7rem; color:#888; margin-left:0.15rem;";
+    statsEl.style.cssText = "font-size:0.7rem; color:#555; margin-left:0.15rem;";
     statsEl.textContent = ` ${Math.round(school.yield_rate)}%Y ${Math.round(school.grad_rate_6yr)}%G`;
     chip.append(statsEl);
 
+    const savedKey = `saved-${key}`;
+    const isSaved = () => localStorage.getItem(savedKey) === "1";
+
+    const btnStyle = "background:none; border:none; cursor:pointer; line-height:1; padding:0 0.15rem; margin-left:0.1rem;";
+
+    const saveBtn = document.createElement("button");
+    saveBtn.title = "Save";
+    saveBtn.style.cssText = btnStyle + " font-size:1rem;";
+    saveBtn.textContent = isSaved() ? "★" : "☆";
+    saveBtn.style.color = isSaved() ? "#f59e0b" : "#9ca3af";
+    saveBtn.onclick = e => {
+      e.stopPropagation();
+      if (isSaved()) { localStorage.removeItem(savedKey); saveBtn.textContent = "☆"; saveBtn.style.color = "#9ca3af"; }
+      else           { localStorage.setItem(savedKey, "1"); saveBtn.textContent = "★"; saveBtn.style.color = "#f59e0b"; }
+    };
+    chip.append(saveBtn);
+
+    const expandBtn = document.createElement("button");
+    expandBtn.title = "Expand";
+    expandBtn.style.cssText = btnStyle + " font-size:0.85rem; color:#6b7280;";
+    expandBtn.textContent = "⤢";
+    expandBtn.onclick = e => {
+      e.stopPropagation();
+      trayChips.querySelectorAll("[data-unitid]").forEach(c => c.style.background = c.dataset.basebg);
+      modal.innerHTML = "";
+      modal.append(collegeCard(school, majors));
+      modal.style.display = "block";
+      chip.style.background = chipActiveBg;
+      activeChip = key;
+    };
+    chip.append(expandBtn);
+
     const xBtn = document.createElement("button");
+    xBtn.title = "Remove";
     xBtn.textContent = "×";
-    xBtn.style.cssText = "background:none; border:none; cursor:pointer; font-size:1.1rem; line-height:1; color:#9ca3af; padding:0 0.1rem; margin-left:0.2rem;";
+    xBtn.style.cssText = btnStyle + " font-size:1.1rem; color:#9ca3af;";
     xBtn.onclick = e => {
       e.stopPropagation();
       chip.remove();
@@ -213,15 +250,15 @@ const cardArea = {
       e.stopPropagation();
       if (activeChip === key) {
         modal.style.display = "none";
-        chip.style.background = "#f3f4f6";
+        chip.style.background = chipBg;
         activeChip = null;
         return;
       }
-      trayChips.querySelectorAll("[data-unitid]").forEach(c => c.style.background = "#f3f4f6");
+      trayChips.querySelectorAll("[data-unitid]").forEach(c => c.style.background = c.dataset.basebg);
       modal.innerHTML = "";
       modal.append(collegeCard(school, majors));
       modal.style.display = "block";
-      chip.style.background = "#dbeafe";
+      chip.style.background = chipActiveBg;
       activeChip = key;
     };
 
@@ -233,7 +270,7 @@ const cardArea = {
 
 ```js
 {
-  const query = searchQuery.trim().toLowerCase();
+  const query = controls.searchQuery.trim().toLowerCase();
   const match = d => query && d.INSTNM.toLowerCase().includes(query);
 
   const baseColor = d => d.sector_label === "Public" ? "#d50000" : "#1d4ed8";
@@ -255,8 +292,8 @@ const cardArea = {
     marginBottom,
     marginTop,
     marginRight,
-    x: { label: null, domain: [gradFloor, 100], ticks: d3.range(gradFloor, 101, 5) },
-    y: { label: null, domain: [yieldFloor, 90], ticks: d3.range(yieldFloor, 91, 5) },
+    x: { label: null, domain: [gradFloor, 100], ticks: d3.range(gradFloor, 101, 5), tickFormat: d => d + "%" },
+    y: { label: null, domain: [yieldFloor, 90], ticks: d3.range(yieldFloor, 91, 5), tickFormat: d => d + "%" },
     marks: [
       Plot.rect(grid, {x1: "x1", x2: "x2", y1: "y1", y2: "y2", fill: d => cellShade(d.x1, d.y1)}),
       Plot.dot(data.filter(d => !dupeKeys.has(`${d.grad_rate_6yr}|${d.yield_rate}`)), {
@@ -311,7 +348,7 @@ const cardArea = {
   yAxisLabel.setAttribute("font-size", "11");
   yAxisLabel.setAttribute("font-family", "sans-serif");
   yAxisLabel.setAttribute("fill", "#555");
-  yAxisLabel.textContent = "Yield (% of admitted students who chose to attend)";
+  yAxisLabel.textContent = "Yield (admitted students who chose to attend)";
   svgEl?.appendChild(yAxisLabel);
 
   // X-axis label
@@ -323,7 +360,7 @@ const cardArea = {
   xAxisLabel.setAttribute("font-size", "11");
   xAxisLabel.setAttribute("font-family", "sans-serif");
   xAxisLabel.setAttribute("fill", "#555");
-  xAxisLabel.textContent = "6-year graduation rate (%)";
+  xAxisLabel.textContent = "6-year graduation rate";
   svgEl?.appendChild(xAxisLabel);
 
   // "Number of schools in each column" label across the top
@@ -496,6 +533,7 @@ const sizeCounts = {
 ```js
 const controls = view(Inputs.form(
   {
+    searchQuery: Inputs.text({placeholder: "Search for a school…", width: 300, label: "Search:"}),
     yieldFloor: Inputs.select([10, 15, 20, 25], {
       label: null,
       format: d => `Exclude schools with < ${d}% yield`,
@@ -537,7 +575,7 @@ const controls = view(Inputs.form(
       const row1 = document.createElement("div");
       row1.style.cssText = "display:flex; gap:1rem;";
       row1.append(inputs.yieldFloor, inputs.gradFloor);
-      wrap.append(row1, inputs.selectedState, inputs.localeFilter, inputs.sizeFilter);
+      wrap.append(inputs.searchQuery, row1, inputs.selectedState, inputs.localeFilter, inputs.sizeFilter);
       return wrap;
     }
   }
