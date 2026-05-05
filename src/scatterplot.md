@@ -112,26 +112,27 @@ const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldSt
       <li><strong>A college's acceptance rate</strong> is a fairly bullshit number. When the Common App went online in the late '90s, most of the selective colleges became more selective on paper, even though there were <em>no new students and no reductions in incoming classes</em> -- the change in rate came solely from the same number of students each applying to more schools.</li>
     </ol>
     <p>Colleges have every incentive to get you to focus on things like their mission statement (some version of "Knowledge is good", but in Latin), or how selective they are, or how nice the campus looks in the fall. These signals of quality are easy to understand but also easy to fake and relatively unimportant.</p>
-    <p>On the other hand, there are two important and hard to fake measurements: Yield, and 6 Year Graduation rate.</p>
+    <p>On the other hand, there are two important and hard to fake measurements: Yield, and graduation rate.</p>
     <ul>
-      <li><p><strong>Yield</strong> is an input, a measure of the percentage of students who were admitted and chose to go.</p> 
+      <li><p><strong>Yield</strong> is an input, a measure of the percentage of students who were admitted and chose to go there instead of to another school that accepted them.</p> 
       <p>Yield measures a <em>choice</em> -- if a student says Yes to one school, they are saying No to every other school they got into. Colleges obsess over yield internally, but don't mention it to applicants. If a school offers a spot to 100 students, and only 10 go, that tells you something very different than if 40 go, or 60: School A, at 10% yield, is a safety, School B, at 40%, has more people who want to be there in particular. Schoool C, at 60%, is beloved. So, higher Yield is a good proxy for an engaged and committed student body.</p></li>
       <li><p><strong>6 Year Graduation Rate</strong> is an output, and just what it sounds like: how many students have graduated 6 years after their arrival? (The Bachelor's is often called a 4 year degree, but many students take more time, hence the 6 year window.)</p> 
-        <p>Colleges don't like to talk about graduation rate either; out of thousands of colleges in the U.S. fewer than 100 graduate 9 out of 10 students, while thousands graduate less than half their incoming classes. Graduation rate is the single most important metric. It captures something about how prepared and serious the students there are, and something about how well the college supports them. If many students drop out or transfer out before graduating, it does not matter how nice the campus looks in fall -- just don't apply.</p></li>
+        <p>Colleges don't like to talk about graduation rate either; out of thousands of colleges in the U.S. fewer than 100 graduate 9 out of 10 students, while thousands of colleges graduate less than half their incoming classes. Graduation rate is the single most important metric. It captures something about how prepared and serious the students there are, and something about how well the college supports them. If many students drop out or transfer out before graduating, it does not matter how nice the campus looks in fall -- just don't apply.</p></li>
     </ul>
     <p>The chart below shows colleges that:</p>
     <ul>
-      <li>Have 10%+ Yield and 50%+ graduation rate. (You can adjust this to higher thresholds in the controls below the chart.)</li> 
+      <li>Have at least a 10%+ Yield and 50%+ graduation rate. (You can set higher thresholds in the controls below the chart.)</li> 
       <li>Offers more Bachelor's degrees than Associate's ("two year") degrees</li>
       <li>Has students studying full-time, in person, and living on or near campus</li>
       <li>Has a broad curriculum (a lot of potential majors)</li>
     </ul>
     <p>There are also some schools that are categorically excluded:</p>
-    <ul><li>For-profit schools, which typically have awful graduation rates, and are more reliable producers of debt than degrees. (Seriously, don't even <em>consider</em> attending a for-profit college.)</li>
+    <ul><li>For-profit schools, which typically have awful graduation rates, and are more reliable producers of debt than degrees. (Seriously, don't even <em>consider</em> for-profit colleges. Oh, and US News now camouflages for-profit schools as "proprietary" on its lists, so don't consider propiretary schools either.)</li>
       <li>Schools with highly specialized curricula -- art schools, engineering schools, health professions schools, seminaries.</li>
       <li>Schools designed for students of a specific gender, race, ethnicity, or religious affiliation.</li>
     </ul>
-    <p>Click any dot to see a school card at the bottom of the page, and any diamond to see the two or more schools at that location.</p>
+    <p>As you'll see, schools where at least 1 in 2 admits actually attend (>50% yield) and schools where at least 4 out of 5 graduate (>80% grad rate) are rare. This is one of the reasons colleges obsess about these figures internally, but don't like to talk about them in public.</p>
+    <p>Click any dot to see a school card in the tray at the bottom of the page, and any diamond to see the two or more schools at that location. </p>
   </div>
 </details>`;
   details.addEventListener("toggle", () => {
@@ -163,7 +164,12 @@ trayEmpty.style.cssText = "font-size:0.8rem; color:#aaa; font-style:italic;";
 const trayChips = document.createElement("div");
 trayChips.style.cssText = "display:flex; gap:0.5rem; flex-wrap:wrap; flex:1; align-items:center;";
 
-tray.append(trayEmpty, trayChips);
+const deckLink = document.createElement("a");
+deckLink.href = "/my-deck";
+deckLink.textContent = "My Deck";
+deckLink.style.cssText = "font-size:0.8rem; font-weight:600; color:#2563eb; text-decoration:none; white-space:nowrap; padding:0.2rem 0.5rem; border:1px solid #93c5fd; border-radius:4px; background:#dbeafe;";
+
+tray.append(trayEmpty, trayChips, deckLink);
 document.body.append(modal, tray);
 document.addEventListener("click", () => {
   modal.style.display = "none";
