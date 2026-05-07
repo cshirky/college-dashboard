@@ -10,6 +10,7 @@ import { collegeCard } from "./components/collegeCard.js";
 
 ```js
 const good_schools = FileAttachment("data/good_schools.csv").csv({typed: true});
+const usGeo = await FileAttachment("data/us-states.json").json();
 ```
 
 ```js
@@ -96,7 +97,7 @@ const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldSt
     <span class="toggle-hint" style="font-size:0.8rem; font-weight:400; color:#888;">click to expand</span>
   </summary>
   <div style="margin-top:0.75rem; font-size:0.9rem; line-height:1.7; color:#333; max-width:720px;">
-    <p>This is an opinionated guide to picking U.S. colleges you might be interested in attending. It assumes you are:</p>
+    <p>This is an opinionated guide to understanding the landscape of U.S. colleges you might be interested in attending. It assumes you are:</p>
     <ul>
       <li>An American high school student…</li>
       <li>…with a B- grade average or better</li>
@@ -111,27 +112,27 @@ const rowCounts = d3.range(yieldStart, Math.ceil(yieldMax / yieldStep) * yieldSt
       <li><strong>If you have a dream school</strong>, knock it off. Seriously, tf are you thinking? It's good to have a sense of what colleges you might like to attend, but no institution should have that much effect on your hopes for yourself. Make a list and don't fixate on just one school.</li>
       <li><strong>A college's acceptance rate</strong> is a fairly bullshit number. When the Common App went online in the late '90s, most of the selective colleges became more selective on paper, even though there were <em>no new students and no reductions in incoming classes</em> -- the change in rate came solely from the same number of students each applying to more schools.</li>
     </ol>
-    <p>Colleges have every incentive to get you to focus on things like their mission statement (some version of "Knowledge is good", but in Latin), or how selective they are, or how nice the campus looks in the fall. These signals of quality are easy to understand but also easy to fake and relatively unimportant.</p>
+    <p>Colleges have every incentive to get you to focus on things like their mission statement (some version of "Knowledge is good", but in Latin), or how selective they are, or how nice the campus looks in the fall. These signals of quality are easy to understand, but they are also easy to fake and relatively unimportant.</p>
     <p>On the other hand, there are two important and hard to fake measurements: Yield, and graduation rate.</p>
     <ul>
       <li><p><strong>Yield</strong> is an input, a measure of the percentage of students who were admitted and chose to go there instead of to another school that accepted them.</p> 
-      <p>Yield measures a <em>choice</em> -- if a student says Yes to one school, they are saying No to every other school they got into. Colleges obsess over yield internally, but don't mention it to applicants. If a school offers a spot to 100 students, and only 10 go, that tells you something very different than if 40 go, or 60: School A, at 10% yield, is a safety, School B, at 40%, has more people who want to be there in particular. Schoool C, at 60%, is beloved. So, higher Yield is a good proxy for an engaged and committed student body.</p></li>
+      <p>Yield measures a <em>choice</em> -- if a student says Yes to one school, they are saying No to every other school they got into. Colleges obsess over yield internally, but don't mention it to applicants. If a school offers a spot to 100 students, and only 10 go, that tells you something very different than if 40 go, or 60: School A, at 10% yield, is a safety, School B, at 40%, has many more people who want to be there in particular. Schoool C, at 60%, is beloved. So, higher Yield is a good proxy for an engaged and committed student body.</p></li>
       <li><p><strong>6 Year Graduation Rate</strong> is an output, and just what it sounds like: how many students have graduated 6 years after their arrival? (The Bachelor's is often called a 4 year degree, but many students take more time, hence the 6 year window.)</p> 
-        <p>Colleges don't like to talk about graduation rate either; out of thousands of colleges in the U.S. fewer than 100 graduate 9 out of 10 students, while thousands of colleges graduate less than half their incoming classes. Graduation rate is the single most important metric. It captures something about how prepared and serious the students there are, and something about how well the college supports them. If many students drop out or transfer out before graduating, it does not matter how nice the campus looks in fall -- just don't apply.</p></li>
+        <p>Graduation rate is the single most important metric. Colleges don't like to talk about graduation rate either; out of thousands of colleges in the U.S. fewer than a hundred graduate 9 out of 10 students, while thousands of colleges graduate less than half.  Grad rate captures something about how prepared and serious the students there are, and something about how well the college supports them. If many students drop out or transfer out before graduating, it does not matter how nice the campus looks in fall -- just don't apply.</p></li>
     </ul>
     <p>The chart below shows colleges that:</p>
     <ul>
-      <li>Have at least a 10%+ Yield and 50%+ graduation rate. (You can set higher thresholds in the controls below the chart.)</li> 
+      <li>Have at least a 10%+ Yield and 50%+ graduation rate, pretty much <a href="https://en.wikipedia.org/wiki/Mendoza_Line">the Mendoza Line</a> for being a selective college. (You can set higher thresholds in the controls below the chart.)</li> 
       <li>Offers more Bachelor's degrees than Associate's ("two year") degrees</li>
       <li>Has students studying full-time, in person, and living on or near campus</li>
       <li>Has a broad curriculum (a lot of potential majors)</li>
     </ul>
     <p>There are also some schools that are categorically excluded:</p>
-    <ul><li>For-profit schools, which typically have awful graduation rates, and are more reliable producers of debt than degrees. (Seriously, don't even <em>consider</em> for-profit colleges. Oh, and US News now camouflages for-profit schools as "proprietary" on its lists, so don't consider propiretary schools either.)</li>
+    <ul><li>For-profit schools, which typically have awful graduation rates, and are more reliable producers of debt than degrees. (Seriously, don't even <em>consider</em> for-profit colleges. Oh, and US News now camouflages for-profit schools as Proprietary on its lists, so don't consider proprietary schools either.)</li>
       <li>Schools with highly specialized curricula -- art schools, engineering schools, health professions schools, seminaries.</li>
       <li>Schools designed for students of a specific gender, race, ethnicity, or religious affiliation.</li>
     </ul>
-    <p>As you'll see, schools where at least 1 in 2 admits actually attend (>50% yield) and schools where at least 4 out of 5 graduate (>80% grad rate) are rare. This is one of the reasons colleges obsess about these figures internally, but don't like to talk about them in public.</p>
+    <p>As you'll see, schools where at least one in two admits actually attend (>50% yield) and schools where at least four out of five graduate (>80% grad rate) are rare. (They are also correlated at the upper end of both ranges) This is one of the reasons colleges obsess about these figures internally, but don't like to talk about them in public.</p>
     <p>Click any dot to see a school card in the tray at the bottom of the page, and any diamond to see the two or more schools at that location. </p>
   </div>
 </details>`;
@@ -165,9 +166,21 @@ const trayChips = document.createElement("div");
 trayChips.style.cssText = "display:flex; gap:0.5rem; flex-wrap:wrap; flex:1; align-items:center;";
 
 const deckLink = document.createElement("a");
-deckLink.href = "/my-deck";
 deckLink.textContent = "My Deck";
 deckLink.style.cssText = "font-size:0.8rem; font-weight:600; color:#2563eb; text-decoration:none; white-space:nowrap; padding:0.2rem 0.5rem; border:1px solid #93c5fd; border-radius:4px; background:#dbeafe;";
+
+function getStarred() {
+  try { return new Set(JSON.parse(localStorage.getItem("tray-starred") || "[]").map(String)); }
+  catch { return new Set(); }
+}
+function setStarred(set) {
+  localStorage.setItem("tray-starred", JSON.stringify([...set]));
+}
+function updateDeckLink() {
+  const ids = [...getStarred()];
+  deckLink.href = ids.length ? `/my-deck?ids=${ids.join(",")}` : "/my-deck";
+}
+updateDeckLink();
 
 tray.append(trayEmpty, trayChips, deckLink);
 document.body.append(modal, tray);
@@ -208,8 +221,7 @@ const cardArea = {
     statsEl.textContent = ` ${Math.round(school.yield_rate)}%Y ${Math.round(school.grad_rate_6yr)}%G`;
     chip.append(statsEl);
 
-    const savedKey = `saved-${key}`;
-    const isSaved = () => localStorage.getItem(savedKey) === "1";
+    const isSaved = () => getStarred().has(key);
 
     const btnStyle = "background:none; border:none; cursor:pointer; line-height:1; padding:0 0.15rem; margin-left:0.1rem;";
 
@@ -220,8 +232,11 @@ const cardArea = {
     saveBtn.style.color = isSaved() ? "#f59e0b" : "#9ca3af";
     saveBtn.onclick = e => {
       e.stopPropagation();
-      if (isSaved()) { localStorage.removeItem(savedKey); saveBtn.textContent = "☆"; saveBtn.style.color = "#9ca3af"; }
-      else           { localStorage.setItem(savedKey, "1"); saveBtn.textContent = "★"; saveBtn.style.color = "#f59e0b"; }
+      const starred = getStarred();
+      if (starred.has(key)) { starred.delete(key); saveBtn.textContent = "☆"; saveBtn.style.color = "#9ca3af"; }
+      else                  { starred.add(key);    saveBtn.textContent = "★"; saveBtn.style.color = "#f59e0b"; }
+      setStarred(starred);
+      updateDeckLink();
     };
     chip.append(saveBtn);
 
@@ -233,7 +248,10 @@ const cardArea = {
       e.stopPropagation();
       trayChips.querySelectorAll("[data-unitid]").forEach(c => c.style.background = c.dataset.basebg);
       modal.innerHTML = "";
-      modal.append(collegeCard(school, majors));
+      modal.append(collegeCard(school, majors, {
+        usGeo,
+        onClose: () => { modal.style.display = "none"; chip.style.background = chipBg; activeChip = null; },
+      }));
       modal.style.display = "block";
       chip.style.background = chipActiveBg;
       activeChip = key;
@@ -262,7 +280,10 @@ const cardArea = {
       }
       trayChips.querySelectorAll("[data-unitid]").forEach(c => c.style.background = c.dataset.basebg);
       modal.innerHTML = "";
-      modal.append(collegeCard(school, majors));
+      modal.append(collegeCard(school, majors, {
+        usGeo,
+        onClose: () => { modal.style.display = "none"; chip.style.background = chipBg; activeChip = null; },
+      }));
       modal.style.display = "block";
       chip.style.background = chipActiveBg;
       activeChip = key;
@@ -592,5 +613,3 @@ const controls = view(Inputs.form(
 const yieldFloor = controls.yieldFloor;
 const gradFloor  = controls.gradFloor;
 ```
-
-
