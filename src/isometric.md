@@ -15,7 +15,7 @@ display(scatterNav("isometric"));
 
 # The Landscape of American Colleges in 3D
 
-The same data as the [original](/scatterplot), with a prism rising from each 5×5-point square in proportion to the number of schools in it. Hover a prism for the schools; click to add them to the tray.
+The same data as the [original](/scatterplot), with a prism rising from each 5×5-point square in proportion to the number of schools in it. Drag the chart to see it from another angle. Hover a prism for the schools; click to add them to the tray.
 
 ```js
 const good_schools = FileAttachment("data/good_schools.csv").csv({typed: true});
@@ -45,7 +45,7 @@ const cardArea = createCardArea({usGeo, emptyText: "Click a prism to add its sch
 
 ```js
 display(isometricPlot({
-  data, query: controls.searchQuery.trim().toLowerCase(), yieldFloor, gradFloor, cardArea, programsByUnitid,
+  data, query: controls.searchQuery.trim().toLowerCase(), yieldFloor, gradFloor, cardArea, programsByUnitid, invalidation,
 }));
 ```
 
