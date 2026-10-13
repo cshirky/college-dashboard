@@ -15,7 +15,7 @@ display(scatterNav("joy"));
 
 # The Landscape of American Colleges as a Joy Plot
 
-The same data as the [original](/scatterplot), drawn as a ridgeline plot. Each horizontal line is a 5-point band of **graduation rate**; its height at each **yield** column is the number of schools in that square. Hover a ridge for the schools; click to add them to the tray.
+The same data as the [original](/scatterplot), drawn as a ridgeline plot. Each horizontal line is a 5-point band of **graduation rate**; along the **yield** axis each school covers its own yield ±1 point, and the line's height is the number of schools covering that yield. Hover a ridge for the schools; click to add them to the tray.
 
 ```js
 const good_schools = FileAttachment("data/good_schools.csv").csv({typed: true});
