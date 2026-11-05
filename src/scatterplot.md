@@ -17,6 +17,7 @@ display(scatterNav("scatterplot"));
 
 ```js
 const good_schools = FileAttachment("data/good_schools.csv").csv({typed: true});
+const all_schools = FileAttachment("data/all_schools.csv").csv({typed: true});
 const usGeo = await FileAttachment("data/us-states.json").json();
 ```
 
@@ -32,7 +33,7 @@ for (const v of programsByUnitid.values()) v.sort((a, b) => b.total_awards - a.t
 ```
 
 ```js
-const data = filterData(good_schools, controls);
+const data = filterData(controls.broadOnly ? good_schools : all_schools, controls);
 ```
 
 ```js
@@ -68,7 +69,7 @@ const data = filterData(good_schools, controls);
     </ul>
     <p>The chart below shows colleges that:</p>
     <ul>
-      <li>Have at least a 10%+ Yield and 50%+ graduation rate, pretty much <a href="https://en.wikipedia.org/wiki/Mendoza_Line">the Mendoza Line</a> for being a selective college. (You can set higher thresholds in the controls below the chart.)</li> 
+      <li>Have at least a 10%+ Yield and 50%+ graduation rate, pretty much <a href="https://en.wikipedia.org/wiki/Mendoza_Line">the Mendoza Line</a> for being a selective college. (You can set higher thresholds in the controls below the chart, or uncheck "Only broad, nationally competitive colleges" to see every school with a yield and graduation rate between 2% and 98%.)</li> 
       <li>Offers more Bachelor's degrees than Associate's ("two year") degrees</li>
       <li>Has students studying full-time, in person, and living on or near campus</li>
       <li>Has a broad curriculum (a lot of potential majors)</li>
@@ -89,7 +90,7 @@ const data = filterData(good_schools, controls);
 }
 ```
 
-## ${data.length} Residential Colleges with a Broad Student Body and Curriculum, arranged by Yield x Graduation Rate
+## ${data.length} ${controls.broadOnly ? "Residential Colleges with a Broad Student Body and Curriculum" : "Colleges"}, arranged by Yield x Graduation Rate
 
 ```js
 const cardArea = createCardArea({usGeo});
@@ -98,11 +99,12 @@ const cardArea = createCardArea({usGeo});
 ```js
 display(scatterPlot({
   data, query: controls.searchQuery.trim().toLowerCase(), yieldFloor, gradFloor, cardArea, programsByUnitid,
+  reversed: true,
 }));
 ```
 
 ```js
-const controls = view(buildControls(Inputs, good_schools));
+const controls = view(buildControls(Inputs, good_schools, {broadToggle: true}));
 ```
 
 ```js

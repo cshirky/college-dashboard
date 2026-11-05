@@ -5,7 +5,9 @@ const stateOptions = [
   "WI","WV","WY"
 ];
 
-export function buildControls(Inputs, good_schools) {
+// broadToggle adds the "Only broad, nationally competitive colleges" checkbox. Unchecking it
+// drops the yield/grad floors to "No minimum"; rechecking restores the defaults.
+export function buildControls(Inputs, good_schools, {broadToggle = false} = {}) {
   const localeCounts = {
     "Cities":           good_schools.filter(d => d.locale_group === "City").length,
     "Towns or Suburbs": good_schools.filter(d => d.locale_group === "Town" || d.locale_group === "Suburb").length,
@@ -21,15 +23,16 @@ export function buildControls(Inputs, good_schools) {
   return Inputs.form(
     {
       searchQuery: Inputs.text({placeholder: "Search for a school…", width: 300, label: "Search:"}),
-      yieldFloor: Inputs.select([10, 15, 20, 25], {
+      ...(broadToggle ? {broadOnly: Inputs.toggle({label: "Only broad, nationally competitive colleges", value: true})} : {}),
+      yieldFloor: Inputs.select([0, 10, 15, 20, 25], {
         label: null,
-        format: d => `Exclude schools with < ${d}% yield`,
+        format: d => d ? `Exclude schools with < ${d}% yield` : "No yield minimum",
         value: 10,
         width: 170,
       }),
-      gradFloor: Inputs.select([50, 55, 60, 65], {
+      gradFloor: Inputs.select([0, 50, 55, 60, 65], {
         label: null,
-        format: d => `Exclude schools with < ${d}% grad rate`,
+        format: d => d ? `Exclude schools with < ${d}% grad rate` : "No grad rate minimum",
         value: 50,
         width: 185,
       }),
@@ -62,6 +65,16 @@ export function buildControls(Inputs, good_schools) {
         const row1 = document.createElement("div");
         row1.style.cssText = "display:flex; gap:1rem;";
         row1.append(inputs.yieldFloor, inputs.gradFloor);
+        if (inputs.broadOnly) {
+          // Runs before the event bubbles to the form, so the form sees the new floors.
+          inputs.broadOnly.addEventListener("input", () => {
+            const broad = inputs.broadOnly.value;
+            inputs.yieldFloor.value = broad ? 10 : 0;
+            inputs.gradFloor.value  = broad ? 50 : 0;
+          });
+          inputs.broadOnly.querySelector("label").style.width = "auto";
+          wrap.append(inputs.broadOnly);
+        }
         wrap.append(inputs.searchQuery, row1, inputs.selectedState, inputs.localeFilter, inputs.sizeFilter);
         return wrap;
       }

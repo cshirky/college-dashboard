@@ -1,8 +1,6 @@
 const VERSIONS = [
-  {id: "scatterplot", href: "/scatterplot", label: "Original"},
-  {id: "reverse",     href: "/reverse",     label: "A) Reverse"},
-  {id: "joy",         href: "/joy",         label: "B) Joy"},
-  {id: "3d",          href: "/3d",          label: "C) 3D"},
+  {id: "scatterplot", href: "/scatterplot", label: "A) Scatterplot"},
+  {id: "3d",          href: "/3d",          label: "B) 3D"},
 ];
 
 export function scatterNav(current) {

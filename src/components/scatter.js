@@ -12,16 +12,17 @@ export function scatterPlot({data, query, yieldFloor, gradFloor, cardArea, progr
   const hiColor   = d => d.sector_label === "Public" ? "#7f0000" : "#1e3a8a";
 
   const gradAxis  = {key: "grad_rate_6yr", floor: gradFloor,  end: GRAD_END,  label: "6-year graduation rate", name: "grad-rate"};
-  const yieldAxis = {key: "yield_rate",    floor: yieldFloor, end: YIELD_END, label: "Yield (admitted students who chose to attend)", name: "yield"};
+  // Yield normally stops at 90%; stretch it when the data runs past that.
+  const yieldMax = d3.max(data, d => d.yield_rate) ?? 0;
+  const yieldEnd = Math.max(YIELD_END, Math.ceil(yieldMax / STEP) * STEP);
+  const yieldAxis = {key: "yield_rate",    floor: yieldFloor, end: yieldEnd, label: "Yield (admitted students who chose to attend)", name: "yield"};
   const xAx = reversed ? yieldAxis : gradAxis;
   const yAx = reversed ? gradAxis : yieldAxis;
-
-  const yieldMax = d3.max(data, d => d.yield_rate);
 
   // Grid of 5x5 cells, in grad/yield terms regardless of orientation.
   const grid = [];
   for (let g1 = gradFloor; g1 < GRAD_END; g1 += STEP) {
-    for (let y1 = yieldFloor; y1 < YIELD_END; y1 += STEP) {
+    for (let y1 = yieldFloor; y1 < yieldEnd; y1 += STEP) {
       grid.push({g1, g2: g1 + STEP, y1, y2: y1 + STEP});
     }
   }
