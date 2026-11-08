@@ -188,17 +188,22 @@ uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
   `scratch/`.
 
 ### Deploy workflows point at an archived repo and a missing branch
-- **Where:** `.github/workflows/deploy-scatterplot.yml`, `.github/workflows/deploy.yml:5`
+- **Status (2026-11-08):** partly fixed. `deploy-scatterplot.yml` is removed
+  (`5dfa9d7`): the Scatterplot work was merged into `main` (PR #1) and the
+  `Scatterplot` branch deleted. The `dashboard` trigger in `deploy.yml` is
+  still open.
+- **Where:** `.github/workflows/deploy-scatterplot.yml` (removed), `.github/workflows/deploy.yml:5`
 - **Evidence:**
-  - `deploy-scatterplot.yml` pushes `Scatterplot` builds to
+  - **Fixed:** `deploy-scatterplot.yml` pushes `Scatterplot` builds to
     `cshirky/college-scatterplot`, which is now archived. It deployed fine
     on 2026-10-25, so the archiving came later. GitHub rejects pushes to
     archived repos, so the next push to `Scatterplot` will fail at the
     deploy step.
   - `deploy.yml` also triggers on a `dashboard` branch that doesn't exist.
-- **Suggested response:** decide where the Scatterplot version should live.
+- **Suggested response:** ~~decide where the Scatterplot version should live.
   Unarchive `college-scatterplot`, or deploy `Scatterplot` through this
-  repo's own Pages. Remove `dashboard` from the trigger list.
+  repo's own Pages.~~ Done: it now deploys with `main` to this repo's Pages.
+  Still to do: remove `dashboard` from the trigger list.
 
 ### Boilerplate left in `package.json`
 - **Where:** `package.json`
@@ -212,8 +217,8 @@ uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
 1. Commit or settle the in-progress Scatterplot work. That means committing
    `build_all_schools.py` and `all_schools.csv`, and deciding Joy's fate,
    because the deployed page depends on a file that isn't in git.
-2. Fix the deploy target before the next push to `Scatterplot`
-   (`college-scatterplot` is archived).
+2. ~~Fix the deploy target before the next push to `Scatterplot`
+   (`college-scatterplot` is archived).~~ Done 2026-11-08 (`5dfa9d7`).
 3. Delete the dead pipeline: `build_dataset.py`, `sfa2223.csv`,
    `enrich_scratch_schools.py` and the two raw zips, plus `SFA2223` from the
    download script.
