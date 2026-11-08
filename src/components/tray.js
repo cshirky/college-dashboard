@@ -1,4 +1,4 @@
-import { collegeCard } from "./collegeCard.js";
+import { collegeCard } from "./scatterCard.js";
 
 // Bottom tray of school chips + modal card. Returns {addSchool(school, majors)}.
 export function createCardArea({usGeo, emptyText = "Click any dot to see a school"}) {

@@ -28,6 +28,7 @@ IPEDS_FILES=(
   "drvef2023"    # Enrollment & demographics
   "IC2023_AY"    # Tuition (in-state / out-of-state)
   "ADM2023"      # SAT/ACT scores, yield rate
+  "SFA2223"      # Pell grant percentage
   "C2023_A"      # CIP completions (bachelor's degrees by field)
 )
 

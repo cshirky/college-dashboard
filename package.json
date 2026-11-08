@@ -1,5 +1,5 @@
 {
-  "name": "clay_scatterplot",
+  "name": "clayplorp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,5 +18,7 @@
   "dependencies": {
     "@observablehq/framework": "^1.13.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.2.3"
+  }
 }

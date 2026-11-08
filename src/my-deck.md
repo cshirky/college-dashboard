@@ -1,11 +1,12 @@
 ---
 toc: false
+sidebar: false
 ---
 
 # My Deck
 
 ```js
-import { collegeCard } from "./components/collegeCard.js";
+import { collegeCard } from "./components/scatterCard.js";
 ```
 
 ```js

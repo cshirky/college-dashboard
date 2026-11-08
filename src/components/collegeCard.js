@@ -1,43 +1,31 @@
 import { html } from "npm:htl";
-import * as topojson from "npm:topojson-client";
-import { geoAlbersUsa, geoPath } from "npm:d3-geo";
 
-// State abbreviation → FIPS code (us-atlas uses string IDs like "06")
-const STATE_FIPS = {
-  AL:"01",AK:"02",AZ:"04",AR:"05",CA:"06",CO:"08",CT:"09",DE:"10",FL:"12",GA:"13",
-  HI:"15",ID:"16",IL:"17",IN:"18",IA:"19",KS:"20",KY:"21",LA:"22",ME:"23",MD:"24",
-  MA:"25",MI:"26",MN:"27",MS:"28",MO:"29",MT:"30",NE:"31",NV:"32",NH:"33",NJ:"34",
-  NM:"35",NY:"36",NC:"37",ND:"38",OH:"39",OK:"40",OR:"41",PA:"42",RI:"44",SC:"45",
-  SD:"46",TN:"47",TX:"48",UT:"49",VT:"50",VA:"51",WA:"53",WV:"54",WI:"55",WY:"56",
-  DC:"11",PR:"72",
-};
+const TIERS = ["definitely", "probably", "maybe"];
 
-function buildStateMap(stabbr, usGeo) {
-  const w = 90, h = 58;
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
-  svg.setAttribute("width", w);
-  svg.setAttribute("height", h);
-  svg.style.cssText = "flex-shrink:0; border-radius:3px; overflow:visible;";
+export function getDeck() {
+  try {
+    const raw = JSON.parse(localStorage.getItem("college-deck") || "{}");
+    if (Array.isArray(raw)) return { definitely: new Set(), probably: new Set(), maybe: new Set(raw) };
+    return {
+      definitely: new Set(raw.definitely || []),
+      probably:   new Set(raw.probably   || []),
+      maybe:      new Set(raw.maybe      || []),
+    };
+  } catch { return { definitely: new Set(), probably: new Set(), maybe: new Set() }; }
+}
 
-  const allStates = topojson.feature(usGeo, usGeo.objects.states);
-  const projection = geoAlbersUsa().fitSize([w, h], allStates);
-  const pathGen = geoPath(projection);
-  const targetFips = STATE_FIPS[stabbr];
+export function saveDeck(deck) {
+  localStorage.setItem("college-deck", JSON.stringify({
+    definitely: [...deck.definitely],
+    probably:   [...deck.probably],
+    maybe:      [...deck.maybe],
+  }));
+}
 
-  for (const feature of allStates.features) {
-    const d = pathGen(feature);
-    if (!d) continue;
-    const el = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    el.setAttribute("d", d);
-    const isTarget = targetFips && (feature.id === targetFips || String(+feature.id).padStart(2,"0") === targetFips);
-    el.setAttribute("fill", isTarget ? "#2563eb" : "#d1d5db");
-    el.setAttribute("stroke", "#fff");
-    el.setAttribute("stroke-width", "0.4");
-    svg.append(el);
-  }
-
-  return svg;
+export function getTier(unitid) {
+  const deck = getDeck();
+  for (const tier of TIERS) if (deck[tier].has(unitid)) return tier;
+  return null;
 }
 
 // ── Prose helpers ────────────────────────────────────────────────────────────
@@ -66,6 +54,10 @@ function sectorAdjective(sector) {
   return "";
 }
 
+function localePhrase(locale) {
+  return { City: "an urban area", Suburb: "a suburban area", Town: "a small town", Rural: "a rural area" }[locale] || null;
+}
+
 function roughEnroll(n) {
   if (n >= 20000) return Math.round(n / 5000) * 5000;
   if (n >= 5000)  return Math.round(n / 1000) * 1000;
@@ -76,97 +68,70 @@ function roughEnroll(n) {
 function buildProse(school) {
   const p1 = [], p2 = [];
 
-  const kind    = instKind(school);
-  const sector  = sectorAdjective(school.sector_label || "");
+  // ── Para 1: identity, location, designations, size ───────────────────────
+  const kind   = instKind(school);
+  const sector = sectorAdjective(school.sector_label || "");
+  const locale = localePhrase(school.locale_group);
   const typeStr = sector ? `${sector} ${kind}` : kind;
-  const ug      = school.enrollment_ug != null ? roughEnroll(+school.enrollment_ug) : null;
 
-  const lg = school.locale_group;
-  let cityPhrase = `${school.CITY}, ${school.STABBR}`;
-  if (lg === "Rural") cityPhrase = `rural ${school.CITY}, ${school.STABBR}`;
-  else if (lg === "Town") cityPhrase = `${school.CITY}, ${school.STABBR}, a small town`;
-
-  let s1 = `${school.INSTNM} is a ${typeStr}`;
-  if (ug != null) s1 += ` — about ${ug.toLocaleString()} students —`;
-  s1 += ` in ${cityPhrase}.`;
+  let s1 = `${school.INSTNM} is a ${typeStr} in ${school.CITY}, ${school.STABBR}`;
+  if (locale) s1 += `, ${locale}`;
+  s1 += ".";
   p1.push(s1);
 
+  // Religious affiliation
   const rel = school.relaffil_label;
   if (rel) p1.push(`It is affiliated with the ${rel}.`);
 
+  // Special designations
   const specials = [
-    +school.hbcu      === 1 ? "a Historically Black College or University (HBCU)" : null,
-    +school.hsi       === 1 ? "a Hispanic-Serving Institution (HSI)" : null,
+    +school.hbcu     === 1 ? "a Historically Black College or University (HBCU)" : null,
+    +school.hsi      === 1 ? "a Hispanic-Serving Institution (HSI)" : null,
     +school.womenonly === 1 ? "a women's college" : null,
-    +school.tribal    === 1 ? "a Tribal College" : null,
+    +school.tribal   === 1 ? "a Tribal College" : null,
     +school.landgrant === 1 ? "a land-grant institution" : null,
   ].filter(Boolean);
   if (specials.length === 1) p1.push(`It is ${specials[0]}.`);
   else if (specials.length > 1) p1.push(`It is ${specials.slice(0, -1).join(", ")} and ${specials.at(-1)}.`);
 
-  const demParts = [];
-  if (school.pct_women != null) {
-    const w = Math.round(+school.pct_women);
-    if (w >= 60 || w <= 38) demParts.push(`${w}% women`);
-  }
-  if (school.pct_nonresident != null) {
-    const nr = Math.round(+school.pct_nonresident);
-    if (nr >= 10) demParts.push(`about ${nr}% of students from outside the US`);
-  }
-  if (demParts.length > 0) p1.push(`The student body is ${demParts.join("; ")}.`);
-
-  if (school.yield_rate != null) {
-    const y = Math.round(+school.yield_rate);
-    let s;
-    if (y >= 50)      s = `${y}% of admitted students choose to enroll — a high yield for a school of this type.`;
-    else if (y >= 30) s = `${y}% of admitted students choose to enroll.`;
-    else              s = `${y}% of admitted students choose to enroll, meaning most who are admitted also have other options.`;
+  // Enrollment
+  if (school.enrollment_ug != null) {
+    const ug = roughEnroll(school.enrollment_ug);
+    let s = `It enrolls about ${ug.toLocaleString()} undergraduates`;
+    if (school.enrollment_total != null && school.enrollment_total > 0) {
+      const gradFrac = (school.enrollment_total - school.enrollment_ug) / school.enrollment_total;
+      if (gradFrac > 0.35)      s += `, along with a large graduate population`;
+      else if (gradFrac > 0.15) s += `, plus some graduate students`;
+    }
+    s += ".";
     p1.push(s);
   }
 
-  if (school.admission_rate != null) {
-    const adm = Math.round(+school.admission_rate > 1 ? +school.admission_rate : +school.admission_rate * 100);
-    const shortName = school.INSTNM.replace(/\bUniversity\b/g, "U.");
-    let s = `${shortName} admits ${adm}% of applicants`;
-    const sat = school.sat_avg ? Math.round(+school.sat_avg) : null;
-    const act = school.act_avg ? Math.round(+school.act_avg) : null;
-    if (sat != null && sat > 0)       s += ` (average SAT: ${sat})`;
-    else if (act != null && act > 0)  s += ` (average ACT: ${act})`;
-    s += ".";
-    p2.push(s);
+  // ── Para 2: selectivity, cost, outcomes ──────────────────────────────────
+
+  // Grad rate
+  const gradRate = school.grad_rate_6yr;
+  if (gradRate != null) {
+    const g = Math.round(gradRate);
+    p2.push(`${g}% of students graduate within six years.`);
   }
 
-  const isPublic = /public/i.test(school.sector_label || "");
-  const net      = school.net_price         != null ? Math.round(+school.net_price)         : null;
-  const inState  = school.tuition_in_state  != null ? Math.round(+school.tuition_in_state)  : null;
-  const outState = school.tuition_out_of_state != null ? Math.round(+school.tuition_out_of_state) : null;
-
-  if (isPublic && inState != null && outState != null && inState !== outState) {
-    let s = `In-state tuition is $${inState.toLocaleString()}; out-of-state is $${outState.toLocaleString()}.`;
-    if (net != null) s += ` The average student pays about $${net.toLocaleString()} per year after aid.`;
-    p2.push(s);
-  } else if (net != null && inState != null) {
-    p2.push(`Tuition is about $${inState.toLocaleString()}, but the average student pays about $${net.toLocaleString()} per year after aid.`);
-  } else if (net != null) {
-    p2.push(`The average student pays about $${net.toLocaleString()} per year after aid.`);
-  }
-
-  const pellDebt = [];
-  if (school.pell_2023 != null) pellDebt.push(`${Math.round(+school.pell_2023 * 100)}% of students receive Pell grants`);
-  if (school.grad_debt_median != null) pellDebt.push(`median debt at graduation is $${Math.round(+school.grad_debt_median).toLocaleString()}`);
-  if (pellDebt.length > 0) {
-    const s = pellDebt.join("; ");
+  // Net price + Pell
+  const netPrice = school.net_price;
+  const pell     = school.pell_2023;
+  if (netPrice != null || pell != null) {
+    const parts = [];
+    if (netPrice != null) parts.push(`the average net price is $${Math.round(netPrice).toLocaleString()} per year`);
+    if (pell != null)     parts.push(`${Math.round(pell * 100)}% of students receive Pell grants`);
+    const s = parts.join("; ");
     p2.push(`${s[0].toUpperCase()}${s.slice(1)}.`);
   }
 
-  if (school.grad_rate_6yr != null) {
-    p2.push(`${Math.round(+school.grad_rate_6yr)}% of students graduate within six years.`);
-  }
-
-  if (school.saec_earnings != null) {
-    let s = `Graduates earn a median of $${Math.round(+school.saec_earnings).toLocaleString()} eight years after enrollment`;
+  // Earnings
+  if (school.saec_earnings) {
+    let s = `Graduates earn a median of $${Math.round(school.saec_earnings).toLocaleString()} eight years after enrollment`;
     if (school.earnings_ratio != null) {
-      const r = +school.earnings_ratio;
+      const r = Number(school.earnings_ratio);
       if (r >= 1.15)      s += `, above average for similar institutions`;
       else if (r <= 0.85) s += `, below average for similar institutions`;
     }
@@ -177,11 +142,10 @@ function buildProse(school) {
   return { p1, p2 };
 }
 
-// options: { onClose, usGeo }
-export function collegeCard(school, topMajors = [], options = {}) {
+// ── schoolPrograms: [{cip_family, cip_label, total_awards}] for this school
+// ── cipSchoolCounts: Map<cip_family, number> — how many schools offer each
+export function collegeCard(school, schoolPrograms = [], cipSchoolCounts = new Map()) {
   if (!school) return html``;
-
-  const { onClose, usGeo } = options;
 
   const wikiUrl    = `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(school.INSTNM)}&go=Go`;
   const mapsUrl    = `https://maps.google.com/?q=${encodeURIComponent(school.CITY + ", " + school.STABBR)}`;
@@ -229,65 +193,28 @@ export function collegeCard(school, topMajors = [], options = {}) {
     const r = school.admission_rate > 1 ? school.admission_rate / 100 : school.admission_rate;
     admPie.title = `${Math.round(r * 100)}% admission rate`;
   }
+  const admRate = admPie;
 
   const statItems = [
     school.yield_rate    != null ? `${pct(school.yield_rate)} yield`   : null,
     school.grad_rate_6yr != null ? `${pct(school.grad_rate_6yr)} grad` : null,
-    admPie,
+    admRate,
   ].filter(Boolean);
 
-  // ── Right-side header widgets ─────────────────────────────────────────────
-  const rightWidgets = document.createElement("div");
-  rightWidgets.style.cssText = "display:flex; align-items:flex-start; gap:0.35rem; flex-shrink:0;";
-
-  if (usGeo) {
-    rightWidgets.append(buildStateMap(school.STABBR, usGeo));
-  }
-
-  if (onClose) {
-    const xBtn = document.createElement("button");
-    xBtn.textContent = "×";
-    xBtn.title = "Close";
-    xBtn.style.cssText = "background:none; border:none; cursor:pointer; font-size:1.3rem; line-height:1; color:#9ca3af; padding:0 0.1rem; flex-shrink:0;";
-    xBtn.onmouseenter = () => xBtn.style.color = "#374151";
-    xBtn.onmouseleave = () => xBtn.style.color = "#9ca3af";
-    xBtn.onclick = e => { e.stopPropagation(); onClose(); };
-    rightWidgets.append(xBtn);
-  }
-
   // ── Section 1: header ────────────────────────────────────────────────────
-  const header = document.createElement("div");
-  header.style.cssText = `background:${headerBg}; padding:0.75rem 1rem 0.65rem; display:flex; gap:0.5rem; align-items:flex-start;`;
-
-  const headerLeft = document.createElement("div");
-  headerLeft.style.cssText = "flex:1; min-width:0;";
-
-  const nameRow = document.createElement("div");
-  nameRow.style.cssText = "display:flex; align-items:baseline; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.15rem;";
-  nameRow.innerHTML = `
-    <strong style="font-size:0.95rem; line-height:1.3;">
-      <a href="${wikiUrl}" target="_blank" rel="noopener" style="color:#2563eb; text-decoration:none;">${displayName}</a>
-    </strong>
-    <span style="font-size:0.78rem; color:${headerColor}; opacity:0.8;">
-      <a href="${mapsUrl}" target="_blank" rel="noopener" style="color:#2563eb; text-decoration:none;">${school.CITY}, ${school.STABBR}</a>
-    </span>
-  `;
-  headerLeft.append(nameRow);
-
-  if (statItems.length > 0) {
-    const badgeRow = document.createElement("div");
-    badgeRow.style.cssText = "margin-top:0.45rem; display:flex; flex-wrap:wrap; gap:0.3rem; align-items:center;";
-    for (const s of statItems) {
-      const span = document.createElement("span");
-      span.style.cssText = badgeStyle;
-      if (typeof s === "string") span.textContent = s;
-      else span.append(s);
-      badgeRow.append(span);
-    }
-    headerLeft.append(badgeRow);
-  }
-
-  header.append(headerLeft, rightWidgets);
+  const header = html`<div style="background:${headerBg}; padding:0.75rem 1rem 0.65rem;">
+    <div style="display:flex; align-items:baseline; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.15rem;">
+      <strong style="font-size:0.95rem; line-height:1.3;">
+        <a href="${wikiUrl}" target="_blank" rel="noopener" style="color:#2563eb; text-decoration:none;">${displayName}</a>
+      </strong>
+      <span style="font-size:0.78rem; color:${headerColor}; opacity:0.8;">
+        <a href="${mapsUrl}" target="_blank" rel="noopener" style="color:#2563eb; text-decoration:none;">${school.CITY}, ${school.STABBR}</a>
+      </span>
+    </div>
+    ${statItems.length > 0 ? html`<div style="margin-top:0.45rem; display:flex; flex-wrap:wrap; gap:0.3rem; align-items:center;">
+      ${statItems.map(s => html`<span style="${badgeStyle}">${s}</span>`)}
+    </div>` : html``}
+  </div>`;
 
   // ── Section 2: prose ─────────────────────────────────────────────────────
   const { p1, p2 } = buildProse(school);
@@ -300,14 +227,38 @@ export function collegeCard(school, topMajors = [], options = {}) {
   </div>`;
 
   // ── Section 3: majors ────────────────────────────────────────────────────
-  const majorsSection = topMajors.length === 0 ? html`` : html`<div style="padding:0.45rem 1rem; border-bottom:1px solid #f0f0f0; font-size:0.78rem; color:#444;">
-    <span style="font-weight:600; color:#555;">Top majors:</span> ${topMajors.map(m => m.cip_label).join(", ")}
+  const topMajors = [...schoolPrograms]
+    .sort((a, b) => b.total_awards - a.total_awards)
+    .slice(0, 5);
+  const distinctiveMajors = [...schoolPrograms]
+    .sort((a, b) => (cipSchoolCounts.get(a.cip_family) || 999) - (cipSchoolCounts.get(b.cip_family) || 999))
+    .slice(0, 5);
+
+  const majorsSection = schoolPrograms.length === 0 ? html`` : html`<div style="padding:0.6rem 1rem; border-bottom:1px solid #f0f0f0; font-size:0.78rem; color:#444;">
+    <div style="margin-bottom:0.3rem;"><span style="font-weight:600; color:#555;">Top majors:</span> ${topMajors.map(p => p.cip_label).join(", ")}</div>
+    <div><span style="font-weight:600; color:#555;">Distinctive:</span> ${distinctiveMajors.map(p => p.cip_label).join(", ")}</div>
   </div>`;
 
   // ── Section 4: external links ────────────────────────────────────────────
-  const externalLinks = html`<div style="padding:0.5rem 1rem; display:flex; flex-wrap:wrap; gap:0.5rem; font-size:0.78rem;">
+  const externalLinks = html`<div style="padding:0.5rem 1rem; border-bottom:1px solid #f0f0f0; display:flex; flex-wrap:wrap; gap:0.5rem; font-size:0.78rem;">
     ${websiteUrl ? html`<a href="${websiteUrl}" target="_blank" rel="noopener" style="color:#2563eb;">Website ↗</a>` : html``}
     <a href="${usnewsUrl}" target="_blank" rel="noopener" style="color:#2563eb;">US News ↗</a>
+  </div>`;
+
+  // ── Section 5: save to deck ──────────────────────────────────────────────
+  const tierStyles = {
+    definitely: { active: { bg: "#dcfce7", color: "#166534", border: "#86efac" }, label: "Definitely" },
+    probably:   { active: { bg: "#dbeafe", color: "#1e40af", border: "#93c5fd" }, label: "Probably"   },
+    maybe:      { active: { bg: "#fef9c3", color: "#854d0e", border: "#fde047" }, label: "Maybe"      },
+  };
+  const inactiveStyle = "background:#f9fafb; color:#6b7280; border-color:#e5e7eb;";
+
+  const saveSection = html`<div style="padding:0.5rem 1rem; display:flex; gap:0.4rem;">
+    ${TIERS.map(tier => {
+      const s = tierStyles[tier];
+      const btn = html`<button data-tier="${tier}" style="flex:1; font-size:0.75rem; padding:0.3rem 0.2rem; border-radius:4px; border:1px solid; cursor:pointer; font-weight:500; transition:all 0.1s;">${s.label}</button>`;
+      return btn;
+    })}
   </div>`;
 
   const card = html`<div style="border:1px solid #ddd; border-radius:8px; overflow:hidden; font-size:0.9rem; background:var(--theme-background,#fff);">
@@ -315,7 +266,36 @@ export function collegeCard(school, topMajors = [], options = {}) {
     ${proseSection}
     ${majorsSection}
     ${externalLinks}
+    ${saveSection}
   </div>`;
 
+  function updateTierButtons() {
+    const currentTier = getTier(school.UNITID);
+    for (const btn of card.querySelectorAll("[data-tier]")) {
+      const tier = btn.dataset.tier;
+      const s = tierStyles[tier].active;
+      if (tier === currentTier) {
+        btn.style.background = s.bg;
+        btn.style.color = s.color;
+        btn.style.borderColor = s.border;
+      } else {
+        btn.style.cssText += inactiveStyle;
+      }
+    }
+  }
+
+  for (const btn of card.querySelectorAll("[data-tier]")) {
+    btn.onclick = () => {
+      const deck = getDeck();
+      const currentTier = getTier(school.UNITID);
+      for (const t of TIERS) deck[t].delete(school.UNITID);
+      if (btn.dataset.tier !== currentTier) deck[btn.dataset.tier].add(school.UNITID);
+      saveDeck(deck);
+      updateTierButtons();
+      card.dispatchEvent(new CustomEvent("deck-changed", { bubbles: true, detail: { unitid: school.UNITID } }));
+    };
+  }
+
+  updateTierButtons();
   return card;
 }
