@@ -1,40 +1,58 @@
 # Project review: college-dashboard, 2026-11-03
 
-An Observable Framework site (`src/`, 5 pages, 8 components) that plots U.S.
-colleges by yield and graduation rate. It's fed by a stdlib-Python pipeline
+An Observable Framework site that explores U.S. colleges: 13 pages
+(intro, school card, landscape, vibe, academics, deck, schools, twins,
+compare, and the scatterplot, 3D and scatterplot-deck pages) and 9
+components. It's fed by a stdlib-Python pipeline
 (`data/pipeline/build_carnegie.py`) that joins the Carnegie 2025 files with
-IPEDS 2023 raw data. The code is small (14 code files, ~118 KB). The data is
-not: 25 data files, ~46 MB, almost all of it in `data/raw/`. The site code is
-in decent shape. Most findings are about the data side: a superseded
+IPEDS 2023 raw data. The code is small (17 code files, ~130 KB). The data is
+not: tracked data files total ~54 MB, ~38 MB of it in `data/raw/`. The site
+code is in decent shape. Most findings are about the data side: a superseded
 pipeline still in the repo, raw downloads committed alongside their own zips,
-the main dataset with no script that builds it, and docs describing other
-branches.
+the scatterplot's dataset with no script that builds it, and docs describing
+other branches or an older version of the project.
 
-Reviewed as the working tree stands on branch `Scatterplot`, including its
-uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
+Originally reviewed on 2026-11-03 against branch `Scatterplot`, including its
+uncommitted edits. **Updated 2026-11-08** to reflect `main` after the
+Scatterplot work was merged (PR #1) and the `Scatterplot` branch deleted. The
+merge kept everything `main` already had, so some files the Scatterplot
+branch had removed (the pandas pipeline, its tests, the raw zips) are back,
+and `main`'s own pages add two new findings. Each finding has a
+**Status** line where it changed.
 
 ## Summary
-| Type | Findings | Suggested effort |
-|---|---|---|
-| Unused work | 5 | small |
-| Duplicates that could be merged | 4 | small–medium |
-| Design patterns worth changing | 3 | small–medium |
-| Docs and data hygiene | 6 | small, plus 1 large (history) |
+| Type | Open | Fixed | Suggested effort |
+|---|---|---|---|
+| Unused work | 4 | 1 | small |
+| Duplicates that could be merged | 4 | 1 | small–medium |
+| Design patterns worth changing | 3 | 0 | small–medium |
+| Docs and data hygiene | 5 | 1 | small, plus 1 large (history) |
 
 ## Unused work
 
 ### Old pandas pipeline `build_dataset.py` is superseded
-- **Where:** `data/pipeline/build_dataset.py` (380 lines)
+- **Status (2026-11-08):** still open. `f111c44` deleted it on `Scatterplot`,
+  but the merge into `main` restored it along with everything else `main`
+  had.
+- **Where:** `data/pipeline/build_dataset.py` (380 lines), plus the files
+  that exist only for it: `data/pipeline/download_ipeds.sh`,
+  `tests/test_pipeline.py`, `tests/conftest.py` and `requirements.txt`
+  (pandas).
 - **Evidence:** It writes the same `data/output/institutions.csv` and
   `programs.csv` that `build_carnegie.py` writes, but from IPEDS 2023 only.
-  Nothing runs or mentions it. `memory/project_overview.md` names
-  `build_carnegie.py` as the pipeline, and calls the pandas version the
-  "original" one from the old `master` branch. It's the only reader of
-  `data/raw/sfa2223.csv` (see below).
-- **Suggested response:** delete it. Git history keeps it, and so do the
-  `main-old` branch and the archived `college-scatterplot` repo.
+  The `institutions.csv` the site serves has the Carnegie columns
+  (`saec2025name`, `relaffil_label`), so it comes from `build_carnegie.py`.
+  `memory/project_overview.md` calls the pandas version the "original"
+  pipeline. It's the only reader of `data/raw/sfa2223.csv` (see below), and
+  the 11 tests in `tests/` only test it.
+- **Suggested response:** delete `build_dataset.py`, `download_ipeds.sh`,
+  `tests/` and `requirements.txt` together. Git history keeps them, and so
+  does the `main-old` branch. Update the README (see below) in the same
+  commit.
 
 ### `sfa2223.csv` (12.4 MB) is only read by the dead pipeline
+- **Status (2026-11-08):** still open. The merge restored the file and
+  `SFA2223` in the download list, which the Scatterplot branch had removed.
 - **Where:** `data/raw/sfa2223.csv`, and `SFA2223` in `data/pipeline/download_carnegie.sh:32`
 - **Evidence:** `build_carnegie.py` never opens it; Pell share comes from
   the Carnegie file (`pell_2023`). The only reader is `build_dataset.py`.
@@ -44,22 +62,21 @@ uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
 
 ### `enrich_scratch_schools.py` can't run any more
 - **Where:** `enrich_scratch_schools.py:10`, `:13`
-- **Evidence:** It reads `scratch_schools.csv` from the repo root and
-  `src/data/institutions.csv`. Neither file exists. It also imports pandas,
-  which the current pipeline deliberately avoids.
+- **Evidence:** It reads `scratch_schools.csv` from the repo root, which
+  doesn't exist. (`src/data/institutions.csv`, its other input, is back
+  on `main`.) It also imports pandas, which the current pipeline
+  deliberately avoids.
 - **Suggested response:** delete it. If the enrichment is still wanted, move
   it into `scratch/` (already git-ignored) and fix its paths.
 
 ### Joy page is orphaned
-- **Where:** `src/joy.md`, `src/components/joy.js`
-- **Evidence:** The uncommitted `nav.js` and `index.md` edits remove Joy
-  from the version nav and the index, but the page and component remain and
-  still build to `/joy`. `reverse.md` was deleted in the same edit.
-- **Suggested response:** if Joy is retired, delete both files in the same
-  commit as the nav change, as was done for Reverse. If it's parked, keep it
-  and say so in the commit message.
+- **Status (2026-11-08):** fixed. `edb463f` deleted `src/joy.md` and
+  `src/components/joy.js`, after `6441766` dropped Joy (and Reverse) from
+  the nav and index.
 
 ### Zip downloads committed next to their extracted CSVs
+- **Status (2026-11-08):** still open. `f111c44` deleted the zips on
+  `Scatterplot`; the merge restored them.
 - **Where:** `data/raw/ADM2023.zip` (with `adm2023.csv`), `data/raw/IC2023_AY.zip` (with `ic2023_ay.csv`)
 - **Evidence:** `download_carnegie.sh` unzips into `data/raw/` and leaves
   the zip. The pipeline reads only the CSVs.
@@ -68,10 +85,12 @@ uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
 
 ## Duplicates that could be merged
 
-### Same 8-line `programsByUnitid` block on three pages
-- **Where:** `src/scatterplot.md:24-33`, `src/3d.md:25-34`, `src/joy.md:25-34` (also `src/my-deck.md:13-22`)
+### Same 8-line `programsByUnitid` block on five pages
+- **Status (2026-11-08):** still open, and now on five pages: Joy is gone,
+  but `main`'s `deck.md` and `twins.md` build the same map.
+- **Where:** `src/scatterplot.md:27`, `src/3d.md:28`, `src/my-deck.md:17`, `src/deck.md:13`, `src/twins.md:246`
 - **Evidence:** It's the same code each time: load `programs.csv`, group by
-  UNITID, sort by `total_awards`. The pages also repeat the same
+  UNITID, sort by `total_awards`. The scatterplot pages also repeat the same
   `good_schools` / `us-states` loads and the `controls` / `yieldFloor` /
   `gradFloor` cells.
 - **Suggested response:** extract a `groupPrograms(rows)` function into a
@@ -80,22 +99,39 @@ uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
   calls the helper. Small effort.
 
 ### `programs.csv` stored twice
-- **Where:** `data/output/programs.csv` and `src/data/programs.csv` (identical, 944 KB)
+- **Where:** `data/output/programs.csv` and `src/data/programs.csv` (identical,
+  944 KB); likewise `data/output/institutions.csv` and
+  `src/data/institutions.csv` (identical, 2.5 MB)
 - **Evidence:** `build_carnegie.py:702-712` writes to `data/output/` and
-  then copies to `src/data/`. Only the `src/data/` copy is used by the site.
+  then copies to `src/data/`. Only the `src/data/` copies are used by the
+  site.
 - **Suggested response:** pick one home. The simplest is to have the
   pipeline write site data straight to `src/data/`, and keep `data/output/`
-  for intermediates only. At minimum, stop committing the `data/output/` copy.
+  for intermediates only. At minimum, stop committing the `data/output/`
+  copies.
 
 ### `all_schools.csv` is a filtered copy of `institutions.csv`
-- **Where:** `src/data/all_schools.csv` (untracked, 1.1 MB), built by `data/pipeline/build_all_schools.py` (untracked) from `data/output/institutions.csv`
-- **Evidence:** same columns; the script keeps rows with yield and grad rate
-  between 2 and 98. That's fine as a derived file, but both the script and
-  its output are uncommitted, while `scatterplot.md:20` already loads the
-  output. A fresh clone or the CI build would be missing it.
-- **Suggested response:** commit `build_all_schools.py` and
-  `all_schools.csv` together with the scatterplot change. Or fold the filter
-  into `build_carnegie.py` so one command produces all site data.
+- **Status (2026-11-08):** fixed. `6441766` committed
+  `data/pipeline/build_all_schools.py` and `src/data/all_schools.csv`
+  together with the scatterplot change, so a fresh clone and the CI build
+  have it. Optional follow-up: fold the 2–98% filter into
+  `build_carnegie.py` so one command produces all site data.
+
+### Two school-card components and two decks
+- **Where:** `src/components/collegeCard.js` and `src/components/scatterCard.js`;
+  `src/deck.md` ("My Deck") and `src/my-deck.md` ("Scatterplot deck")
+- **Evidence:** The merge kept `main`'s card for `main`'s pages and moved the
+  Scatterplot branch's redesign to `scatterCard.js`, because the two take
+  different arguments and only `collegeCard.js` exports
+  `getDeck`/`saveDeck`/`getTier`. The decks are separate too: `deck.md`
+  keeps definitely/probably/maybe tiers under the `college-deck`
+  localStorage key, while the scatterplot tray and `my-deck.md` keep a flat
+  starred list under `tray-starred`. A school starred on the scatterplot
+  never shows up in My Deck, and vice versa.
+- **Suggested response:** **your call** on which card and which deck model
+  win. Then port the other pages to the winner and delete the loser. The
+  card's ~20 inline style strings are a good moment to do the colors
+  finding below. Medium effort.
 
 ### `CIP_FAMILIES` map copied between pipelines
 - **Where:** `data/pipeline/build_dataset.py:7`, `data/pipeline/build_carnegie.py:228`
@@ -105,8 +141,9 @@ uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
 
 ## Design patterns worth changing
 
-### Main dataset has no script that builds it
-- **Where:** `src/data/good_schools.csv` (566 KB; loaded by every page)
+### Scatterplot dataset has no script that builds it
+- **Where:** `src/data/good_schools.csv` (566 KB; loaded by the
+  scatterplot, 3D and scatterplot-deck pages)
 - **Evidence:** No script writes it. `build_all_schools.py` only says
   "unlike good_schools.csv there is no curation". The curation rules exist
   only as prose in `memory/project_good_schools_filters.md` (e.g. HBCUs and
@@ -119,11 +156,13 @@ uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
   The rules need confirming against the current file.
 
 ### Colors and styles hard-coded in components
-- **Where:** `src/components/collegeCard.js` (20 inline style strings), `tray.js` (11), `3d.js` (7), `nav.js:9-21`
-- **Evidence:** The same palette hexes recur across files: `#2563eb` ×7,
-  `#1d4ed8`, `#1e3a8a` and `#9ca3af` ×5 each, `#dbeafe` ×4. They're set
-  through `style.cssText` strings. Changing the accent color means editing
-  several files, and none of it follows Observable's light/dark theme.
+- **Where:** `src/components/collegeCard.js` and `scatterCard.js` (20 inline
+  style strings each), `tray.js` (11), `3d.js` (7), `nav.js:9-21`
+- **Evidence:** The same palette hexes recur across components and pages:
+  `#2563eb` ×16, `#dbeafe` ×7, `#1e3a8a` ×6, `#9ca3af` ×5, `#1d4ed8` ×4.
+  They're set through `style.cssText` strings. Changing the accent color
+  means editing several files, and none of it follows Observable's
+  light/dark theme.
 - **Suggested response:** move the repeated colors into CSS custom
   properties in a `src/style.css`, and use classes for the nav pills and
   card chrome. Medium effort; do it file by file as you touch them.
@@ -132,11 +171,12 @@ uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
 - **Where:** `data/pipeline/build_carnegie.py:694-712`
 - **Evidence:** The copy into `src/data/` only happens when the file is run
   as a script, not when `main()` is called. The comment `# Also copy outputs
-  to src/data/` sits above the `main()` call rather than the copy. The copy
-  also still lists `institutions.csv`, which no page reads.
+  to src/data/` sits above the `main()` call rather than the copy.
+  (*Updated 2026-11-08:* the copy's `institutions.csv` is needed again,
+  since `main`'s index, deck, schools and twins pages read it.)
 - **Suggested response:** move the copy into `main()` (or a `publish()`
-  function it calls), and drop `institutions.csv` from the list. Small
-  effort; it fits naturally with the `programs.csv` fix above.
+  function it calls). Small effort; it fits naturally with the
+  `programs.csv` fix above.
 
 ## Docs and data hygiene
 
@@ -158,8 +198,8 @@ uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
   clone, although no current file uses it.
 - **Suggested response:** **your call.** Removing it means rewriting history
   (`git filter-repo --path data/raw/C2023_a.csv --invert-paths`) and
-  force-pushing every branch: main, Scatterplot, Carnegie-Data,
-  feature/discover and main-old. Large effort, with some risk. Worth it only
+  force-pushing every branch: main, Carnegie-Data, feature/discover and
+  main-old (`Scatterplot` was deleted on 2026-11-08). Large effort, with some risk. Worth it only
   if clone size actually bothers you.
 
 ### Handoff and memory docs describe other branches
@@ -167,67 +207,70 @@ uncommitted edits (`reverse.md` deleted, nav trimmed to two versions).
 - **Evidence:**
   - `HANDOFF.md` is for `feature/discover`. It gives the path
     `/home/cshirky/college-dashboard` (the project lives in
-    `~/claude_projects/`) and names files that don't exist here (`twins.md`,
-    `vibe.md`, `discover.md`).
+    `~/claude_projects/`) and plans a `src/discover.md` that doesn't exist
+    here. (*Updated 2026-11-08:* the pages it builds on, `twins.md`,
+    `vibe.md` and `academics.md`, are on `main` now.)
   - `HANDOFF_Carnegie-Data.md` describes US News extraction outputs that
-    aren't in this branch.
+    aren't on `main`.
   - The overview refers to a `master` branch; the repo uses `main`.
-- **Suggested response:** delete both handoffs from this branch; they live
-  on in their own branches. Then add a short CLAUDE.md for `Scatterplot`
-  with a `## Status` section, which is what `/catchup` looks for. Fix
-  `master` → `main` in the overview.
+  - There's no `CLAUDE.md`, so `/catchup` finds no `## Status` notes.
+- **Suggested response:** delete both handoffs from `main`; they live on in
+  their own branches. Then add a short CLAUDE.md with a `## Status`
+  section. Fix `master` → `main` in the overview.
 
-### No README; `card_description.md` is unfinished
-- **Where:** repo root
-- **Evidence:** There's no README, so the run and build steps
-  (`download_carnegie.sh` → `build_carnegie.py` → `build_all_schools.py` →
-  `npm run dev`) are written down nowhere. `card_description.md` stops
-  mid-sentence ("It also shows that") and nothing references it.
-- **Suggested response:** add a 15-line README covering the pipeline order
-  and the deploy workflows. Finish `card_description.md` or move it to
-  `scratch/`.
+### README describes the original dashboard; `card_description.md` is unfinished
+- **Status (2026-11-08):** changed. `main` has a README, but it's out of
+  date, so the finding is now "README describes the original IPEDS
+  dashboard".
+- **Where:** `README.md`, `card_description.md`
+- **Evidence:** The README describes the first version: an admission-rate
+  scatterplot on `index.md`, built by `build_dataset.py` from IPEDS 2023
+  only. It doesn't mention `build_carnegie.py`, the Carnegie files,
+  `build_all_schools.py`, the 13 pages or the Pages deploy. So the real run
+  and build steps (`download_carnegie.sh` → `build_carnegie.py` →
+  `build_all_schools.py` → `npm run dev`) are written down nowhere.
+  `card_description.md` stops mid-sentence ("It also shows that") and
+  nothing references it.
+- **Suggested response:** rewrite the README around the current pipeline
+  and pages, alongside deleting `build_dataset.py`. Finish
+  `card_description.md` or move it to `scratch/`.
 
 ### Deploy workflows point at an archived repo and a missing branch
-- **Status (2026-11-08):** partly fixed. `deploy-scatterplot.yml` is removed
-  (`5dfa9d7`): the Scatterplot work was merged into `main` (PR #1) and the
-  `Scatterplot` branch deleted. The `dashboard` trigger in `deploy.yml` is
-  still open.
-- **Where:** `.github/workflows/deploy-scatterplot.yml` (removed), `.github/workflows/deploy.yml:5`
-- **Evidence:**
-  - **Fixed:** `deploy-scatterplot.yml` pushes `Scatterplot` builds to
-    `cshirky/college-scatterplot`, which is now archived. It deployed fine
-    on 2026-10-25, so the archiving came later. GitHub rejects pushes to
-    archived repos, so the next push to `Scatterplot` will fail at the
-    deploy step.
-  - `deploy.yml` also triggers on a `dashboard` branch that doesn't exist.
-- **Suggested response:** ~~decide where the Scatterplot version should live.
-  Unarchive `college-scatterplot`, or deploy `Scatterplot` through this
-  repo's own Pages.~~ Done: it now deploys with `main` to this repo's Pages.
-  Still to do: remove `dashboard` from the trigger list.
+- **Status (2026-11-08):** fixed. `5dfa9d7` removed
+  `deploy-scatterplot.yml`, which pushed `Scatterplot` builds to the
+  archived `cshirky/college-scatterplot`; the scatterplot now deploys with
+  `main` to this repo's Pages (PR #1), and the `Scatterplot` branch is
+  deleted. The nonexistent `dashboard` branch was removed from the
+  `deploy.yml` trigger list in the same update as this note.
 
 ### Boilerplate left in `package.json`
 - **Where:** `package.json`
-- **Evidence:** It has `"name": "clay_scatterplot"`, `"main": "index.js"`
-  (no such file), `"directories": {"doc": "docs"}` (no such folder), and a
-  placeholder `test` script.
+- **Evidence:** It has `"name": "clayplorp"` (*updated 2026-11-08:* `main`'s
+  name; the Scatterplot branch had `clay_scatterplot`), `"main": "index.js"`
+  (no such file), `"directories": {"doc": "docs"}`, and a placeholder
+  `test` script. Its one dev dependency, `@marp-team/marp-cli`, is only for
+  rendering the slide decks in `docs/plans/`.
 - **Suggested response:** rename to `college-dashboard` (matching the repo)
-  and drop `main`, `directories` and `test`. Small effort.
+  and drop `main`, `directories` and `test`. Keep marp if you still render
+  those decks. Small effort.
 
 ## Next steps
-1. Commit or settle the in-progress Scatterplot work. That means committing
-   `build_all_schools.py` and `all_schools.csv`, and deciding Joy's fate,
-   because the deployed page depends on a file that isn't in git.
+1. ~~Commit or settle the in-progress Scatterplot work.~~ Done 2026-11-05
+   (`6441766`, `edb463f`): `build_all_schools.py` and `all_schools.csv`
+   committed, Joy deleted.
 2. ~~Fix the deploy target before the next push to `Scatterplot`
    (`college-scatterplot` is archived).~~ Done 2026-11-08 (`5dfa9d7`).
-3. Delete the dead pipeline: `build_dataset.py`, `sfa2223.csv`,
-   `enrich_scratch_schools.py` and the two raw zips, plus `SFA2223` from the
-   download script.
-4. Write `build_good_schools.py`, so the main dataset can be rebuilt.
-5. Stop committing `data/raw/` and `data/output/programs.csv`. Leave the
-   history rewrite for later, if ever.
+3. Delete the dead pipeline: `build_dataset.py`, `download_ipeds.sh`,
+   `tests/`, `requirements.txt`, `sfa2223.csv`, `enrich_scratch_schools.py`
+   and the two raw zips, plus `SFA2223` from the download script. Rewrite
+   the README in the same change.
+4. Decide between the two card components and the two decks.
+5. Write `build_good_schools.py`, so the scatterplot dataset can be rebuilt.
+6. Stop committing `data/raw/` and `data/output/`. Leave the history
+   rewrite for later, if ever.
 
-- `/simplify src/scatterplot.md src/3d.md src/joy.md src/my-deck.md` to
-  extract the shared programs block.
+- `/simplify src/scatterplot.md src/3d.md src/my-deck.md src/deck.md src/twins.md`
+  to extract the shared programs block.
 - `/code-review data/pipeline/build_carnegie.py` for a bug hunt in the
   712-line pipeline. Its field-mapping pitfalls (OMENRAP vs. admission
   rate, 0–1 vs. 0–100 scales) are exactly where bugs hide.
