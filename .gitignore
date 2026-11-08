@@ -1,5 +1,6 @@
 node_modules/
 .observablehq/
+src/.observablehq/cache/
 __pycache__/
 *.pyc
 .venv/
