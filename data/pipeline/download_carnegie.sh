@@ -13,11 +13,11 @@ BASE_URL="https://nces.ed.gov/ipeds/datacenter/data"
 if [ ! -f "$RAW_DIR/HD2024.csv" ]; then
   echo "Downloading HD2024..."
   if curl -sf -L -o "$RAW_DIR/HD2024.zip" "$BASE_URL/HD2024.zip" 2>/dev/null; then
-    unzip -o "$RAW_DIR/HD2024.zip" -d "$RAW_DIR"
+    unzip -o "$RAW_DIR/HD2024.zip" -d "$RAW_DIR" && rm "$RAW_DIR/HD2024.zip"
   else
     echo "  HD2024 not available, downloading HD2023..."
     curl -sL -o "$RAW_DIR/HD2023.zip" "$BASE_URL/HD2023.zip"
-    unzip -o "$RAW_DIR/HD2023.zip" -d "$RAW_DIR"
+    unzip -o "$RAW_DIR/HD2023.zip" -d "$RAW_DIR" && rm "$RAW_DIR/HD2023.zip"
   fi
 fi
 
@@ -28,7 +28,6 @@ IPEDS_FILES=(
   "drvef2023"    # Enrollment & demographics
   "IC2023_AY"    # Tuition (in-state / out-of-state)
   "ADM2023"      # SAT/ACT scores, yield rate
-  "SFA2223"      # Pell grant percentage
   "C2023_A"      # CIP completions (bachelor's degrees by field)
 )
 
@@ -41,7 +40,7 @@ for f in "${IPEDS_FILES[@]}"; do
   fi
   echo "Downloading $f..."
   curl -sL -o "$RAW_DIR/${f}.zip" "$BASE_URL/${f}.zip"
-  unzip -o "$RAW_DIR/${f}.zip" -d "$RAW_DIR"
+  unzip -o "$RAW_DIR/${f}.zip" -d "$RAW_DIR" && rm "$RAW_DIR/${f}.zip"
 done
 
 # IC2023 for religious affiliation (try RV variant first)
@@ -49,7 +48,7 @@ if [ ! -f "$RAW_DIR/IC2023_RV.csv" ] && [ ! -f "$RAW_DIR/IC2023.csv" ]; then
   echo "Downloading IC2023..."
   curl -sL -o "$RAW_DIR/IC2023.zip" "$BASE_URL/IC2023.zip" || true
   if [ -f "$RAW_DIR/IC2023.zip" ]; then
-    unzip -o "$RAW_DIR/IC2023.zip" -d "$RAW_DIR"
+    unzip -o "$RAW_DIR/IC2023.zip" -d "$RAW_DIR" && rm "$RAW_DIR/IC2023.zip"
   fi
 fi
 

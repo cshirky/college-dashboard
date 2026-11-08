@@ -1,114 +1,71 @@
-# IPEDS College Dashboard
+# Carnegie 2025 College Dashboard
 
-Interactive scatterplot dashboard of all U.S. 4-year bachelor's-granting institutions, plotting 6-year graduation rate vs. admission rate. Built with Observable Framework and a Python data pipeline using IPEDS 2023 data.
+An [Observable Framework](https://observablehq.com/framework/) site for exploring U.S. colleges, built on the 2025 Carnegie Classification files plus IPEDS 2023 data. It's aimed at students looking for colleges that fit them, including ones they haven't heard of.
 
-## Quick Start
+Live site: https://cshirky.github.io/college-dashboard/
 
-### Prerequisites
+## Run it locally
 
-- Node.js 18+
-- Python 3.10+
-
-### Install and Run
-
-Pre-built data files are included in the repo — no Python step is needed to view the dashboard.
+The built data files are committed, so you don't need Python just to view the site.
 
 ```bash
-# Install Node dependencies
 npm install
-
-# Start the dev server
-npx observable preview
+npm run dev      # http://localhost:3000/
+npm run build    # static site in dist/
 ```
 
-The dashboard will be available at `http://127.0.0.1:3000/`.
+## Pages
 
-### Build for Deployment
+| Page | What it is |
+|---|---|
+| `/` (`index.md`) | Explorer: filter every institution and open its card |
+| `/intro`, `/school-card`, `/landscape` | Guided introduction: how to read a school card and the college landscape |
+| `/vibe`, `/academics` | Questionnaires about what the student wants |
+| `/deck` | My Deck: schools saved as definitely / probably / maybe |
+| `/schools` | One school's full page |
+| `/twins` | Schools similar to ones you name |
+| `/compare` | Compare up to three groups of schools |
+| `/scatterplot` | Colleges by yield vs. 6-year graduation rate, with a school tray |
+| `/3d` | The same chart in drag-to-rotate 3D |
+| `/my-deck` | Scatterplot deck: schools starred from the scatterplot tray |
+
+The three scatterplot pages hide the sidebar and have their own nav (`src/components/nav.js`). They use `scatterCard.js`; the other pages use `collegeCard.js`.
+
+## Data
+
+Site data lives in `src/data/`:
+
+| File | Built by |
+|---|---|
+| `institutions.csv`, `programs.csv` | `data/pipeline/build_carnegie.py` |
+| `all_schools.csv` | `data/pipeline/build_all_schools.py` (schools with yield and grad rate between 2% and 98%) |
+| `good_schools.csv` | No script yet: a hand-curated subset of `institutions.csv`. The rules are in `memory/project_good_schools_filters.md` |
+| `us-states.json` | Static map outline for the school cards |
+| `vibe-questions.json.js`, `academic-questions.json.js` | Observable data loaders for the questionnaires |
+
+### Rebuilding the data
+
+The pipeline is Python 3 standard library only; there's nothing to install.
 
 ```bash
-npx observable build
+# 1. Put the Carnegie files in the repo root (both are committed):
+#    2025-Public-Data-File.xlsx, 2025-SAEC-Public-Data-File.xlsx
+# 2. Fetch any missing IPEDS files into data/raw/
+bash data/pipeline/download_carnegie.sh
+# 3. Build institutions.csv and programs.csv (writes data/output/, copies to src/data/)
+python3 data/pipeline/build_carnegie.py
+# 4. Build all_schools.csv from the new institutions.csv
+python3 data/pipeline/build_all_schools.py
 ```
 
-Static site output goes to `dist/`.
+`data/raw/eada2023_participants.csv` (athletics) comes from a different source and isn't downloaded by the script. `memory/project_overview.md` explains the field mappings, including which column is the real admission rate.
 
-## Project Structure
+## Deploying
 
-```
-├── data/
-│   ├── raw/                     # Original IPEDS 2023 CSV downloads (included)
-│   │   ├── HD2023.csv           # Institution directory
-│   │   ├── drvadm2023.csv       # Admissions (derived)
-│   │   ├── drvgr2023.csv        # Graduation rates (derived)
-│   │   ├── C2023_a.csv          # Completions by CIP code
-│   │   ├── drvef2023.csv        # Enrollment & demographics (derived)
-│   │   └── sfa2223.csv          # Student financial aid
-│   ├── pipeline/
-│   │   ├── build_dataset.py     # Python ETL script
-│   │   └── download_ipeds.sh    # Script to re-download raw data from NCES
-│   └── output/
-│       ├── institutions.csv     # One row per school (2,738 institutions, 30 columns)
-│       └── programs.csv         # One row per school-per-CIP (30,208 records)
-├── src/
-│   ├── index.md                 # Dashboard page (Observable Framework)
-│   └── data/
-│       ├── institutions.csv     # Copy of output, served by Observable
-│       └── programs.csv         # Copy of output, served by Observable
-├── tests/
-│   └── test_pipeline.py         # Pipeline tests (11 tests)
-├── observablehq.config.js       # Observable Framework config
-├── package.json                 # Node dependencies
-└── requirements.txt             # Python dependencies
-```
+Every push to `main` builds the site and publishes it to GitHub Pages (`.github/workflows/deploy.yml`).
 
-## Data Pipeline (Optional)
+## Other folders
 
-The pre-built CSVs are checked into the repo, so you only need the Python pipeline if you want to modify the data processing or refresh with newer IPEDS data.
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-The pipeline reads 6 IPEDS 2023 survey files, joins them on UNITID, and outputs two clean CSVs:
-
-- **institutions.csv** — one row per 4-year institution with admissions, graduation rates, enrollment, demographics, and Pell grant data
-- **programs.csv** — one row per institution per CIP program family, with bachelor's degree counts
-
-Institutions with 0% admission rate or 0% graduation rate are filtered out (data artifacts from non-reporting institutions).
-
-### Running Tests
-
-```bash
-source .venv/bin/activate
-pytest tests/ -v
-```
-
-### Refreshing Data
-
-When new IPEDS data is released, update `data/pipeline/download_ipeds.sh` with new filenames, run it, then re-run the pipeline:
-
-```bash
-bash data/pipeline/download_ipeds.sh
-python data/pipeline/build_dataset.py
-cp data/output/institutions.csv src/data/institutions.csv
-cp data/output/programs.csv src/data/programs.csv
-```
-
-## Dashboard Features
-
-- **Scatterplot**: x = 6-year graduation rate, y = admission rate, color = sector, size = enrollment
-- **Sidebar filters**: sector, locale, state, enrollment range, programs offered, Pell %, gender %
-- **Institution search**: autocomplete text search
-- **Detail panel**: identity info, demographics chart, top programs chart
-
-## Data Source
-
-All data from the Integrated Postsecondary Education Data System (IPEDS), National Center for Education Statistics (NCES), U.S. Department of Education. Survey year: 2023.
-
-https://nces.ed.gov/ipeds/
-
-## Design Documents
-
-- `docs/plans/2026-02-07-ipeds-college-dashboard-design.md` — Full design spec
-- `docs/plans/2026-02-07-ipeds-college-dashboard-implementation.md` — Implementation plan
+- `NOTES/`: project reviews and notes, such as `project-review-2026-11-03.md`.
+- `docs/plans/`: design docs and proposal decks from earlier phases (the decks render with marp, the one dev dependency).
+- `memory/`: project notes for Claude Code.

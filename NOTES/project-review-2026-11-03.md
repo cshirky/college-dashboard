@@ -5,12 +5,14 @@ An Observable Framework site that explores U.S. colleges: 13 pages
 compare, and the scatterplot, 3D and scatterplot-deck pages) and 9
 components. It's fed by a stdlib-Python pipeline
 (`data/pipeline/build_carnegie.py`) that joins the Carnegie 2025 files with
-IPEDS 2023 raw data. The code is small (17 code files, ~130 KB). The data is
-not: tracked data files total ~54 MB, ~38 MB of it in `data/raw/`. The site
-code is in decent shape. Most findings are about the data side: a superseded
-pipeline still in the repo, raw downloads committed alongside their own zips,
-the scatterplot's dataset with no script that builds it, and docs describing
-other branches or an older version of the project.
+IPEDS 2023 raw data. The code is small (17 code files, ~130 KB at review time;
+12 files, ~105 KB after the 2026-11-08 cleanup). The data is not: tracked
+data files totalled ~54 MB, ~38 MB of it in `data/raw/` (now ~40 MB and
+~25 MB). The site code is in decent shape. Most findings are about the data
+side: a superseded pipeline still in the repo, raw downloads committed
+alongside their own zips, the scatterplot's dataset with no script that
+builds it, and docs describing other branches or an older version of the
+project.
 
 Originally reviewed on 2026-11-03 against branch `Scatterplot`, including its
 uncommitted edits. **Updated 2026-11-08** to reflect `main` after the
@@ -23,17 +25,18 @@ and `main`'s own pages add two new findings. Each finding has a
 ## Summary
 | Type | Open | Fixed | Suggested effort |
 |---|---|---|---|
-| Unused work | 4 | 1 | small |
-| Duplicates that could be merged | 4 | 1 | small–medium |
+| Unused work | 0 | 5 | — |
+| Duplicates that could be merged | 3 | 2 | small–medium |
 | Design patterns worth changing | 3 | 0 | small–medium |
 | Docs and data hygiene | 5 | 1 | small, plus 1 large (history) |
 
 ## Unused work
 
 ### Old pandas pipeline `build_dataset.py` is superseded
-- **Status (2026-11-08):** still open. `f111c44` deleted it on `Scatterplot`,
-  but the merge into `main` restored it along with everything else `main`
-  had.
+- **Status (2026-11-08):** fixed. Deleted along with `download_ipeds.sh`,
+  `tests/` and `requirements.txt`. `build_carnegie.py` still rebuilds
+  `institutions.csv` and `programs.csv` byte-for-byte identical to the
+  committed copies without them.
 - **Where:** `data/pipeline/build_dataset.py` (380 lines), plus the files
   that exist only for it: `data/pipeline/download_ipeds.sh`,
   `tests/test_pipeline.py`, `tests/conftest.py` and `requirements.txt`
@@ -51,8 +54,8 @@ and `main`'s own pages add two new findings. Each finding has a
   commit.
 
 ### `sfa2223.csv` (12.4 MB) is only read by the dead pipeline
-- **Status (2026-11-08):** still open. The merge restored the file and
-  `SFA2223` in the download list, which the Scatterplot branch had removed.
+- **Status (2026-11-08):** fixed. Deleted, and `SFA2223` dropped from
+  `download_carnegie.sh`.
 - **Where:** `data/raw/sfa2223.csv`, and `SFA2223` in `data/pipeline/download_carnegie.sh:32`
 - **Evidence:** `build_carnegie.py` never opens it; Pell share comes from
   the Carnegie file (`pell_2023`). The only reader is `build_dataset.py`.
@@ -61,6 +64,7 @@ and `main`'s own pages add two new findings. Each finding has a
   `SFA2223` from the download list.
 
 ### `enrich_scratch_schools.py` can't run any more
+- **Status (2026-11-08):** fixed. Deleted.
 - **Where:** `enrich_scratch_schools.py:10`, `:13`
 - **Evidence:** It reads `scratch_schools.csv` from the repo root, which
   doesn't exist. (`src/data/institutions.csv`, its other input, is back
@@ -75,8 +79,8 @@ and `main`'s own pages add two new findings. Each finding has a
   the nav and index.
 
 ### Zip downloads committed next to their extracted CSVs
-- **Status (2026-11-08):** still open. `f111c44` deleted the zips on
-  `Scatterplot`; the merge restored them.
+- **Status (2026-11-08):** fixed. Both zips deleted, and
+  `download_carnegie.sh` now removes each zip after unzipping it.
 - **Where:** `data/raw/ADM2023.zip` (with `adm2023.csv`), `data/raw/IC2023_AY.zip` (with `ic2023_ay.csv`)
 - **Evidence:** `download_carnegie.sh` unzips into `data/raw/` and leaves
   the zip. The pipeline reads only the CSVs.
@@ -134,6 +138,7 @@ and `main`'s own pages add two new findings. Each finding has a
   finding below. Medium effort.
 
 ### `CIP_FAMILIES` map copied between pipelines
+- **Status (2026-11-08):** fixed. Went away with `build_dataset.py`.
 - **Where:** `data/pipeline/build_dataset.py:7`, `data/pipeline/build_carnegie.py:228`
 - **Evidence:** identical 38-entry dict.
 - **Suggested response:** this goes away when `build_dataset.py` is deleted.
@@ -181,7 +186,8 @@ and `main`'s own pages add two new findings. Each finding has a
 ## Docs and data hygiene
 
 ### Raw IPEDS downloads committed although a script fetches them
-- **Where:** `data/raw/` (15 files, ~40 MB)
+- **Where:** `data/raw/` (15 files, ~40 MB at review time; 12 files, ~25 MB
+  after the 2026-11-08 deletions)
 - **Evidence:** `download_carnegie.sh` re-downloads every file the pipeline
   needs except `eada2023_participants.csv` (athletics; it's from a different
   source). CI only runs `observable build` on `src/`, so the site never
@@ -219,9 +225,10 @@ and `main`'s own pages add two new findings. Each finding has a
   section. Fix `master` → `main` in the overview.
 
 ### README describes the original dashboard; `card_description.md` is unfinished
-- **Status (2026-11-08):** changed. `main` has a README, but it's out of
-  date, so the finding is now "README describes the original IPEDS
-  dashboard".
+- **Status (2026-11-08):** README part fixed. It's rewritten around the
+  current pages, data files, the `build_carnegie.py` →
+  `build_all_schools.py` pipeline and the Pages deploy.
+  `card_description.md` is still unfinished.
 - **Where:** `README.md`, `card_description.md`
 - **Evidence:** The README describes the first version: an admission-rate
   scatterplot on `index.md`, built by `build_dataset.py` from IPEDS 2023
@@ -260,10 +267,10 @@ and `main`'s own pages add two new findings. Each finding has a
    committed, Joy deleted.
 2. ~~Fix the deploy target before the next push to `Scatterplot`
    (`college-scatterplot` is archived).~~ Done 2026-11-08 (`5dfa9d7`).
-3. Delete the dead pipeline: `build_dataset.py`, `download_ipeds.sh`,
+3. ~~Delete the dead pipeline: `build_dataset.py`, `download_ipeds.sh`,
    `tests/`, `requirements.txt`, `sfa2223.csv`, `enrich_scratch_schools.py`
    and the two raw zips, plus `SFA2223` from the download script. Rewrite
-   the README in the same change.
+   the README in the same change.~~ Done 2026-11-08.
 4. Decide between the two card components and the two decks.
 5. Write `build_good_schools.py`, so the scatterplot dataset can be rebuilt.
 6. Stop committing `data/raw/` and `data/output/`. Leave the history
